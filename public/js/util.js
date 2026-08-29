@@ -53,31 +53,38 @@
   // are stable regardless of the active filter.
   function buildSignals(data) {
     const brands = data.meta.brands;
+    const latestTrend = (id) => { const s = data.search.byBrand[id] || []; return s.length ? s[s.length - 1] : 0; };
     const socialTotals = brands.map((b) => (data.social.byBrand[b.id]?.total) || 0);
-    const reviewTotals = brands.map((b) => (data.reviews.byBrand[b.id]?.totalCount) || 0);
     const spendTotals = brands.map((b) => {
       const rows = data.spend.byBrand[b.id]; return rows ? aspTotal(rows[rows.length - 1]) : 0;
     });
+    // each Pull signal is normalised as share-of-max across the 5 brands
+    const maxSearch = Math.max(1, ...brands.map((b) => latestTrend(b.id)));
+    const maxSocial = Math.max(1, ...socialTotals);
+    const maxAi = Math.max(1, ...brands.map((b) => (((data.ai.byBrand[b.id] || {}).overall || {}).visibilityPct) || 0));
+    const maxLogRev = Math.max(1, ...brands.map((b) => Math.log(((data.reviews.byBrand[b.id] || {}).totalCount || 0) + 1)));
+    const shareOfMax = (v, max) => (max > 0 ? clamp((v / max) * 100, 0, 100) : 0);
     const out = {};
     brands.forEach((b) => {
-      const searchSeries = data.search.byBrand[b.id] || [];
-      const searchScore = latestFyAvg(searchSeries);
+      const searchLatest = latestTrend(b.id);      // latest Google-Trends point (0..100)
       const social = data.social.byBrand[b.id] || {};
       const reviews = data.reviews.byBrand[b.id] || {};
       const ai = (data.ai.byBrand[b.id] || {}).overall || { visibilityPct: 0 };
       const spendRows = data.spend.byBrand[b.id] || [];
       const spendLatest = spendRows.length ? aspTotal(spendRows[spendRows.length - 1]) : 0;
+      // reviews: log-scaled rating-count (share-of-max) blended with avg rating
+      const reviewsScore = 0.75 * shareOfMax(Math.log((reviews.totalCount || 0) + 1), maxLogRev) + 0.25 * (((reviews.avgRating || 0) / 5) * 100);
       out[b.id] = {
         score: {
           spend: logNorm(spendLatest, spendTotals),
-          search: clamp(searchScore, 0, 100),
-          social: logNorm(social.total || 0, socialTotals),
-          reviews: logNorm(reviews.totalCount || 0, reviewTotals),
-          ai: clamp(ai.visibilityPct || 0, 0, 100),
+          search: shareOfMax(searchLatest, maxSearch),
+          social: shareOfMax(social.total || 0, maxSocial),
+          reviews: clamp(reviewsScore, 0, 100),
+          ai: shareOfMax(ai.visibilityPct || 0, maxAi),
         },
         raw: {
           spend: spendLatest,               // ₹ cr
-          search: searchScore,              // index 0..100
+          search: searchLatest,             // latest trends index 0..100
           social: social.total || 0,        // followers
           reviews: reviews.totalCount || 0, // review count
           ai: ai.visibilityPct || 0,        // %
@@ -88,7 +95,9 @@
   }
 
   // Composite Pull score = demand side only (spend excluded on purpose).
-  const PULL_WEIGHTS = { search: 0.3, social: 0.25, reviews: 0.2, ai: 0.25 };
+  // Tunable weights, documented here in one place: search 30% / social 25% /
+  // reviews 25% / AI visibility 20%.
+  const PULL_WEIGHTS = { search: 0.30, social: 0.25, reviews: 0.25, ai: 0.20 };
   function pullScore(sig) {
     const s = sig.score;
     return Math.round(
@@ -97,17 +106,15 @@
     );
   }
 
-  // Plain-English verdict from spend trend vs pull trend/level.
+  // Plain-English verdict: spend intensity (A&SP % of revenue trend) × pull.
   function verdict(spendPct, pull) {
-    const spendRising = spendPct.delta > 1;      // A&SP % of revenue up >1pp over 5y
-    const pullRising = pull.trend.delta > 4;     // search interest up >4 pts over 5y
-    const level = pull.score;
-    if (spendRising && pullRising) return { label: 'Spending hard, pull rising', tone: 'good' };
-    if (spendRising && level >= 68) return { label: 'Spending hard, still leads', tone: 'good' };
-    if (spendRising) return { label: 'Spending hard, pull flat', tone: 'warn' };
-    if (!spendRising && level >= 62) return { label: 'Efficient — strong pull', tone: 'good' };
-    if (level >= 40) return { label: 'Steady, modest pull', tone: 'mid' };
-    return { label: 'Quiet — low pull', tone: 'weak' };
+    const spendRising = spendPct.delta > 1;   // A&SP % of revenue up >1pp over the years
+    const pullHigh = pull.score >= 55;
+    const pullRising = pull.trend.delta > 4;  // trends interest rising over the years
+    if (spendRising && (pullHigh || pullRising)) return { label: "Spending, and it's working", tone: 'good' };
+    if (spendRising) return { label: "Spending hard — pull isn't keeping up", tone: 'warn' };
+    if (pullHigh) return { label: 'Strong organic pull', tone: 'good' };
+    return { label: 'Quiet on both', tone: 'mid' };
   }
 
   // Everything the Overview + Vs tabs need, per brand.

@@ -13,8 +13,7 @@
         "revenue": 2010,
         "advertisement": 70,
         "sellingPromo": 105,
-        "quality": "estimated",
-        "stale": true
+        "quality": "estimated"
       },
       {
         "year": "FY23",
@@ -35,16 +34,14 @@
         "revenue": 2436,
         "advertisement": 104,
         "sellingPromo": 155,
-        "quality": "estimated",
-        "stale": true
+        "quality": "estimated"
       },
       {
         "year": "FY26",
         "revenue": 2710,
         "advertisement": 120,
         "sellingPromo": 180,
-        "quality": "estimated",
-        "stale": true
+        "quality": "estimated"
       }
     ],
     "kent": [
@@ -227,11 +224,9 @@
       "stale": true
     },
     "aquaguard": {
-      "stale": true,
-      "fetchedAt": "2026-08-29T19:36:18.485Z",
-      "sourceDoc": "https://www.careratings.com/upload/CompanyFiles/PR/202412151252_Eureka_Forbes_Limited.pdf",
-      "note": "Company-wide Advertisement + Selling & Sales Promotion (Other Expenses)",
-      "quality": "disclosed"
+      "note": "Eureka Forbes Ltd company-wide Advertisement + Selling & Sales Promotion (Other Expenses); FY23–FY24 disclosed, other years estimated.",
+      "quality": "disclosed",
+      "fetchedAt": "2026-08-29T00:00:00.000Z"
     }
   }
 }

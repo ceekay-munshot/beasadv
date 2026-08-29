@@ -92,6 +92,7 @@
     return t;
   }
   const srcIcon = (key) => `<span class="prov" title="${esc(srcNote(key))}"><i data-lucide="info" class="w-3.5 h-3.5"></i></span>`;
+  const infoIcon = (text) => `<span class="prov" title="${esc(text)}"><i data-lucide="info" class="w-3.5 h-3.5"></i></span>`;
 
   function seg(name, opts, current) {
     return `<div class="seg" data-seg="${name}">` + opts.map((o) =>
@@ -214,7 +215,7 @@
     panel.innerHTML = `
       <div class="grid gap-3 grid-cols-2 md:grid-cols-3 xl:grid-cols-6 mb-3">${cards}</div>
       <div class="card p-4 md:p-5 mb-3">
-        ${cardHead('As they spend more, is interest keeping up?',
+        ${cardHead('As they spend more, is interest keeping up? ' + infoIcon('Bars: A&SP % of revenue (company filings / PrivateCircle). Line: Google-Trends search interest. Pull score blends search 30%, social 25%, reviews 25%, AI visibility 20% (share-of-max across brands).'),
           'Bars = share of revenue spent on marketing · Line = how much people search the brand',
           nsel('heroBrand', vis.map((b) => ({ val: b.id, label: b.name })), pickBrand(S.heroBrand, vis)))}
         <div id="ov-hero" class="h-[300px]"></div>
@@ -451,7 +452,7 @@
         <div class="card p-4 lg:col-span-2">${cardHead('Star ratings', 'Average rating per brand')}<div id="sh-stars" class="pt-1"></div></div>
       </div>
       <div class="grid gap-3 lg:grid-cols-5 mt-3">
-        <div class="card p-4 lg:col-span-3">${cardHead('Whose buzz is growing ' + srcIcon('reviews'), 'New reviews per month, last 12 months')}<div id="sh-vel" class="h-[260px]"></div></div>
+        <div class="card p-4 lg:col-span-3">${cardHead('Total reviews over time (buzz) ' + srcIcon('reviews'), 'Cumulative Amazon + Flipkart reviews — a rising line = growing buzz')}<div id="sh-vel" class="h-[260px]"></div></div>
         <div class="card p-4 lg:col-span-2 overflow-x-auto">${cardHead('Flagship models', mktLabel(mkt))}<div id="sh-table"></div></div>
       </div>`;
 
@@ -468,7 +469,7 @@
     // C) velocity line
     Charts.line('sh-vel', {
       categories: rv.velocityMonths, series: vis.map((b) => ({ name: b.name, data: (rv.byBrand[b.id] || {}).velocitySeries || [] })),
-      colors: colorsOf(vis), height: 260, yMin: 0, valueFormatter: (v) => Math.round(v) + ' /mo',
+      colors: colorsOf(vis), height: 260, yMin: 0, valueFormatter: (v) => U.fmtInt(v) + ' reviews', yFormatter: (v) => U.fmtCompact(v),
       override: { xaxis: { categories: rv.velocityMonths, labels: { rotate: 0, hideOverlappingLabels: true } } },
     });
     // D) table
@@ -506,7 +507,7 @@
         ${nsel('aiPlatform', platformOpts, S.aiPlatform)}
         <span class="text-[11px] text-slate-400 flex items-center gap-1"><i data-lucide="sparkles" class="w-3.5 h-3.5"></i>How often AI assistants name each brand when buyers ask for a purifier.</span>
       </div>
-      <div class="card p-4 mb-3">${cardHead('How often AI names this brand', 'Share of buyer questions where the brand is recommended')}
+      <div class="card p-4 mb-3">${cardHead('How often AI names this brand ' + srcIcon('ai'), 'Share of buyer questions where the brand is recommended')}
         <div id="ai-gauges" class="grid gap-1 grid-cols-3 md:grid-cols-6"></div></div>
       <div class="grid gap-3 lg:grid-cols-2 mb-3">
         <div class="card p-4">${cardHead('Share of all AI mentions', 'Of the brands shown')}<div id="ai-donut" class="h-[300px]"></div></div>

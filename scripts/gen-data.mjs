@@ -198,18 +198,18 @@ function buildReviews() {
 }
 
 function buildAI() {
-  const PLATFORMS = ['chatgpt', 'claude', 'perplexity', 'gemini'];
-  const LABELS = { chatgpt: 'ChatGPT', claude: 'Claude', perplexity: 'Perplexity', gemini: 'Gemini' };
+  // Mock uses the two providers the AI engine actually queries (Bedrock Claude
+  // + Mistral). scrape-ai.mjs replaces these placeholders with measured data.
+  const PLATFORMS = ['claude', 'mistral'];
+  const LABELS = { claude: 'Claude', mistral: 'Mistral' };
   const overall = { kent: 78, aquaguard: 72, pureit: 46, aosmith: 40, livpure: 28 };
   const sentiment = {
     kent: { pos: 70, neu: 22, neg: 8 }, aquaguard: { pos: 72, neu: 21, neg: 7 },
     pureit: { pos: 62, neu: 28, neg: 10 }, aosmith: { pos: 66, neu: 26, neg: 8 }, livpure: { pos: 58, neu: 30, neg: 12 },
   };
   const tilt = {
-    chatgpt: { aquaguard: 3, kent: 2, pureit: 0, aosmith: -1, livpure: 0 },
     claude: { aquaguard: 1, kent: 4, pureit: 1, aosmith: 2, livpure: -2 },
-    perplexity: { aquaguard: 5, kent: -2, pureit: 5, aosmith: -3, livpure: 2 },
-    gemini: { aquaguard: -2, kent: 5, pureit: -2, aosmith: 1, livpure: 1 },
+    mistral: { aquaguard: 4, kent: -1, pureit: 3, aosmith: -2, livpure: 2 },
   };
   const gaps = {
     aquaguard: ['Cheapest RO purifier under ₹8,000?', 'Best purifier for a rented 1BHK flat?', 'Which purifier needs the least maintenance?'],

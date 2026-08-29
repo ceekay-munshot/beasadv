@@ -9,7 +9,8 @@
     "scrape:spend": "node scripts/scrape-spend.mjs",
     "scrape:social": "node scripts/scrape-social.mjs",
     "scrape:reviews": "node scripts/scrape-reviews.mjs",
-    "scrape:trends": "node scripts/scrape-trends.mjs"
+    "scrape:trends": "node scripts/scrape-trends.mjs",
+    "scrape:ai": "node scripts/scrape-ai.mjs"
   },
   "devDependencies": {
     "playwright-core": "^1.48.0"

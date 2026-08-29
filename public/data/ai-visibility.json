@@ -1,15 +1,11 @@
 {
   "platforms": [
-    "chatgpt",
     "claude",
-    "perplexity",
-    "gemini"
+    "mistral"
   ],
   "platformLabels": {
-    "chatgpt": "ChatGPT",
     "claude": "Claude",
-    "perplexity": "Perplexity",
-    "gemini": "Gemini"
+    "mistral": "Mistral"
   },
   "byBrand": {
     "aquaguard": {
@@ -23,15 +19,6 @@
         }
       },
       "byPlatform": {
-        "chatgpt": {
-          "visibilityPct": 76,
-          "shareOfVoice": 22.6,
-          "sentiment": {
-            "pos": 72,
-            "neu": 21,
-            "neg": 7
-          }
-        },
         "claude": {
           "visibilityPct": 72,
           "shareOfVoice": 21.3,
@@ -41,18 +28,9 @@
             "neg": 7
           }
         },
-        "perplexity": {
+        "mistral": {
           "visibilityPct": 75,
           "shareOfVoice": 22.5,
-          "sentiment": {
-            "pos": 72,
-            "neu": 21,
-            "neg": 7
-          }
-        },
-        "gemini": {
-          "visibilityPct": 69,
-          "shareOfVoice": 20.8,
           "sentiment": {
             "pos": 72,
             "neu": 21,
@@ -78,15 +56,6 @@
         }
       },
       "byPlatform": {
-        "chatgpt": {
-          "visibilityPct": 81,
-          "shareOfVoice": 24.1,
-          "sentiment": {
-            "pos": 70,
-            "neu": 22,
-            "neg": 8
-          }
-        },
         "claude": {
           "visibilityPct": 81,
           "shareOfVoice": 24,
@@ -96,18 +65,9 @@
             "neg": 8
           }
         },
-        "perplexity": {
+        "mistral": {
           "visibilityPct": 75,
           "shareOfVoice": 22.5,
-          "sentiment": {
-            "pos": 70,
-            "neu": 22,
-            "neg": 8
-          }
-        },
-        "gemini": {
-          "visibilityPct": 82,
-          "shareOfVoice": 24.7,
           "sentiment": {
             "pos": 70,
             "neu": 22,
@@ -132,15 +92,6 @@
         }
       },
       "byPlatform": {
-        "chatgpt": {
-          "visibilityPct": 27,
-          "shareOfVoice": 8,
-          "sentiment": {
-            "pos": 58,
-            "neu": 30,
-            "neg": 12
-          }
-        },
         "claude": {
           "visibilityPct": 27,
           "shareOfVoice": 8,
@@ -150,18 +101,9 @@
             "neg": 12
           }
         },
-        "perplexity": {
+        "mistral": {
           "visibilityPct": 28,
           "shareOfVoice": 8.4,
-          "sentiment": {
-            "pos": 58,
-            "neu": 30,
-            "neg": 12
-          }
-        },
-        "gemini": {
-          "visibilityPct": 30,
-          "shareOfVoice": 9,
           "sentiment": {
             "pos": 58,
             "neu": 30,
@@ -190,15 +132,6 @@
         }
       },
       "byPlatform": {
-        "chatgpt": {
-          "visibilityPct": 46,
-          "shareOfVoice": 13.7,
-          "sentiment": {
-            "pos": 62,
-            "neu": 28,
-            "neg": 10
-          }
-        },
         "claude": {
           "visibilityPct": 47,
           "shareOfVoice": 13.9,
@@ -208,18 +141,9 @@
             "neg": 10
           }
         },
-        "perplexity": {
+        "mistral": {
           "visibilityPct": 51,
           "shareOfVoice": 15.3,
-          "sentiment": {
-            "pos": 62,
-            "neu": 28,
-            "neg": 10
-          }
-        },
-        "gemini": {
-          "visibilityPct": 44,
-          "shareOfVoice": 13.3,
           "sentiment": {
             "pos": 62,
             "neu": 28,
@@ -245,15 +169,6 @@
         }
       },
       "byPlatform": {
-        "chatgpt": {
-          "visibilityPct": 40,
-          "shareOfVoice": 11.9,
-          "sentiment": {
-            "pos": 66,
-            "neu": 26,
-            "neg": 8
-          }
-        },
         "claude": {
           "visibilityPct": 42,
           "shareOfVoice": 12.4,
@@ -263,18 +178,9 @@
             "neg": 8
           }
         },
-        "perplexity": {
+        "mistral": {
           "visibilityPct": 37,
           "shareOfVoice": 11.1,
-          "sentiment": {
-            "pos": 66,
-            "neu": 26,
-            "neg": 8
-          }
-        },
-        "gemini": {
-          "visibilityPct": 41,
-          "shareOfVoice": 12.3,
           "sentiment": {
             "pos": 66,
             "neu": 26,
@@ -292,5 +198,10 @@
       ],
       "quality": "estimated"
     }
+  },
+  "_provenance": {
+    "source": "estimated",
+    "fetchedAt": "2026-08-29T00:00:00.000Z",
+    "note": "Mock until the AI engine runs (Claude + Mistral)."
   }
 }
