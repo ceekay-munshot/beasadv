@@ -18,19 +18,17 @@
       },
       {
         "year": "FY23",
-        "revenue": 2080,
+        "revenue": 2084.64,
         "advertisement": 76,
         "sellingPromo": 114,
-        "quality": "disclosed",
-        "stale": true
+        "quality": "disclosed"
       },
       {
         "year": "FY24",
-        "revenue": 2189,
+        "revenue": 2189.26,
         "advertisement": 87,
         "sellingPromo": 120,
-        "quality": "disclosed",
-        "stale": true
+        "quality": "disclosed"
       },
       {
         "year": "FY25",
@@ -206,31 +204,34 @@
     "livpure": {
       "sourceDoc": "PrivateCircle / MCA",
       "note": "Unlisted entity financials",
-      "fetchedAt": "2026-08-29T19:14:14.757Z",
+      "fetchedAt": "2026-08-29T19:36:18.485Z",
       "quality": "private-circle"
     },
     "pureit": {
       "sourceDoc": "PrivateCircle / MCA",
       "note": "Unlisted entity financials",
-      "fetchedAt": "2026-08-29T19:14:14.757Z",
+      "fetchedAt": "2026-08-29T19:36:18.485Z",
       "quality": "private-circle"
     },
     "aosmith": {
       "sourceDoc": "PrivateCircle / MCA",
       "note": "Unlisted entity financials",
-      "fetchedAt": "2026-08-29T19:14:14.757Z",
+      "fetchedAt": "2026-08-29T19:36:18.485Z",
       "quality": "private-circle"
     },
     "kent": {
       "sourceDoc": "PrivateCircle / MCA",
       "note": "Kent RO Systems Ltd (snapshot)",
-      "fetchedAt": "2026-08-29T19:14:14.757Z",
+      "fetchedAt": "2026-08-29T19:36:18.485Z",
       "quality": "snapshot",
       "stale": true
     },
     "aquaguard": {
       "stale": true,
-      "fetchedAt": "2026-08-29T19:14:14.757Z"
+      "fetchedAt": "2026-08-29T19:36:18.485Z",
+      "sourceDoc": "https://www.careratings.com/upload/CompanyFiles/PR/202412151252_Eureka_Forbes_Limited.pdf",
+      "note": "Company-wide Advertisement + Selling & Sales Promotion (Other Expenses)",
+      "quality": "disclosed"
     }
   }
 }
