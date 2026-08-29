@@ -7,14 +7,9 @@
       "name": "Aquaguard",
       "color": "#0ea5e9",
       "group": "Eureka Forbes",
-      "quality": "disclosed"
-    },
-    {
-      "id": "eurekaforbes",
-      "name": "Eureka Forbes",
-      "color": "#6366f1",
-      "group": "Eureka Forbes",
-      "quality": "disclosed"
+      "quality": "disclosed",
+      "spendEntity": "Eureka Forbes Ltd",
+      "spendNote": "Company-wide advertising & sales-promotion (brand parent)"
     },
     {
       "id": "kent",
@@ -48,6 +43,7 @@
   "qualityNotes": {
     "disclosed": "From the company / parent audited annual report.",
     "snapshot": "From a point-in-time filing; not a full multi-year series.",
-    "estimated": "Modelled estimate — no public brand-level disclosure."
+    "estimated": "Modelled estimate — no public brand-level disclosure.",
+    "private-circle": "From PrivateCircle / MCA filings for the unlisted entity."
   }
 }

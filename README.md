@@ -85,22 +85,63 @@ Plain `index.html` + vanilla JS (namespaced classic scripts, so it also runs fro
 
 ```
 public/
-  index.html        app shell, CDN links, design system, tab markup
-  js/app.js         bootstrap, tab/subtab router, controls, state, renderers
-  js/charts.js      ApexCharts theme + one factory per chart type
-  js/data.js        fetch + cache /data/*.json (falls back to the seed on file://)
-  js/util.js        formatting + derived metrics (Pull score, signals, verdicts)
-  js/seed.js        embedded mirror of /data/*.json for file:// support (generated)
-  data/*.json       mock data (meta, spend, search-trends, social, reviews, ai-visibility)
-worker/index.js     Cloudflare Worker: serves assets + stub POST /api/refresh (501)
-wrangler.jsonc      Cloudflare config (assets -> ./public, main -> worker/index.js)
-scripts/gen-data.mjs  regenerates data/*.json + js/seed.js  (node scripts/gen-data.mjs)
+  index.html            app shell, CDN links, design system, tab markup
+  js/app.js             bootstrap, tab/subtab router, controls, state, renderers
+  js/charts.js          ApexCharts theme + one factory per chart type
+  js/data.js            fetch + cache /data/*.json (falls back to the seed on file://)
+  js/util.js            formatting + derived metrics (Pull score, signals, verdicts)
+  js/seed.js            embedded mirror of /data/*.json for file:// support (generated)
+  data/*.json           meta, spend (real pipeline), search-trends/social/reviews/ai (mock)
+  data/manual/private-circle.json  hand-entered PrivateCircle/MCA numbers for unlisted peers
+worker/index.js         Cloudflare Worker: serves assets + stub POST /api/refresh (501)
+wrangler.jsonc          Cloudflare config (assets -> ./public, main -> worker/index.js)
+lib/llm.mjs             LLM JSON extraction (Bedrock Claude primary, Mistral fallback)
+lib/scrape.mjs          page/PDF scraping (Firecrawl primary, Scrape.do fallback)
+lib/screener.mjs        best-effort screener.in session (playwright-core)
+scripts/gen-data.mjs    default: mirror data/*.json -> seed.js; --regen-mock rebuilds mock
+scripts/scrape-spend.mjs  refresh spend.json from primary sources (degrades gracefully)
+.github/workflows/spend-refresh.yml  monthly + on-demand spend refresh
+```
+
+## Data pipeline (CI)
+
+Spend is now backed by a real extraction pipeline; the other lanes are still
+mock (later rounds). A monthly GitHub Actions job
+(`.github/workflows/spend-refresh.yml`, also runnable via *workflow_dispatch*)
+runs `scripts/scrape-spend.mjs`, which:
+
+- **Aquaguard** (Eureka Forbes Ltd, listed) — finds the annual-report PDF via
+  screener.in, reads it with Firecrawl, and extracts the *Advertisement* and
+  *Selling & Sales Promotion* Other-Expenses lines with an LLM.
+- **Kent** — screener/DRHP if reachable, else the manual PrivateCircle file.
+- **Livpure / Pureit / AO Smith** (unlisted) — from
+  `public/data/manual/private-circle.json` (paste real MCA/PrivateCircle numbers
+  there; a brand omitted keeps its modelled estimate).
+
+It then runs `gen-data.mjs` to refresh `seed.js`. Every source degrades
+gracefully: on any failure it keeps the last-good committed value, marks it
+`stale`, and exits 0 — it never regresses a real number to null, and it makes no
+network calls at all when no secrets are set. Each spend figure carries a
+`quality` tier (**Disclosed / Snapshot / PrivateCircle / Estimated**) and an
+optional `_provenance` note surfaced by the ⓘ on the Spend tab.
+
+Secrets (GitHub Actions repository secrets; see `.env.example`; never committed):
+`CLAUDE_BEDROCK_API_KEY` (+ `CLAUDE_BEDROCK_REGION`, `CLAUDE_BEDROCK_MODEL_ID`),
+`MISTRAL_API_KEY` (+ `MISTRAL_MODEL`), `FIRECRAWL_API_KEY`, `SCRAPEDO_API_KEY`,
+`SCREENER_EMAIL`, `SCREENER_PASSWORD`. No secret ever reaches the frontend.
+
+Run locally:
+
+```bash
+npm ci                       # installs playwright-core (the only dep)
+cp .env.example .env         # fill in secrets, or leave blank to keep last-good
+npm run scrape:spend         # refreshes public/data/spend.json + js/seed.js
 ```
 
 ## Data quality
 
-All figures are illustrative. Where real published anchors exist (e.g. Eureka
-Forbes' FY23/FY24 advertising and promotion spend) they are used as-is and
-badged **Disclosed**; point-in-time figures are **Snapshot**; the rest is
-modelled and badged **Estimated**. To change the numbers, edit
-`scripts/gen-data.mjs` and run `node scripts/gen-data.mjs`.
+Real published anchors (e.g. Eureka Forbes' FY23/FY24 advertising & promotion
+spend) are used as-is and badged **Disclosed**; point-in-time figures are
+**Snapshot**; unlisted-peer figures from MCA/PrivateCircle are **PrivateCircle**;
+the rest is modelled and badged **Estimated**. The mock lanes can be rebuilt with
+`node scripts/gen-data.mjs --regen-mock`.

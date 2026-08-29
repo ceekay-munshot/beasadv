@@ -22,28 +22,6 @@
       ],
       "quality": "estimated"
     },
-    "eurekaforbes": {
-      "amazonCount": 2500,
-      "flipkartCount": 1700,
-      "totalCount": 4200,
-      "avgRating": 4.2,
-      "flagship": "Eureka Forbes AquaSure Delight",
-      "velocitySeries": [
-        62,
-        61,
-        57,
-        58,
-        57,
-        59,
-        64,
-        74,
-        96,
-        87,
-        65,
-        66
-      ],
-      "quality": "estimated"
-    },
     "kent": {
       "amazonCount": 3500,
       "flipkartCount": 2300,

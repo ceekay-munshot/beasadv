@@ -1,0 +1,24 @@
+{
+  "_note": "PrivateCircle / MCA financials for unlisted peers. ₹ crore. Paste real numbers here. A brand omitted keeps its modelled estimate. If advertisement/sellingPromo are null, the current estimate for that field is kept but the provided revenue is used. Years must match spend.json (FY22–FY26).",
+  "_schema": {
+    "byBrand": {
+      "<brandId>": [
+        { "year": "FY24", "revenue": 0, "advertisement": null, "sellingPromo": null, "totalExpenses": null }
+      ]
+    }
+  },
+  "byBrand": {
+    "livpure": [
+      { "year": "FY23", "revenue": 294, "advertisement": null, "sellingPromo": null, "totalExpenses": null }
+    ],
+    "pureit": [
+      { "year": "FY24", "revenue": 293, "advertisement": null, "sellingPromo": null }
+    ],
+    "aosmith": [
+      { "year": "FY24", "revenue": 500, "advertisement": null, "sellingPromo": null }
+    ],
+    "kent": [
+      { "year": "FY24", "revenue": 1178, "advertisement": null, "sellingPromo": null }
+    ]
+  }
+}

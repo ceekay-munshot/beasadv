@@ -10,7 +10,7 @@
     selected: new Set(),      // visible brand ids (global filter)
     unit: 'cr',               // 'cr' | 'pct'
     spendKind: 'adsp',        // 'ad' | 'adsp'
-    heroBrand: 'eurekaforbes',
+    heroBrand: 'aquaguard',
     web: 'search',            // subtab: 'search' | 'social'
     searchTerm: 'brand',      // 'brand' | 'category'
     social: 'size',           // 'size' | 'engagement'
@@ -48,6 +48,37 @@
     const note = (META.qualityNotes && META.qualityNotes[q]) || '';
     return `<span class="badge ${b.cls}" title="${note}">${b.text}</span>`;
   }
+  const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+
+  // Plain-English source note for a brand's spend, from _provenance if the
+  // scraper wrote one, else derived from the entity / quality tier.
+  function spendProvenance(b) {
+    const sp = (D.spend && D.spend.data) || {};
+    const prov = (sp._provenance || {})[b.id];
+    const rows = (sp.byBrand || {})[b.id] || [];
+    const latest = rows[rows.length - 1] || {};
+    const q = latest.quality || b.quality;
+    const stale = rows.some((r) => r && r.stale) || (prov && prov.stale);
+    let text;
+    if (prov && (prov.note || prov.sourceDoc)) {
+      text = [prov.sourceDoc, prov.note].filter(Boolean).join(' — ');
+      if (prov.fetchedAt) text += ` (fetched ${String(prov.fetchedAt).slice(0, 10)})`;
+    } else if (b.spendEntity) {
+      text = `Source: ${b.spendEntity} — ${b.spendNote || 'company-wide advertising & sales promotion'}. Years without disclosure are modelled.`;
+    } else if (q === 'private-circle') {
+      text = 'Source: PrivateCircle / MCA filings (unlisted entity).';
+    } else if (q === 'snapshot') {
+      text = 'Source: point-in-time company filing (snapshot); other years modelled.';
+    } else if (q === 'disclosed') {
+      text = (META.qualityNotes && META.qualityNotes.disclosed) || 'From the audited annual report.';
+    } else {
+      text = (META.qualityNotes && META.qualityNotes.estimated) || 'Modelled estimate — no public brand-level disclosure.';
+    }
+    if (stale) text += ' • Showing last-good values (latest refresh could not confirm new numbers).';
+    return text;
+  }
+  const provIcon = (b) => `<span class="prov" title="${esc(spendProvenance(b))}"><i data-lucide="info" class="w-3.5 h-3.5"></i></span>`;
+  const qDot = (q) => q === 'disclosed' ? '#10b981' : q === 'snapshot' ? '#3b82f6' : q === 'private-circle' ? '#8b5cf6' : '#f59e0b';
 
   function seg(name, opts, current) {
     return `<div class="seg" data-seg="${name}">` + opts.map((o) =>
@@ -233,7 +264,7 @@
     const vis = visibleBrands(); if (!vis.length) return emptyBrands(panel);
     const unitCr = S.unit === 'cr', kind = S.spendKind;
     const spend = D.spend.data, years = spend.years;
-    const splitBrand = vis.find((b) => b.id === 'eurekaforbes') || vis.find((b) => spend.byBrand[b.id]) || vis[0];
+    const splitBrand = vis.find((b) => b.id === 'aquaguard') || vis.find((b) => spend.byBrand[b.id]) || vis[0];
 
     panel.innerHTML = `
       <div class="flex items-center gap-2 flex-wrap mb-3">
@@ -287,7 +318,10 @@
       valueFormatter: (v) => unitCr ? U.fmtCr(v) : U.fmtPct(v),
       yFormatter: (v) => unitCr ? '₹' + Math.round(v) : Math.round(v) + '%',
     });
-    $('#sp-latest-badges').innerHTML = vis.map((b) => `<span class="chip" style="cursor:default"><span class="dot" style="background:${b.color}"></span>${U.shortName(b.id)} ${qbadge(b.quality)}</span>`).join('');
+    $('#sp-latest-badges').innerHTML = vis.map((b) => {
+      const latest = (spend.byBrand[b.id] || []).slice(-1)[0] || {};
+      return `<span class="chip" style="cursor:default"><span class="dot" style="background:${b.color}"></span>${U.shortName(b.id)} ${qbadge(latest.quality || b.quality)}${provIcon(b)}</span>`;
+    }).join('');
 
     // D) table brand x year
     const th = ['Brand', ...years].map((h, i) => `<th${i === 0 ? '' : ''}>${h}</th>`).join('');
@@ -297,13 +331,13 @@
         if (!r) return `<td class="text-slate-300 text-right">—</td>`;
         const val = unitCr ? U.aspByKind(r, kind) : U.aspPct(r, kind);
         const bd = U.qualityBadge(r.quality);
-        return `<td class="text-right" title="${bd.text}"><span class="num">${unitCr ? val : val.toFixed(1) + '%'}</span>
-          <span class="inline-block w-1.5 h-1.5 rounded-full align-middle ml-1" style="background:${r.quality === 'disclosed' ? '#10b981' : r.quality === 'snapshot' ? '#3b82f6' : '#f59e0b'}"></span></td>`;
+        return `<td class="text-right${r.stale ? ' opacity-60' : ''}" title="${bd.text}${r.stale ? ' · last-good (stale)' : ''}"><span class="num">${unitCr ? val : val.toFixed(1) + '%'}</span>
+          <span class="inline-block w-1.5 h-1.5 rounded-full align-middle ml-1" style="background:${qDot(r.quality)}"></span></td>`;
       }).join('');
-      return `<tr><td class="font-semibold whitespace-nowrap"><span class="dot inline-block mr-1.5" style="background:${b.color};width:8px;height:8px;border-radius:999px"></span>${U.shortName(b.id)}</td>${tds}</tr>`;
+      return `<tr><td class="font-semibold whitespace-nowrap"><span class="dot inline-block mr-1.5" style="background:${b.color};width:8px;height:8px;border-radius:999px"></span>${U.shortName(b.id)} ${provIcon(b)}</td>${tds}</tr>`;
     }).join('');
     $('#sp-table').innerHTML = `<table class="grid-table"><thead><tr>${th}</tr></thead><tbody>${trs}</tbody></table>
-      <div class="flex gap-2 mt-2 text-[10px] text-slate-400">${['disclosed', 'snapshot', 'estimated'].map((q) => `<span class="inline-flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full" style="background:${q === 'disclosed' ? '#10b981' : q === 'snapshot' ? '#3b82f6' : '#f59e0b'}"></span>${U.qualityBadge(q).text}</span>`).join('')}</div>`;
+      <div class="flex flex-wrap gap-2 mt-2 text-[10px] text-slate-400">${['disclosed', 'snapshot', 'private-circle', 'estimated'].map((q) => `<span class="inline-flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full" style="background:${qDot(q)}"></span>${U.qualityBadge(q).text}</span>`).join('')}</div>`;
   }
 
   // ================================================================ WEB & SOCIAL

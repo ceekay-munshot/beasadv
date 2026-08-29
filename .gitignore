@@ -1,6 +1,11 @@
 # dependencies
 node_modules/
 
+# secrets — never commit real values (see .env.example)
+.env
+.env.*
+!.env.example
+
 # cloudflare / wrangler
 .wrangler/
 .dev.vars

@@ -7,43 +7,6 @@
     "FY26"
   ],
   "byBrand": {
-    "eurekaforbes": [
-      {
-        "year": "FY22",
-        "revenue": 2010,
-        "advertisement": 70,
-        "sellingPromo": 105,
-        "quality": "estimated"
-      },
-      {
-        "year": "FY23",
-        "revenue": 2080,
-        "advertisement": 76,
-        "sellingPromo": 114,
-        "quality": "disclosed"
-      },
-      {
-        "year": "FY24",
-        "revenue": 2189,
-        "advertisement": 87,
-        "sellingPromo": 120,
-        "quality": "disclosed"
-      },
-      {
-        "year": "FY25",
-        "revenue": 2436,
-        "advertisement": 104,
-        "sellingPromo": 155,
-        "quality": "estimated"
-      },
-      {
-        "year": "FY26",
-        "revenue": 2710,
-        "advertisement": 120,
-        "sellingPromo": 180,
-        "quality": "estimated"
-      }
-    ],
     "aquaguard": [
       {
         "year": "FY22",
@@ -131,7 +94,7 @@
         "revenue": 294,
         "advertisement": 17,
         "sellingPromo": 21,
-        "quality": "estimated"
+        "quality": "private-circle"
       },
       {
         "year": "FY24",
@@ -175,7 +138,7 @@
         "revenue": 293,
         "advertisement": 12,
         "sellingPromo": 11,
-        "quality": "estimated"
+        "quality": "private-circle"
       },
       {
         "year": "FY25",
@@ -212,7 +175,7 @@
         "revenue": 500,
         "advertisement": 18,
         "sellingPromo": 17,
-        "quality": "estimated"
+        "quality": "private-circle"
       },
       {
         "year": "FY25",
@@ -229,5 +192,31 @@
         "quality": "estimated"
       }
     ]
+  },
+  "_provenance": {
+    "livpure": {
+      "sourceDoc": "PrivateCircle / MCA",
+      "note": "Unlisted entity financials",
+      "fetchedAt": "2026-08-29T14:31:42.835Z",
+      "quality": "private-circle"
+    },
+    "pureit": {
+      "sourceDoc": "PrivateCircle / MCA",
+      "note": "Unlisted entity financials",
+      "fetchedAt": "2026-08-29T14:31:42.835Z",
+      "quality": "private-circle"
+    },
+    "aosmith": {
+      "sourceDoc": "PrivateCircle / MCA",
+      "note": "Unlisted entity financials",
+      "fetchedAt": "2026-08-29T14:31:42.835Z",
+      "quality": "private-circle"
+    },
+    "kent": {
+      "sourceDoc": "PrivateCircle / MCA",
+      "note": "Kent RO Systems Ltd (snapshot)",
+      "fetchedAt": "2026-08-29T14:31:42.835Z",
+      "quality": "snapshot"
+    }
   }
 }

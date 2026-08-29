@@ -1,0 +1,17 @@
+{
+  "name": "beasadv-pipeline",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "CI data pipeline for the water-purifier ad-spend dashboard. The static site itself is zero-build; only these scrapers use npm.",
+  "scripts": {
+    "gen": "node scripts/gen-data.mjs",
+    "scrape:spend": "node scripts/scrape-spend.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.48.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

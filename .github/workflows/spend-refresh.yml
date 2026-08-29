@@ -1,0 +1,78 @@
+name: Spend refresh
+
+# Spend is annual/quarterly, so refresh monthly (and on demand).
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 1 * *' # 06:00 UTC on the 1st of each month
+
+permissions:
+  contents: write
+
+concurrency:
+  group: spend-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Install Chromium
+        run: node node_modules/playwright-core/cli.js install --with-deps chromium
+
+      - name: Scrape spend
+        continue-on-error: true
+        env:
+          LLM_PROVIDER: ${{ secrets.LLM_PROVIDER }}
+          CLAUDE_BEDROCK_API_KEY: ${{ secrets.CLAUDE_BEDROCK_API_KEY }}
+          CLAUDE_BEDROCK_REGION: ${{ secrets.CLAUDE_BEDROCK_REGION }}
+          CLAUDE_BEDROCK_MODEL_ID: ${{ secrets.CLAUDE_BEDROCK_MODEL_ID }}
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          MISTRAL_MODEL: ${{ secrets.MISTRAL_MODEL }}
+          FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+          SCRAPEDO_API_KEY: ${{ secrets.SCRAPEDO_API_KEY }}
+          SCREENER_EMAIL: ${{ secrets.SCREENER_EMAIL }}
+          SCREENER_PASSWORD: ${{ secrets.SCREENER_PASSWORD }}
+        run: node scripts/scrape-spend.mjs
+
+      - name: Commit & push if changed
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data/spend.json public/data/manual/private-circle.json public/js/seed.js
+          if git diff --cached --quiet; then
+            echo "No spend changes to commit."
+            exit 0
+          fi
+          git commit -m "Spend refresh ($(date -u +%Y-%m-%d))"
+          for i in 1 2 3 4; do
+            if git push origin HEAD:main; then echo "pushed"; exit 0; fi
+            echo "push failed (attempt $i); rebasing onto origin/main"
+            git fetch origin main || true
+            git rebase origin/main || git rebase --abort || true
+            sleep $((2 ** i))
+          done
+          echo "push failed after retries" >&2
+          exit 1
+
+      - name: Upload spend.json artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: spend-json
+          path: public/data/spend.json
+          if-no-files-found: warn
