@@ -2,10 +2,10 @@
   "byBrand": {
     "aquaguard": {
       "youtube": 93600,
-      "instagram": 122000,
+      "instagram": 168000,
       "facebook": 573000,
       "engagementRate": 1.9,
-      "total": 788600,
+      "total": 834600,
       "growthSeries": [
         684.8,
         690,
@@ -18,11 +18,11 @@
       ]
     },
     "kent": {
-      "youtube": 49600,
-      "instagram": 81000,
+      "youtube": 49500,
+      "instagram": 151000,
       "facebook": 1200000,
       "engagementRate": 0.8,
-      "total": 1330600,
+      "total": 1400500,
       "growthSeries": [
         1139.3,
         1181.7,
@@ -36,10 +36,10 @@
     },
     "livpure": {
       "youtube": 15600,
-      "instagram": 69000,
+      "instagram": 73000,
       "facebook": 150000,
       "engagementRate": 2.4,
-      "total": 234600,
+      "total": 238600,
       "growthSeries": [
         201.3,
         208.4,
@@ -52,11 +52,11 @@
       ]
     },
     "pureit": {
-      "youtube": 22000,
-      "instagram": 11000,
+      "youtube": 26100,
+      "instagram": 14000,
       "facebook": 141000,
       "engagementRate": 1.1,
-      "total": 174000,
+      "total": 181100,
       "growthSeries": [
         149.2,
         153.8,
@@ -69,11 +69,11 @@
       ]
     },
     "aosmith": {
-      "youtube": 12000,
-      "instagram": 15000,
+      "youtube": 10200,
+      "instagram": 23000,
       "facebook": 70000,
       "engagementRate": 1.3,
-      "total": 97000,
+      "total": 103200,
       "growthSeries": [
         83.5,
         84.9,
@@ -99,32 +99,32 @@
   "_provenance": {
     "byBrand": {
       "aquaguard": {
-        "fetchedAt": "2026-08-29T15:04:31.194Z",
-        "youtube": "estimated",
-        "instagram": "estimated"
+        "fetchedAt": "2026-08-29T19:38:03.849Z",
+        "youtube": "youtube-scrape",
+        "instagram": "instagram-scrape"
       },
       "kent": {
-        "fetchedAt": "2026-08-29T15:04:31.194Z",
-        "youtube": "estimated",
-        "instagram": "estimated"
+        "fetchedAt": "2026-08-29T19:38:03.849Z",
+        "youtube": "youtube-scrape",
+        "instagram": "instagram-scrape"
       },
       "livpure": {
-        "fetchedAt": "2026-08-29T15:04:31.194Z",
-        "youtube": "estimated",
-        "instagram": "estimated"
+        "fetchedAt": "2026-08-29T19:38:03.849Z",
+        "youtube": "youtube-scrape",
+        "instagram": "instagram-scrape"
       },
       "pureit": {
-        "fetchedAt": "2026-08-29T15:04:31.194Z",
-        "youtube": "estimated",
-        "instagram": "estimated"
+        "fetchedAt": "2026-08-29T19:38:03.849Z",
+        "youtube": "youtube-scrape",
+        "instagram": "instagram-scrape"
       },
       "aosmith": {
-        "fetchedAt": "2026-08-29T15:04:31.194Z",
-        "youtube": "estimated",
-        "instagram": "estimated"
+        "fetchedAt": "2026-08-29T19:38:03.849Z",
+        "youtube": "youtube-scrape",
+        "instagram": "instagram-scrape"
       }
     },
-    "source": "estimated",
-    "fetchedAt": "2026-08-29T15:04:31.194Z"
+    "source": "YouTube + Instagram",
+    "fetchedAt": "2026-08-29T19:38:03.849Z"
   }
 }

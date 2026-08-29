@@ -18,16 +18,17 @@
         217,
         195,
         152,
+        148,
         148
       ],
       "quality": "estimated"
     },
     "kent": {
-      "amazonCount": 3500,
+      "amazonCount": 15418,
       "flipkartCount": 2300,
-      "totalCount": 5800,
-      "avgRating": 4.2,
-      "flagship": "Kent Grand RO+UV+UF+TDS",
+      "totalCount": 17718,
+      "avgRating": 4.1,
+      "flagship": "KENT Supreme Plus Neo RO Water Purifier | 2 Yrs Comprehensive Warranty* | No Service Cost for 2 Yrs | RO+UF+UV+Alk+Cu+TDS Control+UV In-Tank | 8L | 20LP/Hr | Ideal For Borewell/Tanker/Municipal Water",
       "velocitySeries": [
         95,
         101,
@@ -40,7 +41,8 @@
         142,
         115,
         96,
-        85
+        85,
+        17718
       ],
       "quality": "estimated"
     },
@@ -61,6 +63,7 @@
         21,
         30,
         27,
+        24,
         24,
         24
       ],
@@ -84,16 +87,17 @@
         133,
         109,
         92,
+        96,
         96
       ],
       "quality": "estimated"
     },
     "aosmith": {
-      "amazonCount": 1500,
+      "amazonCount": 2123,
       "flipkartCount": 800,
-      "totalCount": 2300,
+      "totalCount": 2923,
       "avgRating": 4.3,
-      "flagship": "A.O. Smith Z8 Hot RO",
+      "flagship": "AO Smith Z8 Instant Hot and Ambient Purifier|Hot Water in Stainless Steel Tank|10 L Storage|8-Stage Purification |100% RO+SCMT|Wall mount Water Purifier for Home",
       "velocitySeries": [
         40,
         44,
@@ -106,7 +110,8 @@
         74,
         67,
         53,
-        53
+        53,
+        2923
       ],
       "quality": "estimated"
     }
@@ -123,32 +128,33 @@
     "May'26",
     "Jun'26",
     "Jul'26",
+    "Aug'26",
     "Aug'26"
   ],
   "_provenance": {
     "byBrand": {
       "aquaguard": {
         "source": "estimated",
-        "fetchedAt": "2026-08-29T15:04:31.317Z"
+        "fetchedAt": "2026-08-29T19:38:28.172Z"
       },
       "kent": {
-        "source": "estimated",
-        "fetchedAt": "2026-08-29T15:04:31.317Z"
+        "source": "amazon",
+        "fetchedAt": "2026-08-29T19:38:28.172Z"
       },
       "livpure": {
         "source": "estimated",
-        "fetchedAt": "2026-08-29T15:04:31.317Z"
+        "fetchedAt": "2026-08-29T19:38:28.172Z"
       },
       "pureit": {
         "source": "estimated",
-        "fetchedAt": "2026-08-29T15:04:31.317Z"
+        "fetchedAt": "2026-08-29T19:38:28.172Z"
       },
       "aosmith": {
-        "source": "estimated",
-        "fetchedAt": "2026-08-29T15:04:31.317Z"
+        "source": "amazon",
+        "fetchedAt": "2026-08-29T19:38:28.172Z"
       }
     },
-    "source": "estimated",
-    "fetchedAt": "2026-08-29T15:04:31.317Z"
+    "source": "Amazon + Flipkart",
+    "fetchedAt": "2026-08-29T19:38:28.172Z"
   }
 }
