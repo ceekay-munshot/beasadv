@@ -1,0 +1,352 @@
+{
+  "platforms": [
+    "chatgpt",
+    "claude",
+    "perplexity",
+    "gemini"
+  ],
+  "platformLabels": {
+    "chatgpt": "ChatGPT",
+    "claude": "Claude",
+    "perplexity": "Perplexity",
+    "gemini": "Gemini"
+  },
+  "byBrand": {
+    "aquaguard": {
+      "overall": {
+        "visibilityPct": 72,
+        "shareOfVoice": 21.8,
+        "sentiment": {
+          "pos": 72,
+          "neu": 21,
+          "neg": 7
+        }
+      },
+      "byPlatform": {
+        "chatgpt": {
+          "visibilityPct": 76,
+          "shareOfVoice": 22.6,
+          "sentiment": {
+            "pos": 72,
+            "neu": 21,
+            "neg": 7
+          }
+        },
+        "claude": {
+          "visibilityPct": 72,
+          "shareOfVoice": 21.3,
+          "sentiment": {
+            "pos": 72,
+            "neu": 21,
+            "neg": 7
+          }
+        },
+        "perplexity": {
+          "visibilityPct": 75,
+          "shareOfVoice": 22.5,
+          "sentiment": {
+            "pos": 72,
+            "neu": 21,
+            "neg": 7
+          }
+        },
+        "gemini": {
+          "visibilityPct": 69,
+          "shareOfVoice": 20.8,
+          "sentiment": {
+            "pos": 72,
+            "neu": 21,
+            "neg": 7
+          }
+        }
+      },
+      "sampleGaps": [
+        "Cheapest RO purifier under ₹8,000?",
+        "Best purifier for a rented 1BHK flat?",
+        "Which purifier needs the least maintenance?"
+      ],
+      "quality": "estimated"
+    },
+    "eurekaforbes": {
+      "overall": {
+        "visibilityPct": 66,
+        "shareOfVoice": 20,
+        "sentiment": {
+          "pos": 68,
+          "neu": 24,
+          "neg": 8
+        }
+      },
+      "byPlatform": {
+        "chatgpt": {
+          "visibilityPct": 66,
+          "shareOfVoice": 19.6,
+          "sentiment": {
+            "pos": 68,
+            "neu": 24,
+            "neg": 8
+          }
+        },
+        "claude": {
+          "visibilityPct": 69,
+          "shareOfVoice": 20.4,
+          "sentiment": {
+            "pos": 68,
+            "neu": 24,
+            "neg": 8
+          }
+        },
+        "perplexity": {
+          "visibilityPct": 68,
+          "shareOfVoice": 20.4,
+          "sentiment": {
+            "pos": 68,
+            "neu": 24,
+            "neg": 8
+          }
+        },
+        "gemini": {
+          "visibilityPct": 66,
+          "shareOfVoice": 19.9,
+          "sentiment": {
+            "pos": 68,
+            "neu": 24,
+            "neg": 8
+          }
+        }
+      },
+      "sampleGaps": [
+        "Best water purifier under ₹10,000?",
+        "Which purifier is best for borewell water?",
+        "Best budget RO for a small family?",
+        "Most stylish purifier for a modern kitchen?"
+      ],
+      "quality": "estimated"
+    },
+    "kent": {
+      "overall": {
+        "visibilityPct": 78,
+        "shareOfVoice": 23.6,
+        "sentiment": {
+          "pos": 70,
+          "neu": 22,
+          "neg": 8
+        }
+      },
+      "byPlatform": {
+        "chatgpt": {
+          "visibilityPct": 81,
+          "shareOfVoice": 24.1,
+          "sentiment": {
+            "pos": 70,
+            "neu": 22,
+            "neg": 8
+          }
+        },
+        "claude": {
+          "visibilityPct": 81,
+          "shareOfVoice": 24,
+          "sentiment": {
+            "pos": 70,
+            "neu": 22,
+            "neg": 8
+          }
+        },
+        "perplexity": {
+          "visibilityPct": 75,
+          "shareOfVoice": 22.5,
+          "sentiment": {
+            "pos": 70,
+            "neu": 22,
+            "neg": 8
+          }
+        },
+        "gemini": {
+          "visibilityPct": 82,
+          "shareOfVoice": 24.7,
+          "sentiment": {
+            "pos": 70,
+            "neu": 22,
+            "neg": 8
+          }
+        }
+      },
+      "sampleGaps": [
+        "Best purifier for travel or an RV?",
+        "Most compact purifier for a tiny kitchen?"
+      ],
+      "quality": "estimated"
+    },
+    "livpure": {
+      "overall": {
+        "visibilityPct": 28,
+        "shareOfVoice": 8.5,
+        "sentiment": {
+          "pos": 58,
+          "neu": 30,
+          "neg": 12
+        }
+      },
+      "byPlatform": {
+        "chatgpt": {
+          "visibilityPct": 27,
+          "shareOfVoice": 8,
+          "sentiment": {
+            "pos": 58,
+            "neu": 30,
+            "neg": 12
+          }
+        },
+        "claude": {
+          "visibilityPct": 27,
+          "shareOfVoice": 8,
+          "sentiment": {
+            "pos": 58,
+            "neu": 30,
+            "neg": 12
+          }
+        },
+        "perplexity": {
+          "visibilityPct": 28,
+          "shareOfVoice": 8.4,
+          "sentiment": {
+            "pos": 58,
+            "neu": 30,
+            "neg": 12
+          }
+        },
+        "gemini": {
+          "visibilityPct": 30,
+          "shareOfVoice": 9,
+          "sentiment": {
+            "pos": 58,
+            "neu": 30,
+            "neg": 12
+          }
+        }
+      },
+      "sampleGaps": [
+        "Best water purifier for hard water in Chennai?",
+        "Which purifier is best for a family of 5?",
+        "Most reliable RO brand for long-term use?",
+        "Best purifier with the cheapest service plan?",
+        "Top purifier for borewell / high-TDS water?",
+        "Which brand has the best after-sales network?"
+      ],
+      "quality": "estimated"
+    },
+    "pureit": {
+      "overall": {
+        "visibilityPct": 46,
+        "shareOfVoice": 13.9,
+        "sentiment": {
+          "pos": 62,
+          "neu": 28,
+          "neg": 10
+        }
+      },
+      "byPlatform": {
+        "chatgpt": {
+          "visibilityPct": 46,
+          "shareOfVoice": 13.7,
+          "sentiment": {
+            "pos": 62,
+            "neu": 28,
+            "neg": 10
+          }
+        },
+        "claude": {
+          "visibilityPct": 47,
+          "shareOfVoice": 13.9,
+          "sentiment": {
+            "pos": 62,
+            "neu": 28,
+            "neg": 10
+          }
+        },
+        "perplexity": {
+          "visibilityPct": 51,
+          "shareOfVoice": 15.3,
+          "sentiment": {
+            "pos": 62,
+            "neu": 28,
+            "neg": 10
+          }
+        },
+        "gemini": {
+          "visibilityPct": 44,
+          "shareOfVoice": 13.3,
+          "sentiment": {
+            "pos": 62,
+            "neu": 28,
+            "neg": 10
+          }
+        }
+      },
+      "sampleGaps": [
+        "Best premium purifier for hard water?",
+        "Which purifier gives the best mineral retention?",
+        "Best purifier for a large joint family?"
+      ],
+      "quality": "estimated"
+    },
+    "aosmith": {
+      "overall": {
+        "visibilityPct": 40,
+        "shareOfVoice": 12.1,
+        "sentiment": {
+          "pos": 66,
+          "neu": 26,
+          "neg": 8
+        }
+      },
+      "byPlatform": {
+        "chatgpt": {
+          "visibilityPct": 40,
+          "shareOfVoice": 11.9,
+          "sentiment": {
+            "pos": 66,
+            "neu": 26,
+            "neg": 8
+          }
+        },
+        "claude": {
+          "visibilityPct": 42,
+          "shareOfVoice": 12.4,
+          "sentiment": {
+            "pos": 66,
+            "neu": 26,
+            "neg": 8
+          }
+        },
+        "perplexity": {
+          "visibilityPct": 37,
+          "shareOfVoice": 11.1,
+          "sentiment": {
+            "pos": 66,
+            "neu": 26,
+            "neg": 8
+          }
+        },
+        "gemini": {
+          "visibilityPct": 41,
+          "shareOfVoice": 12.3,
+          "sentiment": {
+            "pos": 66,
+            "neu": 26,
+            "neg": 8
+          }
+        }
+      },
+      "sampleGaps": [
+        "Best water purifier under ₹12,000?",
+        "Which purifier is best for borewell water?",
+        "Best RO for a family of 5?",
+        "Most reliable purifier for hard water?",
+        "Best budget purifier on Amazon?",
+        "Which brand is easiest to get serviced in small towns?"
+      ],
+      "quality": "estimated"
+    }
+  }
+}

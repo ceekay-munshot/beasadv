@@ -1,0 +1,17 @@
+{
+  // Cloudflare config — static assets in ./public served by a tiny Worker.
+  // Deploy:  npx wrangler deploy      Local:  npx wrangler dev
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "brand-adspend-dashboard",
+  "main": "worker/index.js",
+  "compatibility_date": "2024-11-01",
+  "assets": {
+    // bind the built site; the Worker only runs for non-asset paths (e.g. /api/refresh)
+    "directory": "./public",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

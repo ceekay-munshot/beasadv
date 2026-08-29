@@ -1,0 +1,150 @@
+{
+  "byBrand": {
+    "aquaguard": {
+      "amazonCount": 5200,
+      "flipkartCount": 3600,
+      "totalCount": 8800,
+      "avgRating": 4.3,
+      "flagship": "Aquaguard Aura RO+UV+MTDS",
+      "velocitySeries": [
+        145,
+        139,
+        136,
+        137,
+        151,
+        153,
+        148,
+        187,
+        217,
+        195,
+        152,
+        148
+      ],
+      "quality": "estimated"
+    },
+    "eurekaforbes": {
+      "amazonCount": 2500,
+      "flipkartCount": 1700,
+      "totalCount": 4200,
+      "avgRating": 4.2,
+      "flagship": "Eureka Forbes AquaSure Delight",
+      "velocitySeries": [
+        62,
+        61,
+        57,
+        58,
+        57,
+        59,
+        64,
+        74,
+        96,
+        87,
+        65,
+        66
+      ],
+      "quality": "estimated"
+    },
+    "kent": {
+      "amazonCount": 3500,
+      "flipkartCount": 2300,
+      "totalCount": 5800,
+      "avgRating": 4.2,
+      "flagship": "Kent Grand RO+UV+UF+TDS",
+      "velocitySeries": [
+        95,
+        101,
+        101,
+        94,
+        92,
+        92,
+        93,
+        115,
+        142,
+        115,
+        96,
+        85
+      ],
+      "quality": "estimated"
+    },
+    "livpure": {
+      "amazonCount": 380,
+      "flipkartCount": 220,
+      "totalCount": 600,
+      "avgRating": 4.1,
+      "flagship": "Livpure Glo RO+UV+Mineraliser",
+      "velocitySeries": [
+        10,
+        11,
+        13,
+        14,
+        14,
+        16,
+        18,
+        21,
+        30,
+        27,
+        24,
+        24
+      ],
+      "quality": "estimated"
+    },
+    "pureit": {
+      "amazonCount": 4000,
+      "flipkartCount": 2700,
+      "totalCount": 6700,
+      "avgRating": 4.2,
+      "flagship": "Pureit Copper+ RO+UV+MF",
+      "velocitySeries": [
+        73,
+        73,
+        69,
+        81,
+        79,
+        84,
+        89,
+        104,
+        133,
+        109,
+        92,
+        96
+      ],
+      "quality": "estimated"
+    },
+    "aosmith": {
+      "amazonCount": 1500,
+      "flipkartCount": 800,
+      "totalCount": 2300,
+      "avgRating": 4.3,
+      "flagship": "A.O. Smith Z8 Hot RO",
+      "velocitySeries": [
+        40,
+        44,
+        45,
+        46,
+        42,
+        46,
+        43,
+        56,
+        74,
+        67,
+        53,
+        53
+      ],
+      "quality": "estimated"
+    }
+  },
+  "velocityMonths": [
+    "Sep'25",
+    "Oct'25",
+    "Nov'25",
+    "Dec'25",
+    "Jan'26",
+    "Feb'26",
+    "Mar'26",
+    "Apr'26",
+    "May'26",
+    "Jun'26",
+    "Jul'26",
+    "Aug'26"
+  ]
+}
