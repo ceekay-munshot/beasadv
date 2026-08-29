@@ -67,62 +67,6 @@
       ],
       "quality": "estimated"
     },
-    "eurekaforbes": {
-      "overall": {
-        "visibilityPct": 66,
-        "shareOfVoice": 20,
-        "sentiment": {
-          "pos": 68,
-          "neu": 24,
-          "neg": 8
-        }
-      },
-      "byPlatform": {
-        "chatgpt": {
-          "visibilityPct": 66,
-          "shareOfVoice": 19.6,
-          "sentiment": {
-            "pos": 68,
-            "neu": 24,
-            "neg": 8
-          }
-        },
-        "claude": {
-          "visibilityPct": 69,
-          "shareOfVoice": 20.4,
-          "sentiment": {
-            "pos": 68,
-            "neu": 24,
-            "neg": 8
-          }
-        },
-        "perplexity": {
-          "visibilityPct": 68,
-          "shareOfVoice": 20.4,
-          "sentiment": {
-            "pos": 68,
-            "neu": 24,
-            "neg": 8
-          }
-        },
-        "gemini": {
-          "visibilityPct": 66,
-          "shareOfVoice": 19.9,
-          "sentiment": {
-            "pos": 68,
-            "neu": 24,
-            "neg": 8
-          }
-        }
-      },
-      "sampleGaps": [
-        "Best water purifier under ₹10,000?",
-        "Which purifier is best for borewell water?",
-        "Best budget RO for a small family?",
-        "Most stylish purifier for a modern kitchen?"
-      ],
-      "quality": "estimated"
-    },
     "kent": {
       "overall": {
         "visibilityPct": 78,

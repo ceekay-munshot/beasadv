@@ -142,12 +142,13 @@
   const QUALITY = {
     disclosed: { text: 'Disclosed', cls: 'badge-disclosed' },
     snapshot: { text: 'Snapshot', cls: 'badge-snapshot' },
+    'private-circle': { text: 'PrivateCircle', cls: 'badge-private' },
     estimated: { text: 'Estimated', cls: 'badge-estimated' },
   };
   const qualityBadge = (q) => QUALITY[q] || QUALITY.estimated;
 
   const SHORT = {
-    aquaguard: 'Aquaguard', eurekaforbes: 'Eureka F.', kent: 'Kent',
+    aquaguard: 'Aquaguard', kent: 'Kent',
     livpure: 'Livpure', pureit: 'Pureit', aosmith: 'AO Smith',
   };
   const shortName = (id) => SHORT[id] || id;
