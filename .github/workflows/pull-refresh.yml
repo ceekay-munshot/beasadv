@@ -1,0 +1,89 @@
+name: Pull-signal refresh
+
+# Search interest, social reach and e-commerce reviews move week to week.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 5 * * 1' # 05:00 UTC every Monday
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pull-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Install Chromium
+        run: node node_modules/playwright-core/cli.js install --with-deps chromium
+
+      - name: Scrape social (YouTube + Instagram)
+        continue-on-error: true
+        env:
+          FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+          SCRAPEDO_API_KEY: ${{ secrets.SCRAPEDO_API_KEY }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          INSTAGRAM_USERNAME: ${{ secrets.INSTAGRAM_USERNAME }}
+          INSTAGRAM_PASSWORD: ${{ secrets.INSTAGRAM_PASSWORD }}
+        run: node scripts/scrape-social.mjs
+
+      - name: Scrape reviews (Amazon + Flipkart)
+        continue-on-error: true
+        env:
+          FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+          SCRAPEDO_API_KEY: ${{ secrets.SCRAPEDO_API_KEY }}
+        run: node scripts/scrape-reviews.mjs
+
+      - name: Scrape trends (Google Trends)
+        continue-on-error: true
+        env:
+          SCRAPEDO_API_KEY: ${{ secrets.SCRAPEDO_API_KEY }}
+        run: node scripts/scrape-trends.mjs
+
+      - name: Commit & push if changed
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data/search-trends.json public/data/social.json public/data/reviews.json public/data/manual/sources.json public/js/seed.js
+          if git diff --cached --quiet; then
+            echo "No pull-signal changes to commit."
+            exit 0
+          fi
+          git commit -m "Pull-signal refresh ($(date -u +%Y-%m-%d))"
+          for i in 1 2 3 4; do
+            if git push origin HEAD:main; then echo "pushed"; exit 0; fi
+            echo "push failed (attempt $i); rebasing onto origin/main"
+            git fetch origin main || true
+            git rebase origin/main || git rebase --abort || true
+            sleep $((2 ** i))
+          done
+          echo "push failed after retries" >&2
+          exit 1
+
+      - name: Upload pull-signal JSONs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pull-signals-json
+          path: |
+            public/data/search-trends.json
+            public/data/social.json
+            public/data/reviews.json
+          if-no-files-found: warn

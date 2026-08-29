@@ -155,5 +155,31 @@
     51,
     70
   ],
-  "categoryLabel": "“water purifier”"
+  "categoryLabel": "“water purifier”",
+  "_provenance": {
+    "byBrand": {
+      "aquaguard": {
+        "source": "estimated",
+        "fetchedAt": "2026-08-29T15:04:31.419Z"
+      },
+      "kent": {
+        "source": "estimated",
+        "fetchedAt": "2026-08-29T15:04:31.419Z"
+      },
+      "livpure": {
+        "source": "estimated",
+        "fetchedAt": "2026-08-29T15:04:31.419Z"
+      },
+      "pureit": {
+        "source": "estimated",
+        "fetchedAt": "2026-08-29T15:04:31.419Z"
+      },
+      "aosmith": {
+        "source": "estimated",
+        "fetchedAt": "2026-08-29T15:04:31.419Z"
+      }
+    },
+    "source": "estimated",
+    "fetchedAt": "2026-08-29T15:04:31.419Z"
+  }
 }

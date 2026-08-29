@@ -6,7 +6,10 @@
   "description": "CI data pipeline for the water-purifier ad-spend dashboard. The static site itself is zero-build; only these scrapers use npm.",
   "scripts": {
     "gen": "node scripts/gen-data.mjs",
-    "scrape:spend": "node scripts/scrape-spend.mjs"
+    "scrape:spend": "node scripts/scrape-spend.mjs",
+    "scrape:social": "node scripts/scrape-social.mjs",
+    "scrape:reviews": "node scripts/scrape-reviews.mjs",
+    "scrape:trends": "node scripts/scrape-trends.mjs"
   },
   "devDependencies": {
     "playwright-core": "^1.48.0"

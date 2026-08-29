@@ -1,0 +1,10 @@
+{
+  "_note": "Per-brand sources for the pull-signal scrapers. Edit freely. Aquaguard uses Eureka Forbes' corporate YouTube/Instagram.",
+  "byBrand": {
+    "aquaguard": { "youtubeChannelId": "UCNbnH-PjtHBjWsd8kB2ZNxQ", "instagram": "eurekaforbesofficial", "trendsTerm": "Aquaguard", "amazonUrl": "", "flipkartUrl": "" },
+    "kent":      { "youtubeChannelId": "UCkV-GcSEokhTnXQJCGpNEMg", "instagram": "kentrosystems",       "trendsTerm": "Kent RO",  "amazonUrl": "https://www.amazon.in/dp/B0HD72CBZ6", "flipkartUrl": "" },
+    "livpure":   { "youtubeChannelId": "UCvC-OU27svqm5hmKgnlhArw", "instagram": "livpure_india",       "trendsTerm": "Livpure",  "amazonUrl": "", "flipkartUrl": "" },
+    "pureit":    { "youtubeHandle": "pureitindia",                  "instagram": "pureitwater",         "trendsTerm": "Pureit",   "amazonUrl": "", "flipkartUrl": "" },
+    "aosmith":   { "youtubeChannelId": "UC8rLcpvnLO8Ixu1jbcGsVYQ", "instagram": "aosmithindia",         "trendsTerm": "AO Smith water purifier", "amazonUrl": "https://www.amazon.in/dp/B0755D9T1M", "flipkartUrl": "" }
+  }
+}

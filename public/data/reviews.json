@@ -124,5 +124,31 @@
     "Jun'26",
     "Jul'26",
     "Aug'26"
-  ]
+  ],
+  "_provenance": {
+    "byBrand": {
+      "aquaguard": {
+        "source": "estimated",
+        "fetchedAt": "2026-08-29T15:04:31.317Z"
+      },
+      "kent": {
+        "source": "estimated",
+        "fetchedAt": "2026-08-29T15:04:31.317Z"
+      },
+      "livpure": {
+        "source": "estimated",
+        "fetchedAt": "2026-08-29T15:04:31.317Z"
+      },
+      "pureit": {
+        "source": "estimated",
+        "fetchedAt": "2026-08-29T15:04:31.317Z"
+      },
+      "aosmith": {
+        "source": "estimated",
+        "fetchedAt": "2026-08-29T15:04:31.317Z"
+      }
+    },
+    "source": "estimated",
+    "fetchedAt": "2026-08-29T15:04:31.317Z"
+  }
 }
