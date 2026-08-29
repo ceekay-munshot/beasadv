@@ -80,6 +80,19 @@
   const provIcon = (b) => `<span class="prov" title="${esc(spendProvenance(b))}"><i data-lucide="info" class="w-3.5 h-3.5"></i></span>`;
   const qDot = (q) => q === 'disclosed' ? '#10b981' : q === 'snapshot' ? '#3b82f6' : q === 'private-circle' ? '#8b5cf6' : '#f59e0b';
 
+  // Source affordance for a data section (search / social / reviews), driven by
+  // that file's _provenance block. Returns a plain-English note for an ⓘ tooltip.
+  function srcNote(key) {
+    const prov = D[key] && D[key].data && D[key].data._provenance;
+    if (!prov || !prov.source || prov.source === 'estimated') return 'Modelled estimate — no live source yet.';
+    let t = 'Source: ' + prov.source;
+    const bb = prov.byBrand || {};
+    if (prov.stale || Object.keys(bb).some((k) => bb[k] && bb[k].stale)) t += ' • some values showing last-good (latest refresh incomplete)';
+    if (prov.fetchedAt) t += ` (updated ${String(prov.fetchedAt).slice(0, 10)})`;
+    return t;
+  }
+  const srcIcon = (key) => `<span class="prov" title="${esc(srcNote(key))}"><i data-lucide="info" class="w-3.5 h-3.5"></i></span>`;
+
   function seg(name, opts, current) {
     return `<div class="seg" data-seg="${name}">` + opts.map((o) =>
       `<button class="seg-btn" data-val="${o.val}" aria-pressed="${o.val === current}">${o.icon ? `<i data-lucide="${o.icon}" class="w-3.5 h-3.5"></i>` : ''}${o.label}</button>`
@@ -357,7 +370,7 @@
     const vis = visibleBrands(); if (!vis.length) return emptyBrands(body);
     const st = D.search.data, isCat = S.searchTerm === 'category';
     body.innerHTML = `<div class="card p-4 md:p-5">
-      ${cardHead(isCat ? 'How much India searches for “water purifier”' : 'How many people search each brand',
+      ${cardHead((isCat ? 'How much India searches for “water purifier”' : 'How many people search each brand') + ' ' + srcIcon('search'),
         'Relative interest, 0–100 · summer (Apr–Jun) peaks every year',
         nsel('searchTerm', [{ val: 'brand', label: 'By brand name' }, { val: 'category', label: '“water purifier” (category)' }], S.searchTerm))}
       <div id="se-line" class="h-[360px]"></div></div>`;
@@ -379,7 +392,7 @@
     const soc = D.social.data, isSize = S.social === 'size';
 
     body.innerHTML = `<div class="card p-4 md:p-5">
-      ${cardHead('Followers — and are they actually engaging?',
+      ${cardHead('Followers — and are they actually engaging? ' + srcIcon('social'),
         isSize ? 'Audience size on each platform (each chart has its own scale)' : 'Average engagement rate — how many followers actually react',
         seg('social', [{ val: 'size', label: 'Audience size' }, { val: 'engagement', label: 'Engagement rate' }], S.social))}
       ${isSize
@@ -434,11 +447,11 @@
         ${seg('shelfMetric', [{ val: 'reviews', label: 'Review count' }, { val: 'rating', label: 'Rating' }], S.shelfMetric)}
       </div>
       <div class="grid gap-3 lg:grid-cols-5">
-        <div class="card p-4 lg:col-span-3">${cardHead(isRating ? 'Who is rated highest' : 'Who gets talked about most', isRating ? 'Average star rating (out of 5)' : 'Total customer reviews · ' + mktLabel(mkt))}<div id="sh-bar" class="h-[260px]"></div></div>
+        <div class="card p-4 lg:col-span-3">${cardHead((isRating ? 'Who is rated highest' : 'Who gets talked about most') + ' ' + srcIcon('reviews'), isRating ? 'Average star rating (out of 5)' : 'Total customer reviews · ' + mktLabel(mkt))}<div id="sh-bar" class="h-[260px]"></div></div>
         <div class="card p-4 lg:col-span-2">${cardHead('Star ratings', 'Average rating per brand')}<div id="sh-stars" class="pt-1"></div></div>
       </div>
       <div class="grid gap-3 lg:grid-cols-5 mt-3">
-        <div class="card p-4 lg:col-span-3">${cardHead('Whose buzz is growing', 'New reviews per month, last 12 months')}<div id="sh-vel" class="h-[260px]"></div></div>
+        <div class="card p-4 lg:col-span-3">${cardHead('Whose buzz is growing ' + srcIcon('reviews'), 'New reviews per month, last 12 months')}<div id="sh-vel" class="h-[260px]"></div></div>
         <div class="card p-4 lg:col-span-2 overflow-x-auto">${cardHead('Flagship models', mktLabel(mkt))}<div id="sh-table"></div></div>
       </div>`;
 

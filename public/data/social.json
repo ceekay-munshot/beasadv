@@ -95,5 +95,36 @@
     "Q2'26",
     "Q3'26",
     "Q4'26"
-  ]
+  ],
+  "_provenance": {
+    "byBrand": {
+      "aquaguard": {
+        "fetchedAt": "2026-08-29T15:04:31.194Z",
+        "youtube": "estimated",
+        "instagram": "estimated"
+      },
+      "kent": {
+        "fetchedAt": "2026-08-29T15:04:31.194Z",
+        "youtube": "estimated",
+        "instagram": "estimated"
+      },
+      "livpure": {
+        "fetchedAt": "2026-08-29T15:04:31.194Z",
+        "youtube": "estimated",
+        "instagram": "estimated"
+      },
+      "pureit": {
+        "fetchedAt": "2026-08-29T15:04:31.194Z",
+        "youtube": "estimated",
+        "instagram": "estimated"
+      },
+      "aosmith": {
+        "fetchedAt": "2026-08-29T15:04:31.194Z",
+        "youtube": "estimated",
+        "instagram": "estimated"
+      }
+    },
+    "source": "estimated",
+    "fetchedAt": "2026-08-29T15:04:31.194Z"
+  }
 }

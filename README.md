@@ -98,44 +98,65 @@ wrangler.jsonc          Cloudflare config (assets -> ./public, main -> worker/in
 lib/llm.mjs             LLM JSON extraction (Bedrock Claude primary, Mistral fallback)
 lib/scrape.mjs          page/PDF scraping (Firecrawl primary, Scrape.do fallback)
 lib/screener.mjs        best-effort screener.in session (playwright-core)
+lib/store.mjs           shared scraper helpers (read/write data + refresh seed)
 scripts/gen-data.mjs    default: mirror data/*.json -> seed.js; --regen-mock rebuilds mock
-scripts/scrape-spend.mjs  refresh spend.json from primary sources (degrades gracefully)
+scripts/scrape-spend.mjs    refresh spend.json from primary sources (degrades gracefully)
+scripts/scrape-social.mjs   refresh social.json (YouTube API/scrape + Instagram best-effort)
+scripts/scrape-reviews.mjs  refresh reviews.json (Amazon + Flipkart via Firecrawl JSON)
+scripts/scrape-trends.mjs   refresh search-trends.json (Google Trends via Scrape.do)
+public/data/manual/sources.json  per-brand handles / product URLs / trends terms
 .github/workflows/spend-refresh.yml  monthly + on-demand spend refresh
+.github/workflows/pull-refresh.yml   weekly + on-demand search/social/reviews refresh
 ```
 
 ## Data pipeline (CI)
 
-Spend is now backed by a real extraction pipeline; the other lanes are still
-mock (later rounds). A monthly GitHub Actions job
-(`.github/workflows/spend-refresh.yml`, also runnable via *workflow_dispatch*)
-runs `scripts/scrape-spend.mjs`, which:
+Four of the six data lanes are backed by real extraction pipelines (spend +
+search / social / reviews); AI Answers is the remaining mock lane (next round).
+Two GitHub Actions jobs (both also runnable via *workflow_dispatch*) do the work,
+then run `gen-data.mjs` to refresh `seed.js`.
 
-- **Aquaguard** (Eureka Forbes Ltd, listed) — finds the annual-report PDF via
-  screener.in, reads it with Firecrawl, and extracts the *Advertisement* and
-  *Selling & Sales Promotion* Other-Expenses lines with an LLM.
+**`spend-refresh.yml`** (monthly) → `scripts/scrape-spend.mjs`:
+
+- **Aquaguard** (Eureka Forbes Ltd, listed) — annual-report PDF via screener.in +
+  Firecrawl + LLM extraction of the *Advertisement* / *Selling & Sales Promotion*
+  Other-Expenses lines.
 - **Kent** — screener/DRHP if reachable, else the manual PrivateCircle file.
 - **Livpure / Pureit / AO Smith** (unlisted) — from
-  `public/data/manual/private-circle.json` (paste real MCA/PrivateCircle numbers
-  there; a brand omitted keeps its modelled estimate).
+  `public/data/manual/private-circle.json`.
 
-It then runs `gen-data.mjs` to refresh `seed.js`. Every source degrades
-gracefully: on any failure it keeps the last-good committed value, marks it
-`stale`, and exits 0 — it never regresses a real number to null, and it makes no
-network calls at all when no secrets are set. Each spend figure carries a
-`quality` tier (**Disclosed / Snapshot / PrivateCircle / Estimated**) and an
-optional `_provenance` note surfaced by the ⓘ on the Spend tab.
+**`pull-refresh.yml`** (weekly) → three scrapers driven by
+`public/data/manual/sources.json`:
 
-Secrets (GitHub Actions repository secrets; see `.env.example`; never committed):
-`CLAUDE_BEDROCK_API_KEY` (+ `CLAUDE_BEDROCK_REGION`, `CLAUDE_BEDROCK_MODEL_ID`),
-`MISTRAL_API_KEY` (+ `MISTRAL_MODEL`), `FIRECRAWL_API_KEY`, `SCRAPEDO_API_KEY`,
-`SCREENER_EMAIL`, `SCREENER_PASSWORD`. No secret ever reaches the frontend.
+- `scrape-social.mjs` — YouTube subscribers (YouTube Data API, else channel-page
+  scrape) + Instagram followers (playwright login, else public-profile scrape).
+- `scrape-reviews.mjs` — Amazon/Flipkart rating + review count (Firecrawl JSON
+  mode); appends each run's total to `velocitySeries` so the "buzz" line grows.
+- `scrape-trends.mjs` — Google Trends 5-year interest per brand, routed through
+  Scrape.do, downsampled to the quarterly shape.
+
+Every scraper degrades gracefully: on any failure it keeps the last-good
+committed value, marks it `stale`, and exits 0 — it never regresses a real number
+to null, and makes no network calls at all when no secrets are set. Each value
+carries a `quality`/`_provenance` note surfaced by the ⓘ on the Spend, Web &
+Social and Shelf tabs.
+
+Secrets (GitHub Actions repository secrets; see `.env.example`; never committed;
+all pull-signal keys are optional): `CLAUDE_BEDROCK_API_KEY`
+(+ `CLAUDE_BEDROCK_REGION`, `CLAUDE_BEDROCK_MODEL_ID`), `MISTRAL_API_KEY`
+(+ `MISTRAL_MODEL`), `FIRECRAWL_API_KEY`, `SCRAPEDO_API_KEY`, `SCREENER_EMAIL`,
+`SCREENER_PASSWORD`, `YOUTUBE_API_KEY`, `INSTAGRAM_USERNAME`,
+`INSTAGRAM_PASSWORD`. No secret ever reaches the frontend.
 
 Run locally:
 
 ```bash
 npm ci                       # installs playwright-core (the only dep)
 cp .env.example .env         # fill in secrets, or leave blank to keep last-good
-npm run scrape:spend         # refreshes public/data/spend.json + js/seed.js
+npm run scrape:spend         # spend.json + seed.js
+npm run scrape:social        # social.json + seed.js
+npm run scrape:reviews       # reviews.json + seed.js
+npm run scrape:trends        # search-trends.json + seed.js
 ```
 
 ## Data quality
