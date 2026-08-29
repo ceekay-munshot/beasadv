@@ -13,35 +13,40 @@
         "revenue": 2010,
         "advertisement": 70,
         "sellingPromo": 105,
-        "quality": "estimated"
+        "quality": "estimated",
+        "stale": true
       },
       {
         "year": "FY23",
         "revenue": 2080,
         "advertisement": 76,
         "sellingPromo": 114,
-        "quality": "disclosed"
+        "quality": "disclosed",
+        "stale": true
       },
       {
         "year": "FY24",
         "revenue": 2189,
         "advertisement": 87,
         "sellingPromo": 120,
-        "quality": "disclosed"
+        "quality": "disclosed",
+        "stale": true
       },
       {
         "year": "FY25",
         "revenue": 2436,
         "advertisement": 104,
         "sellingPromo": 155,
-        "quality": "estimated"
+        "quality": "estimated",
+        "stale": true
       },
       {
         "year": "FY26",
         "revenue": 2710,
         "advertisement": 120,
         "sellingPromo": 180,
-        "quality": "estimated"
+        "quality": "estimated",
+        "stale": true
       }
     ],
     "kent": [
@@ -50,14 +55,16 @@
         "revenue": 980,
         "advertisement": 51,
         "sellingPromo": 42,
-        "quality": "estimated"
+        "quality": "estimated",
+        "stale": true
       },
       {
         "year": "FY23",
         "revenue": 1084,
         "advertisement": 57,
         "sellingPromo": 46,
-        "quality": "snapshot"
+        "quality": "snapshot",
+        "stale": true
       },
       {
         "year": "FY24",
@@ -71,14 +78,16 @@
         "revenue": 1260,
         "advertisement": 66,
         "sellingPromo": 54,
-        "quality": "estimated"
+        "quality": "estimated",
+        "stale": true
       },
       {
         "year": "FY26",
         "revenue": 1350,
         "advertisement": 71,
         "sellingPromo": 57,
-        "quality": "estimated"
+        "quality": "estimated",
+        "stale": true
       }
     ],
     "livpure": [
@@ -197,26 +206,31 @@
     "livpure": {
       "sourceDoc": "PrivateCircle / MCA",
       "note": "Unlisted entity financials",
-      "fetchedAt": "2026-08-29T14:31:42.835Z",
+      "fetchedAt": "2026-08-29T19:14:14.757Z",
       "quality": "private-circle"
     },
     "pureit": {
       "sourceDoc": "PrivateCircle / MCA",
       "note": "Unlisted entity financials",
-      "fetchedAt": "2026-08-29T14:31:42.835Z",
+      "fetchedAt": "2026-08-29T19:14:14.757Z",
       "quality": "private-circle"
     },
     "aosmith": {
       "sourceDoc": "PrivateCircle / MCA",
       "note": "Unlisted entity financials",
-      "fetchedAt": "2026-08-29T14:31:42.835Z",
+      "fetchedAt": "2026-08-29T19:14:14.757Z",
       "quality": "private-circle"
     },
     "kent": {
       "sourceDoc": "PrivateCircle / MCA",
       "note": "Kent RO Systems Ltd (snapshot)",
-      "fetchedAt": "2026-08-29T14:31:42.835Z",
-      "quality": "snapshot"
+      "fetchedAt": "2026-08-29T19:14:14.757Z",
+      "quality": "snapshot",
+      "stale": true
+    },
+    "aquaguard": {
+      "stale": true,
+      "fetchedAt": "2026-08-29T19:14:14.757Z"
     }
   }
 }
