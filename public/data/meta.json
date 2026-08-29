@@ -1,0 +1,53 @@
+{
+  "lastUpdated": "2026-08-29",
+  "category": "India water purifiers",
+  "brands": [
+    {
+      "id": "aquaguard",
+      "name": "Aquaguard",
+      "color": "#0ea5e9",
+      "group": "Eureka Forbes",
+      "quality": "disclosed"
+    },
+    {
+      "id": "eurekaforbes",
+      "name": "Eureka Forbes",
+      "color": "#6366f1",
+      "group": "Eureka Forbes",
+      "quality": "disclosed"
+    },
+    {
+      "id": "kent",
+      "name": "Kent",
+      "color": "#10b981",
+      "group": "",
+      "quality": "snapshot"
+    },
+    {
+      "id": "livpure",
+      "name": "Livpure",
+      "color": "#f59e0b",
+      "group": "",
+      "quality": "estimated"
+    },
+    {
+      "id": "pureit",
+      "name": "Pureit",
+      "color": "#8b5cf6",
+      "group": "A.O. Smith group",
+      "quality": "estimated"
+    },
+    {
+      "id": "aosmith",
+      "name": "AO Smith",
+      "color": "#f43f5e",
+      "group": "A.O. Smith group",
+      "quality": "estimated"
+    }
+  ],
+  "qualityNotes": {
+    "disclosed": "From the company / parent audited annual report.",
+    "snapshot": "From a point-in-time filing; not a full multi-year series.",
+    "estimated": "Modelled estimate — no public brand-level disclosure."
+  }
+}

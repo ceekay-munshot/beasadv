@@ -1,0 +1,233 @@
+{
+  "years": [
+    "FY22",
+    "FY23",
+    "FY24",
+    "FY25",
+    "FY26"
+  ],
+  "byBrand": {
+    "eurekaforbes": [
+      {
+        "year": "FY22",
+        "revenue": 2010,
+        "advertisement": 70,
+        "sellingPromo": 105,
+        "quality": "estimated"
+      },
+      {
+        "year": "FY23",
+        "revenue": 2080,
+        "advertisement": 76,
+        "sellingPromo": 114,
+        "quality": "disclosed"
+      },
+      {
+        "year": "FY24",
+        "revenue": 2189,
+        "advertisement": 87,
+        "sellingPromo": 120,
+        "quality": "disclosed"
+      },
+      {
+        "year": "FY25",
+        "revenue": 2436,
+        "advertisement": 104,
+        "sellingPromo": 155,
+        "quality": "estimated"
+      },
+      {
+        "year": "FY26",
+        "revenue": 2710,
+        "advertisement": 120,
+        "sellingPromo": 180,
+        "quality": "estimated"
+      }
+    ],
+    "aquaguard": [
+      {
+        "year": "FY22",
+        "revenue": 2010,
+        "advertisement": 70,
+        "sellingPromo": 105,
+        "quality": "estimated"
+      },
+      {
+        "year": "FY23",
+        "revenue": 2080,
+        "advertisement": 76,
+        "sellingPromo": 114,
+        "quality": "disclosed"
+      },
+      {
+        "year": "FY24",
+        "revenue": 2189,
+        "advertisement": 87,
+        "sellingPromo": 120,
+        "quality": "disclosed"
+      },
+      {
+        "year": "FY25",
+        "revenue": 2436,
+        "advertisement": 104,
+        "sellingPromo": 155,
+        "quality": "estimated"
+      },
+      {
+        "year": "FY26",
+        "revenue": 2710,
+        "advertisement": 120,
+        "sellingPromo": 180,
+        "quality": "estimated"
+      }
+    ],
+    "kent": [
+      {
+        "year": "FY22",
+        "revenue": 980,
+        "advertisement": 51,
+        "sellingPromo": 42,
+        "quality": "estimated"
+      },
+      {
+        "year": "FY23",
+        "revenue": 1084,
+        "advertisement": 57,
+        "sellingPromo": 46,
+        "quality": "snapshot"
+      },
+      {
+        "year": "FY24",
+        "revenue": 1178,
+        "advertisement": 62,
+        "sellingPromo": 50,
+        "quality": "snapshot"
+      },
+      {
+        "year": "FY25",
+        "revenue": 1260,
+        "advertisement": 66,
+        "sellingPromo": 54,
+        "quality": "estimated"
+      },
+      {
+        "year": "FY26",
+        "revenue": 1350,
+        "advertisement": 71,
+        "sellingPromo": 57,
+        "quality": "estimated"
+      }
+    ],
+    "livpure": [
+      {
+        "year": "FY22",
+        "revenue": 216,
+        "advertisement": 13,
+        "sellingPromo": 15,
+        "quality": "estimated"
+      },
+      {
+        "year": "FY23",
+        "revenue": 294,
+        "advertisement": 17,
+        "sellingPromo": 21,
+        "quality": "estimated"
+      },
+      {
+        "year": "FY24",
+        "revenue": 380,
+        "advertisement": 22,
+        "sellingPromo": 27,
+        "quality": "estimated"
+      },
+      {
+        "year": "FY25",
+        "revenue": 470,
+        "advertisement": 27,
+        "sellingPromo": 34,
+        "quality": "estimated"
+      },
+      {
+        "year": "FY26",
+        "revenue": 560,
+        "advertisement": 33,
+        "sellingPromo": 40,
+        "quality": "estimated"
+      }
+    ],
+    "pureit": [
+      {
+        "year": "FY22",
+        "revenue": 250,
+        "advertisement": 10,
+        "sellingPromo": 10,
+        "quality": "estimated"
+      },
+      {
+        "year": "FY23",
+        "revenue": 270,
+        "advertisement": 11,
+        "sellingPromo": 11,
+        "quality": "estimated"
+      },
+      {
+        "year": "FY24",
+        "revenue": 293,
+        "advertisement": 12,
+        "sellingPromo": 11,
+        "quality": "estimated"
+      },
+      {
+        "year": "FY25",
+        "revenue": 310,
+        "advertisement": 13,
+        "sellingPromo": 12,
+        "quality": "estimated"
+      },
+      {
+        "year": "FY26",
+        "revenue": 330,
+        "advertisement": 13,
+        "sellingPromo": 13,
+        "quality": "estimated"
+      }
+    ],
+    "aosmith": [
+      {
+        "year": "FY22",
+        "revenue": 420,
+        "advertisement": 15,
+        "sellingPromo": 14,
+        "quality": "estimated"
+      },
+      {
+        "year": "FY23",
+        "revenue": 460,
+        "advertisement": 16,
+        "sellingPromo": 16,
+        "quality": "estimated"
+      },
+      {
+        "year": "FY24",
+        "revenue": 500,
+        "advertisement": 18,
+        "sellingPromo": 17,
+        "quality": "estimated"
+      },
+      {
+        "year": "FY25",
+        "revenue": 540,
+        "advertisement": 19,
+        "sellingPromo": 19,
+        "quality": "estimated"
+      },
+      {
+        "year": "FY26",
+        "revenue": 580,
+        "advertisement": 21,
+        "sellingPromo": 20,
+        "quality": "estimated"
+      }
+    ]
+  }
+}
