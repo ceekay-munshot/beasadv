@@ -11,7 +11,7 @@
 // / total / growthSeries per brand). Only overwrites a number actually
 // retrieved; facebook, engagementRate and growthSeries stay last-good. Applies
 // the never-regress guard, degrades gracefully with no keys, and exits 0.
-import { dataPath, readJSON, writeJSON, refreshSeed, num, parseCompact, nowISO } from '../lib/store.mjs';
+import { dataPath, readJSON, writeJSON, refreshSeed, num, parseCompact, nowISO, chromiumLaunchOptions } from '../lib/store.mjs';
 import { fetchDoc, scrapeAvailable } from '../lib/scrape.mjs';
 
 const SOCIAL = dataPath('social.json');
@@ -67,7 +67,7 @@ async function igPlaywright(username) {
   try { pw = await import('playwright-core'); } catch { console.error('[social] playwright-core missing for IG'); return null; }
   let browser;
   try {
-    browser = await pw.chromium.launch({ executablePath: process.env.PLAYWRIGHT_CHROMIUM_PATH || '/opt/pw-browsers/chromium', headless: true, args: ['--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu'] });
+    browser = await pw.chromium.launch(chromiumLaunchOptions());
     const page = await browser.newPage();
     await page.goto('https://www.instagram.com/accounts/login/', { waitUntil: 'domcontentloaded', timeout: 30000 });
     await page.fill('input[name=username]', user);
