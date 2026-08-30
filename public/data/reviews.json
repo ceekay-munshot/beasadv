@@ -15,6 +15,7 @@
         8347,
         8574,
         8800,
+        12618,
         12618
       ],
       "quality": "estimated"
@@ -33,6 +34,7 @@
         16351,
         16807,
         17262,
+        17718,
         17718,
         17718
       ],
@@ -53,6 +55,7 @@
         569,
         585,
         600,
+        15085,
         15085
       ],
       "quality": "estimated"
@@ -72,6 +75,7 @@
         6355,
         6528,
         6700,
+        3201,
         3201
       ],
       "quality": "estimated"
@@ -91,6 +95,7 @@
         2773,
         2848,
         2923,
+        2923,
         2923
       ],
       "quality": "estimated"
@@ -105,32 +110,33 @@
     "Jun'26",
     "Jul'26",
     "Aug'26",
+    "Aug'26",
     "Aug'26"
   ],
   "_provenance": {
     "byBrand": {
       "aquaguard": {
         "source": "amazon",
-        "fetchedAt": "2026-08-30T03:40:14.605Z"
+        "fetchedAt": "2026-08-30T04:08:15.861Z"
       },
       "kent": {
         "source": "amazon",
-        "fetchedAt": "2026-08-30T03:40:14.605Z"
+        "fetchedAt": "2026-08-30T04:08:15.861Z"
       },
       "livpure": {
         "source": "amazon",
-        "fetchedAt": "2026-08-30T03:40:14.605Z"
+        "fetchedAt": "2026-08-30T04:08:15.861Z"
       },
       "pureit": {
         "source": "amazon",
-        "fetchedAt": "2026-08-30T03:40:14.605Z"
+        "fetchedAt": "2026-08-30T04:08:15.861Z"
       },
       "aosmith": {
         "source": "amazon",
-        "fetchedAt": "2026-08-30T03:40:14.605Z"
+        "fetchedAt": "2026-08-30T04:08:15.861Z"
       }
     },
     "source": "Amazon + Flipkart",
-    "fetchedAt": "2026-08-30T03:40:14.605Z"
+    "fetchedAt": "2026-08-30T04:08:15.861Z"
   }
 }
