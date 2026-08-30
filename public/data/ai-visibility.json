@@ -1,207 +1,158 @@
 {
   "platforms": [
-    "claude",
-    "mistral"
+    "claude"
   ],
   "platformLabels": {
-    "claude": "Claude",
-    "mistral": "Mistral"
+    "claude": "Claude"
   },
   "byBrand": {
     "aquaguard": {
       "overall": {
-        "visibilityPct": 72,
-        "shareOfVoice": 21.8,
+        "visibilityPct": 87,
+        "shareOfVoice": 25.5,
         "sentiment": {
-          "pos": 72,
-          "neu": 21,
-          "neg": 7
+          "pos": 92,
+          "neu": 8,
+          "neg": 0
         }
       },
       "byPlatform": {
         "claude": {
-          "visibilityPct": 72,
-          "shareOfVoice": 21.3,
+          "visibilityPct": 87,
+          "shareOfVoice": 25.5,
           "sentiment": {
-            "pos": 72,
-            "neu": 21,
-            "neg": 7
-          }
-        },
-        "mistral": {
-          "visibilityPct": 75,
-          "shareOfVoice": 22.5,
-          "sentiment": {
-            "pos": 72,
-            "neu": 21,
-            "neg": 7
+            "pos": 92,
+            "neu": 8,
+            "neg": 0
           }
         }
       },
       "sampleGaps": [
-        "Cheapest RO purifier under ₹8,000?",
-        "Best purifier for a rented 1BHK flat?",
-        "Which purifier needs the least maintenance?"
+        "Best copper/mineral water purifier in India?",
+        "Which water purifier brand should I avoid in India?"
       ],
-      "quality": "estimated"
+      "quality": "measured"
     },
     "kent": {
       "overall": {
-        "visibilityPct": 78,
-        "shareOfVoice": 23.6,
+        "visibilityPct": 87,
+        "shareOfVoice": 25.5,
         "sentiment": {
-          "pos": 70,
-          "neu": 22,
-          "neg": 8
+          "pos": 92,
+          "neu": 8,
+          "neg": 0
         }
       },
       "byPlatform": {
         "claude": {
-          "visibilityPct": 81,
-          "shareOfVoice": 24,
+          "visibilityPct": 87,
+          "shareOfVoice": 25.5,
           "sentiment": {
-            "pos": 70,
-            "neu": 22,
-            "neg": 8
-          }
-        },
-        "mistral": {
-          "visibilityPct": 75,
-          "shareOfVoice": 22.5,
-          "sentiment": {
-            "pos": 70,
-            "neu": 22,
-            "neg": 8
+            "pos": 92,
+            "neu": 8,
+            "neg": 0
           }
         }
       },
       "sampleGaps": [
-        "Best purifier for travel or an RV?",
-        "Most compact purifier for a tiny kitchen?"
+        "Best budget water purifier in India in 2026?",
+        "Which water purifier brand should I avoid in India?"
       ],
-      "quality": "estimated"
+      "quality": "measured"
     },
     "livpure": {
       "overall": {
-        "visibilityPct": 28,
-        "shareOfVoice": 8.5,
+        "visibilityPct": 60,
+        "shareOfVoice": 17.6,
         "sentiment": {
-          "pos": 58,
-          "neu": 30,
-          "neg": 12
+          "pos": 89,
+          "neu": 0,
+          "neg": 11
         }
       },
       "byPlatform": {
         "claude": {
-          "visibilityPct": 27,
-          "shareOfVoice": 8,
+          "visibilityPct": 60,
+          "shareOfVoice": 17.6,
           "sentiment": {
-            "pos": 58,
-            "neu": 30,
-            "neg": 12
-          }
-        },
-        "mistral": {
-          "visibilityPct": 28,
-          "shareOfVoice": 8.4,
-          "sentiment": {
-            "pos": 58,
-            "neu": 30,
-            "neg": 12
+            "pos": 89,
+            "neu": 0,
+            "neg": 11
           }
         }
       },
       "sampleGaps": [
-        "Best water purifier for hard water in Chennai?",
-        "Which purifier is best for a family of 5?",
-        "Most reliable RO brand for long-term use?",
-        "Best purifier with the cheapest service plan?",
-        "Top purifier for borewell / high-TDS water?",
-        "Which brand has the best after-sales network?"
+        "Which water purifier brand has the best after-sales service in India?",
+        "Aquaguard vs Kent — which should I buy?",
+        "Most reliable water purifier for a family of four in India?",
+        "Best water purifier for borewell water in India?"
       ],
-      "quality": "estimated"
+      "quality": "measured"
     },
     "pureit": {
       "overall": {
-        "visibilityPct": 46,
-        "shareOfVoice": 13.9,
+        "visibilityPct": 47,
+        "shareOfVoice": 13.7,
         "sentiment": {
-          "pos": 62,
-          "neu": 28,
-          "neg": 10
+          "pos": 86,
+          "neu": 0,
+          "neg": 14
         }
       },
       "byPlatform": {
         "claude": {
           "visibilityPct": 47,
-          "shareOfVoice": 13.9,
+          "shareOfVoice": 13.7,
           "sentiment": {
-            "pos": 62,
-            "neu": 28,
-            "neg": 10
-          }
-        },
-        "mistral": {
-          "visibilityPct": 51,
-          "shareOfVoice": 15.3,
-          "sentiment": {
-            "pos": 62,
-            "neu": 28,
-            "neg": 10
+            "pos": 86,
+            "neu": 0,
+            "neg": 14
           }
         }
       },
       "sampleGaps": [
-        "Best premium purifier for hard water?",
-        "Which purifier gives the best mineral retention?",
-        "Best purifier for a large joint family?"
+        "Which RO water purifier is best for hard/high-TDS water in India?",
+        "Which water purifier brand has the best after-sales service in India?",
+        "Aquaguard vs Kent — which should I buy?",
+        "Most reliable water purifier for a family of four in India?"
       ],
-      "quality": "estimated"
+      "quality": "measured"
     },
     "aosmith": {
       "overall": {
-        "visibilityPct": 40,
-        "shareOfVoice": 12.1,
+        "visibilityPct": 60,
+        "shareOfVoice": 17.6,
         "sentiment": {
-          "pos": 66,
-          "neu": 26,
-          "neg": 8
+          "pos": 89,
+          "neu": 0,
+          "neg": 11
         }
       },
       "byPlatform": {
         "claude": {
-          "visibilityPct": 42,
-          "shareOfVoice": 12.4,
+          "visibilityPct": 60,
+          "shareOfVoice": 17.6,
           "sentiment": {
-            "pos": 66,
-            "neu": 26,
-            "neg": 8
-          }
-        },
-        "mistral": {
-          "visibilityPct": 37,
-          "shareOfVoice": 11.1,
-          "sentiment": {
-            "pos": 66,
-            "neu": 26,
-            "neg": 8
+            "pos": 89,
+            "neu": 0,
+            "neg": 11
           }
         }
       },
       "sampleGaps": [
-        "Best water purifier under ₹12,000?",
-        "Which purifier is best for borewell water?",
-        "Best RO for a family of 5?",
-        "Most reliable purifier for hard water?",
-        "Best budget purifier on Amazon?",
-        "Which brand is easiest to get serviced in small towns?"
+        "Best water purifier under ₹15,000 in India?",
+        "Aquaguard vs Kent — which should I buy?",
+        "Which water purifier brand is most trusted in India?",
+        "Best budget water purifier in India in 2026?"
       ],
-      "quality": "estimated"
+      "quality": "measured"
     }
   },
   "_provenance": {
-    "source": "estimated",
-    "fetchedAt": "2026-08-29T00:00:00.000Z",
-    "note": "Mock until the AI engine runs (Claude + Mistral)."
+    "source": "claude",
+    "fetchedAt": "2026-08-30T03:38:06.758Z",
+    "platforms": [
+      "claude"
+    ]
   }
 }
