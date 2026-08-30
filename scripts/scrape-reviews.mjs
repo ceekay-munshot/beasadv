@@ -32,31 +32,40 @@ const SCHEMA = {
   type: 'object',
   properties: {
     rating: { type: ['number', 'null'] },
+    ratingCount: { type: ['number', 'null'] },
     reviewCount: { type: ['number', 'null'] },
     title: { type: ['string', 'null'] },
   },
 };
 
+// Read a product's rating + rating VOLUME (the canonical count) from Amazon or
+// Flipkart. Structured Firecrawl extraction first, then fill any still-missing
+// field from a regex read of the raw page. Both paths use the same metric — the
+// ratings count — so a structured↔fallback flip never changes it by ~10x.
 async function readProduct(url) {
   if (!url || !scrapeAvailable()) return null;
-  let j = await extractStructured(url, SCHEMA);
-  if (j && (num(j.reviewCount) != null || num(j.rating) != null)) {
-    return { count: num(j.reviewCount), rating: num(j.rating), title: j.title || null };
+  const j = (await extractStructured(url, SCHEMA)) || {};
+  let count = num(j.ratingCount) ?? num(j.reviewCount); // prefer ratings volume
+  let rating = num(j.rating);
+  const title = j.title || null;
+  if (count == null || rating == null) {
+    const doc = await fetchDoc(url);
+    const t = doc && (doc.html || doc.markdown);
+    if (t) {
+      if (count == null) {
+        // Flipkart "1,23,456 Ratings & 12,345 Reviews" -> ratings volume;
+        // Amazon "12,345 global ratings" / "12,345 ratings".
+        const fk = t.match(/([\d,]+)\s*Ratings?\s*(?:&|and|,)?\s*[\d,]*\s*Reviews?/i);
+        const cm = t.match(/([\d,]+)\s*(?:global ratings|ratings|reviews)/i);
+        count = fk ? parseCompact(fk[1]) : cm ? parseCompact(cm[1]) : null;
+      }
+      // rating only from an explicit "X out of 5" — never a bare "5 ★", which
+      // on Flipkart is a rating-distribution row, not the aggregate score.
+      if (rating == null) { const rm = t.match(/([\d.]+)\s*out of\s*5/i); rating = rm ? num(rm[1]) : null; }
+    }
   }
-  // regex fallback (Amazon + Flipkart)
-  const doc = await fetchDoc(url);
-  const t = doc && (doc.html || doc.markdown);
-  if (!t) return null;
-  // Flipkart shows "1,23,456 Ratings & 12,345 Reviews" — take the ratings
-  // volume (consistent with Amazon). Amazon: "12,345 global ratings".
-  const fk = t.match(/([\d,]+)\s*Ratings?\s*(?:&|and|,)?\s*[\d,]*\s*Reviews?/i);
-  const cm = t.match(/([\d,]+)\s*(?:global ratings|ratings|reviews)/i);
-  const count = fk ? parseCompact(fk[1]) : cm ? parseCompact(cm[1]) : null;
-  // rating: Amazon "4.3 out of 5"; Flipkart "4.2 ★" / "4.2 stars".
-  const rm = t.match(/([\d.]+)\s*out of\s*5/i) || t.match(/\b([0-5](?:\.\d)?)\s*(?:★|stars?\b)/i);
-  const rating = rm ? num(rm[1]) : null;
   if (count == null && rating == null) return null;
-  return { count, rating, title: null };
+  return { count, rating, title };
 }
 
 // Amazon India search fallback: for a brand with no product URL, find the

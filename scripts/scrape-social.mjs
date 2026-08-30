@@ -89,8 +89,10 @@ async function fbScrape(url) {
   const doc = await fetchDoc(url);
   const text = doc && (doc.html || doc.markdown);
   if (!text) return null;
-  // e.g. "1,234,567 likes", "12,345 followers", "573K people like this"
-  const m = text.match(/([\d.,]+\s*[KMB]?)\s*(?:people (?:like|follow) this|likes|followers|fans)/i);
+  // canonical metric = page LIKES (the committed 'facebook' field is shown as
+  // "Facebook likes"); fall back to followers only if no likes figure is present.
+  const m = text.match(/([\d.,]+\s*[KMB]?)\s*(?:likes|people like this)/i)
+        || text.match(/([\d.,]+\s*[KMB]?)\s*(?:followers|people follow this)/i);
   return m ? parseCompact(m[1]) : null;
 }
 
