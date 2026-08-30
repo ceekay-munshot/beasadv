@@ -23,48 +23,48 @@
   ],
   "byBrand": {
     "aquaguard": [
-      82,
-      71,
-      85,
-      90,
-      76,
-      65,
+      84,
+      73,
+      87,
+      91,
+      78,
+      67,
+      79,
+      87,
       77,
-      86,
-      76,
+      67,
+      78,
+      78,
+      78,
       65,
+      78,
+      83,
+      78,
+      66,
       76,
-      77,
-      76,
-      64,
-      76,
-      81,
-      76,
-      65,
-      75,
-      77
+      82
     ],
     "kent": [
-      69,
+      67,
       58,
-      74,
-      72,
-      60,
+      73,
+      70,
+      59,
       48,
-      58,
+      57,
       75,
       65,
       51,
-      70,
+      69,
       64,
       58,
       45,
-      61,
+      60,
       59,
-      53,
+      52,
       48,
       59,
-      60
+      61
     ],
     "livpure": [
       43,
@@ -160,26 +160,29 @@
     "byBrand": {
       "aquaguard": {
         "source": "google-trends",
-        "fetchedAt": "2026-08-30T04:08:42.761Z"
+        "fetchedAt": "2026-08-30T14:48:43.034Z"
       },
       "kent": {
         "source": "google-trends",
-        "fetchedAt": "2026-08-30T04:08:42.761Z"
+        "fetchedAt": "2026-08-30T14:48:43.034Z"
       },
       "livpure": {
-        "source": "google-trends",
-        "fetchedAt": "2026-08-30T04:08:42.761Z"
+        "source": "last-good",
+        "fetchedAt": "2026-08-30T14:48:43.034Z",
+        "stale": true
       },
       "pureit": {
-        "source": "google-trends",
-        "fetchedAt": "2026-08-30T04:08:42.761Z"
+        "source": "last-good",
+        "fetchedAt": "2026-08-30T14:48:43.034Z",
+        "stale": true
       },
       "aosmith": {
-        "source": "google-trends",
-        "fetchedAt": "2026-08-30T04:08:42.761Z"
+        "source": "last-good",
+        "fetchedAt": "2026-08-30T14:48:43.034Z",
+        "stale": true
       }
     },
     "source": "Google Trends (IN, 5y)",
-    "fetchedAt": "2026-08-30T04:08:42.761Z"
+    "fetchedAt": "2026-08-30T14:48:43.034Z"
   }
 }

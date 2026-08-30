@@ -99,32 +99,32 @@
   "_provenance": {
     "byBrand": {
       "aquaguard": {
-        "fetchedAt": "2026-08-30T04:07:23.131Z",
-        "youtube": "youtube-scrape",
+        "fetchedAt": "2026-08-30T14:47:53.073Z",
+        "youtube": "youtube-api",
         "instagram": "instagram-scrape"
       },
       "kent": {
-        "fetchedAt": "2026-08-30T04:07:23.131Z",
-        "youtube": "youtube-scrape",
+        "fetchedAt": "2026-08-30T14:47:53.073Z",
+        "youtube": "youtube-api",
         "instagram": "instagram-scrape"
       },
       "livpure": {
-        "fetchedAt": "2026-08-30T04:07:23.131Z",
-        "youtube": "youtube-scrape",
+        "fetchedAt": "2026-08-30T14:47:53.073Z",
+        "youtube": "youtube-api",
         "instagram": "instagram-scrape"
       },
       "pureit": {
-        "fetchedAt": "2026-08-30T04:07:23.131Z",
-        "youtube": "youtube-scrape",
+        "fetchedAt": "2026-08-30T14:47:53.073Z",
+        "youtube": "youtube-api",
         "instagram": "instagram-scrape"
       },
       "aosmith": {
-        "fetchedAt": "2026-08-30T04:07:23.131Z",
-        "youtube": "youtube-scrape",
+        "fetchedAt": "2026-08-30T14:47:53.073Z",
+        "youtube": "youtube-api",
         "instagram": "instagram-scrape"
       }
     },
     "source": "YouTube + Instagram",
-    "fetchedAt": "2026-08-30T04:07:23.131Z"
+    "fetchedAt": "2026-08-30T14:47:53.073Z"
   }
 }
