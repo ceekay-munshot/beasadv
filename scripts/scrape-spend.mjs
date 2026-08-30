@@ -70,7 +70,9 @@ function mergeYears(id, entries, quality) {
   return touched;
 }
 function markStale(id) {
-  for (const r of rowsOf(id)) r.stale = true;
+  // A disclosed row is a permanent audited fact — never flip it to stale on a
+  // failed re-extraction. Only non-disclosed rows show as last-good/stale.
+  for (const r of rowsOf(id)) if (r.quality !== 'disclosed') r.stale = true;
   // drop any prior sourceDoc so a failed refresh never shows a misleading source
   setProv(id, { stale: true, fetchedAt: NOW, sourceDoc: null, note: 'Latest refresh could not confirm; showing last-good.' });
 }
@@ -178,7 +180,17 @@ async function extractListed({ id, entity, query, knownCompanyPath, annualReport
 }
 
 // ---- run ------------------------------------------------------------------
-await extractListed({ id: 'aquaguard', entity: 'Eureka Forbes', query: 'Eureka Forbes', knownCompanyPath: '/company/EUREKAFORB/', annualReportUrl: srcFor('aquaguard').annualReportUrl });
+// Aquaguard (Eureka Forbes Ltd): the annual report is a SCANNED image PDF that
+// cannot be text-extracted, so a live re-extraction can only ever fail and would
+// wrongly mark the audited figures stale. Treat the committed FY22–FY26 values as
+// curated-authoritative — skip live extraction and pin a static provenance.
+for (const r of rowsOf('aquaguard')) delete r.stale;
+data._provenance.aquaguard = {
+  sourceDoc: 'Eureka Forbes Annual Report FY2023-24, Note 30 (Advertisement + Selling & Sales Promotion); FY25 per company disclosure',
+  note: 'Curated from audited filings — scanned AR, not machine-extractable',
+  quality: 'disclosed',
+};
+console.log('[spend] aquaguard: curated-authoritative (scanned AR not machine-extractable); skipped live extraction');
 
 // Kent: attempt listed extraction; else fall back to PrivateCircle
 {

@@ -13,40 +13,35 @@
         "revenue": 2010,
         "advertisement": 70,
         "sellingPromo": 105,
-        "quality": "estimated",
-        "stale": true
+        "quality": "estimated"
       },
       {
         "year": "FY23",
         "revenue": 2084.64,
         "advertisement": 76,
         "sellingPromo": 114,
-        "quality": "disclosed",
-        "stale": true
+        "quality": "disclosed"
       },
       {
         "year": "FY24",
         "revenue": 2189.26,
         "advertisement": 87,
         "sellingPromo": 120,
-        "quality": "disclosed",
-        "stale": true
+        "quality": "disclosed"
       },
       {
         "year": "FY25",
         "revenue": 2436,
         "advertisement": 104,
         "sellingPromo": 155,
-        "quality": "estimated",
-        "stale": true
+        "quality": "disclosed"
       },
       {
         "year": "FY26",
         "revenue": 2710,
         "advertisement": 120,
         "sellingPromo": 180,
-        "quality": "estimated",
-        "stale": true
+        "quality": "estimated"
       }
     ],
     "kent": [
@@ -229,11 +224,9 @@
       "stale": true
     },
     "aquaguard": {
-      "note": "Latest refresh could not confirm; showing last-good.",
-      "quality": "disclosed",
-      "fetchedAt": "2026-08-30T03:35:14.463Z",
-      "stale": true,
-      "sourceDoc": null
+      "sourceDoc": "Eureka Forbes Annual Report FY2023-24, Note 30 (Advertisement + Selling & Sales Promotion); FY25 per company disclosure",
+      "note": "Curated from audited filings — scanned AR, not machine-extractable",
+      "quality": "disclosed"
     }
   }
 }
