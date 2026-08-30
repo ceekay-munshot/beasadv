@@ -1,16 +1,18 @@
 #!/usr/bin/env node
 // ---------------------------------------------------------------------------
-// scrape-social.mjs — refresh public/data/social.json (YouTube + Instagram).
+// scrape-social.mjs — refresh public/data/social.json (YouTube + Instagram + Facebook).
 //
 //   YouTube   YouTube Data API v3 if YOUTUBE_API_KEY is set, else scrape the
 //             channel page for the subscriber count.
 //   Instagram best-effort: playwright-core login if INSTAGRAM_USERNAME/PASSWORD
 //             are set, else scrape the public profile; keep last-good on failure.
+//   Facebook  best-effort (no login): scrape the public page for a likes/
+//             followers count; FB often blocks — keep last-good then.
 //
 // Preserves social.json's shape (youtube / instagram / facebook / engagementRate
 // / total / growthSeries per brand). Only overwrites a number actually
-// retrieved; facebook, engagementRate and growthSeries stay last-good. Applies
-// the never-regress guard, degrades gracefully with no keys, and exits 0.
+// retrieved; engagementRate and growthSeries stay last-good. Applies the
+// never-regress guard, degrades gracefully with no keys, and exits 0.
 import { dataPath, readJSON, writeIfChanged, refreshSeed, num, parseCompact, nowISO, chromiumLaunchOptions } from '../lib/store.mjs';
 import { fetchDoc, scrapeAvailable } from '../lib/scrape.mjs';
 
@@ -81,6 +83,17 @@ async function igPlaywright(username) {
   finally { try { if (browser) await browser.close(); } catch {} }
 }
 
+// ---- Facebook (best-effort; no login) ------------------------------------
+async function fbScrape(url) {
+  if (!url || !scrapeAvailable()) return null;
+  const doc = await fetchDoc(url);
+  const text = doc && (doc.html || doc.markdown);
+  if (!text) return null;
+  // e.g. "1,234,567 likes", "12,345 followers", "573K people like this"
+  const m = text.match(/([\d.,]+\s*[KMB]?)\s*(?:people (?:like|follow) this|likes|followers|fans)/i);
+  return m ? parseCompact(m[1]) : null;
+}
+
 // ---- run ------------------------------------------------------------------
 const now = nowISO();
 let anyReal = false;
@@ -112,14 +125,25 @@ for (const id of Object.keys(data.byBrand)) {
   if (num(ig) != null) { b.instagram = num(ig); anyReal = true; }
   prov.instagram = igSrc || (igAttempted ? 'last-good' : 'estimated');
 
+  // Facebook (best-effort, no login; FB frequently blocks — keep last-good then)
+  const fbAttempted = !!(scrapeAvailable() && src.facebookUrl);
+  let fb = null, fbSrc = null;
+  if (src.facebookUrl) { fb = await fbScrape(src.facebookUrl); if (fb != null) fbSrc = 'facebook-scrape'; }
+  if (num(fb) != null && (num(fb) <= 0 || num(fb) > 100000000)) {
+    console.error(`[social] ${id}: FB ${fb} out of sane range; keeping last-good`);
+    fb = null; fbSrc = null;
+  }
+  if (num(fb) != null) { b.facebook = num(fb); anyReal = true; }
+  prov.facebook = fbSrc || (fbAttempted ? 'last-good' : 'estimated');
+
   // recompute total from whatever we have
   b.total = (num(b.youtube) || 0) + (num(b.instagram) || 0) + (num(b.facebook) || 0);
-  if ((ytAttempted && ytSrc == null) || (igAttempted && igSrc == null)) prov.stale = true;
+  if ((ytAttempted && ytSrc == null) || (igAttempted && igSrc == null) || (fbAttempted && fbSrc == null)) prov.stale = true;
   // only rewrite a brand's provenance when we actually attempted it (keys present);
   // a no-key run leaves the existing (real) provenance untouched → no-op commit
-  if (ytAttempted || igAttempted) data._provenance.byBrand[id] = prov;
+  if (ytAttempted || igAttempted || fbAttempted) data._provenance.byBrand[id] = prov;
 }
-if (anyReal) { data._provenance.source = 'YouTube + Instagram'; data._provenance.fetchedAt = now; }
+if (anyReal) { data._provenance.source = 'YouTube + Instagram + Facebook'; data._provenance.fetchedAt = now; }
 else if (!data._provenance.source) { data._provenance.source = 'estimated'; data._provenance.fetchedAt = now; }
 
 // ---- never regress --------------------------------------------------------

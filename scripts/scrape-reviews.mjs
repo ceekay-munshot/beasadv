@@ -43,13 +43,17 @@ async function readProduct(url) {
   if (j && (num(j.reviewCount) != null || num(j.rating) != null)) {
     return { count: num(j.reviewCount), rating: num(j.rating), title: j.title || null };
   }
-  // regex fallback
+  // regex fallback (Amazon + Flipkart)
   const doc = await fetchDoc(url);
   const t = doc && (doc.html || doc.markdown);
   if (!t) return null;
-  const cm = t.match(/([\d,]+)\s*(?:ratings|reviews|global ratings)/i);
-  const rm = t.match(/([\d.]+)\s*out of\s*5/i);
-  const count = cm ? parseCompact(cm[1]) : null;
+  // Flipkart shows "1,23,456 Ratings & 12,345 Reviews" — take the ratings
+  // volume (consistent with Amazon). Amazon: "12,345 global ratings".
+  const fk = t.match(/([\d,]+)\s*Ratings?\s*(?:&|and|,)?\s*[\d,]*\s*Reviews?/i);
+  const cm = t.match(/([\d,]+)\s*(?:global ratings|ratings|reviews)/i);
+  const count = fk ? parseCompact(fk[1]) : cm ? parseCompact(cm[1]) : null;
+  // rating: Amazon "4.3 out of 5"; Flipkart "4.2 ★" / "4.2 stars".
+  const rm = t.match(/([\d.]+)\s*out of\s*5/i) || t.match(/\b([0-5](?:\.\d)?)\s*(?:★|stars?\b)/i);
   const rating = rm ? num(rm[1]) : null;
   if (count == null && rating == null) return null;
   return { count, rating, title: null };
