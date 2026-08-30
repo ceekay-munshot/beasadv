@@ -33,7 +33,6 @@ const SCHEMA = {
   properties: {
     rating: { type: ['number', 'null'] },
     ratingCount: { type: ['number', 'null'] },
-    reviewCount: { type: ['number', 'null'] },
     title: { type: ['string', 'null'] },
   },
 };
@@ -45,7 +44,7 @@ const SCHEMA = {
 async function readProduct(url) {
   if (!url || !scrapeAvailable()) return null;
   const j = (await extractStructured(url, SCHEMA)) || {};
-  let count = num(j.ratingCount) ?? num(j.reviewCount); // prefer ratings volume
+  let count = num(j.ratingCount); // canonical metric = ratings volume only
   let rating = num(j.rating);
   const title = j.title || null;
   if (count == null || rating == null) {

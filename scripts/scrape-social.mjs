@@ -89,10 +89,16 @@ async function fbScrape(url) {
   const doc = await fetchDoc(url);
   const text = doc && (doc.html || doc.markdown);
   if (!text) return null;
-  // canonical metric = page LIKES (the committed 'facebook' field is shown as
-  // "Facebook likes"); fall back to followers only if no likes figure is present.
-  const m = text.match(/([\d.,]+\s*[KMB]?)\s*(?:likes|people like this)/i)
-        || text.match(/([\d.,]+\s*[KMB]?)\s*(?:followers|people follow this)/i);
+  // Page-level stat only. FB pages summarise as "… N likes · M followers …"
+  // and/or "N people like this" / "N people follow this"; a single post shows a
+  // bare "42 likes". Match only the page-level forms (prefer likes — the
+  // committed 'facebook' field renders as "Facebook likes") so post engagement
+  // can't be mistaken for the page count.
+  const m =
+    text.match(/([\d.,]+\s*[KMB]?)\s*likes\b[^\n]{0,40}?\bfollowers/i) ||
+    text.match(/([\d.,]+\s*[KMB]?)\s*people like this/i) ||
+    text.match(/([\d.,]+\s*[KMB]?)\s*followers\b/i) ||
+    text.match(/([\d.,]+\s*[KMB]?)\s*people follow this/i);
   return m ? parseCompact(m[1]) : null;
 }
 
