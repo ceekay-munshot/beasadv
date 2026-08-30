@@ -19,8 +19,8 @@ const META = readJSON(dataPath('meta.json'), { brands: [] });
 const IDS = META.brands.map((b) => b.id);
 const DISPLAY = META.brands.map((b) => b.name).join(', ');
 
-const PLATFORMS = ['claude', 'mistral'];
-const PLATFORM_LABELS = { claude: 'Claude', mistral: 'Mistral' };
+const PLATFORMS = ['claude', 'gemini', 'mistral'];
+const PLATFORM_LABELS = { claude: 'Claude', gemini: 'Gemini', mistral: 'Mistral' };
 
 const QUESTIONS = [
   'What is the best water purifier brand in India?',
