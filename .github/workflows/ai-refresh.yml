@@ -30,14 +30,17 @@ jobs:
       - name: Install deps
         run: npm ci
 
-      - name: Scrape AI answers (Claude + Mistral)
+      - name: Scrape AI answers (Claude + Gemini + Mistral)
         continue-on-error: true
         env:
           LLM_PROVIDER: ${{ secrets.LLM_PROVIDER }}
           CLAUDE_BEDROCK_API_KEY: ${{ secrets.CLAUDE_BEDROCK_API_KEY }}
           CLAUDE_BEDROCK_REGION: ${{ secrets.CLAUDE_BEDROCK_REGION }}
           CLAUDE_BEDROCK_MODEL_ID: ${{ secrets.CLAUDE_BEDROCK_MODEL_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ secrets.GEMINI_MODEL }}
           MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          MISTRAL_API_KEY_NEW: ${{ secrets.MISTRAL_API_KEY_NEW }}
           MISTRAL_MODEL: ${{ secrets.MISTRAL_MODEL }}
         run: node scripts/scrape-ai.mjs
 
