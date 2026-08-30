@@ -13,35 +13,40 @@
         "revenue": 2010,
         "advertisement": 70,
         "sellingPromo": 105,
-        "quality": "estimated"
+        "quality": "estimated",
+        "stale": true
       },
       {
         "year": "FY23",
         "revenue": 2084.64,
         "advertisement": 76,
         "sellingPromo": 114,
-        "quality": "disclosed"
+        "quality": "disclosed",
+        "stale": true
       },
       {
         "year": "FY24",
         "revenue": 2189.26,
         "advertisement": 87,
         "sellingPromo": 120,
-        "quality": "disclosed"
+        "quality": "disclosed",
+        "stale": true
       },
       {
         "year": "FY25",
         "revenue": 2436,
         "advertisement": 104,
         "sellingPromo": 155,
-        "quality": "estimated"
+        "quality": "estimated",
+        "stale": true
       },
       {
         "year": "FY26",
         "revenue": 2710,
         "advertisement": 120,
         "sellingPromo": 180,
-        "quality": "estimated"
+        "quality": "estimated",
+        "stale": true
       }
     ],
     "kent": [
@@ -201,32 +206,34 @@
     "livpure": {
       "sourceDoc": "PrivateCircle / MCA",
       "note": "Unlisted entity financials",
-      "fetchedAt": "2026-08-29T19:36:18.485Z",
+      "fetchedAt": "2026-08-30T03:35:14.463Z",
       "quality": "private-circle"
     },
     "pureit": {
       "sourceDoc": "PrivateCircle / MCA",
       "note": "Unlisted entity financials",
-      "fetchedAt": "2026-08-29T19:36:18.485Z",
+      "fetchedAt": "2026-08-30T03:35:14.463Z",
       "quality": "private-circle"
     },
     "aosmith": {
       "sourceDoc": "PrivateCircle / MCA",
       "note": "Unlisted entity financials",
-      "fetchedAt": "2026-08-29T19:36:18.485Z",
+      "fetchedAt": "2026-08-30T03:35:14.463Z",
       "quality": "private-circle"
     },
     "kent": {
       "sourceDoc": "PrivateCircle / MCA",
       "note": "Kent RO Systems Ltd (snapshot)",
-      "fetchedAt": "2026-08-29T19:36:18.485Z",
+      "fetchedAt": "2026-08-30T03:35:14.463Z",
       "quality": "snapshot",
       "stale": true
     },
     "aquaguard": {
-      "note": "Eureka Forbes Ltd company-wide Advertisement + Selling & Sales Promotion (Other Expenses); FY23–FY24 disclosed, other years estimated.",
+      "note": "Latest refresh could not confirm; showing last-good.",
       "quality": "disclosed",
-      "fetchedAt": "2026-08-29T00:00:00.000Z"
+      "fetchedAt": "2026-08-30T03:35:14.463Z",
+      "stale": true,
+      "sourceDoc": null
     }
   }
 }
