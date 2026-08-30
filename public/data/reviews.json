@@ -1,11 +1,11 @@
 {
   "byBrand": {
     "aquaguard": {
-      "amazonCount": 5200,
+      "amazonCount": 9018,
       "flipkartCount": 3600,
-      "totalCount": 8800,
-      "avgRating": 4.3,
-      "flagship": "Aquaguard Aura RO+UV+MTDS",
+      "totalCount": 12618,
+      "avgRating": 4.2,
+      "flagship": "Aquaguard Delight NXT WS RO+UV+UF | 6 Stage Purification lFree Service Plan worth ₹2000 | India’s #1 Water Purifier | Suitable for Borewell, Tanker & Municipal Water",
       "velocitySeries": [
         7216,
         7442,
@@ -14,7 +14,8 @@
         8121,
         8347,
         8574,
-        8800
+        8800,
+        12618
       ],
       "quality": "estimated"
     },
@@ -32,16 +33,17 @@
         16351,
         16807,
         17262,
+        17718,
         17718
       ],
       "quality": "estimated"
     },
     "livpure": {
-      "amazonCount": 380,
+      "amazonCount": 14865,
       "flipkartCount": 220,
-      "totalCount": 600,
+      "totalCount": 15085,
       "avgRating": 4.1,
-      "flagship": "Livpure Glo RO+UV+Mineraliser",
+      "flagship": "Livpure GLO PRO++ RO+UV+UF | Water Purifier for Home - 7 L Storage | Free Standard Installation | Suitable for Borewell, Tanker, Municipal Water | Black",
       "velocitySeries": [
         492,
         507,
@@ -50,16 +52,17 @@
         554,
         569,
         585,
-        600
+        600,
+        15085
       ],
       "quality": "estimated"
     },
     "pureit": {
-      "amazonCount": 4000,
+      "amazonCount": 501,
       "flipkartCount": 2700,
-      "totalCount": 6700,
+      "totalCount": 3201,
       "avgRating": 4.2,
-      "flagship": "Pureit Copper+ RO+UV+MF",
+      "flagship": "Pureit Revito Prime RO+MF+Mineral+UV in-Tank | 7 stage | 8L Capacity | Upto 70% Water Saving | Suitable for Borewell, Tanker & Municipal Water | DURAViva | Black",
       "velocitySeries": [
         5494,
         5666,
@@ -68,7 +71,8 @@
         6183,
         6355,
         6528,
-        6700
+        6700,
+        3201
       ],
       "quality": "estimated"
     },
@@ -86,6 +90,7 @@
         2698,
         2773,
         2848,
+        2923,
         2923
       ],
       "quality": "estimated"
@@ -99,32 +104,33 @@
     "May'26",
     "Jun'26",
     "Jul'26",
+    "Aug'26",
     "Aug'26"
   ],
   "_provenance": {
     "byBrand": {
       "aquaguard": {
-        "source": "estimated",
-        "fetchedAt": "2026-08-29T19:38:28.172Z"
+        "source": "amazon",
+        "fetchedAt": "2026-08-30T03:40:14.605Z"
       },
       "kent": {
         "source": "amazon",
-        "fetchedAt": "2026-08-29T19:38:28.172Z"
+        "fetchedAt": "2026-08-30T03:40:14.605Z"
       },
       "livpure": {
-        "source": "estimated",
-        "fetchedAt": "2026-08-29T19:38:28.172Z"
+        "source": "amazon",
+        "fetchedAt": "2026-08-30T03:40:14.605Z"
       },
       "pureit": {
-        "source": "estimated",
-        "fetchedAt": "2026-08-29T19:38:28.172Z"
+        "source": "amazon",
+        "fetchedAt": "2026-08-30T03:40:14.605Z"
       },
       "aosmith": {
         "source": "amazon",
-        "fetchedAt": "2026-08-29T19:38:28.172Z"
+        "fetchedAt": "2026-08-30T03:40:14.605Z"
       }
     },
     "source": "Amazon + Flipkart",
-    "fetchedAt": "2026-08-29T19:38:28.172Z"
+    "fetchedAt": "2026-08-30T03:40:14.605Z"
   }
 }
