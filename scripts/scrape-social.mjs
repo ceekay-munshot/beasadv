@@ -11,7 +11,7 @@
 // / total / growthSeries per brand). Only overwrites a number actually
 // retrieved; facebook, engagementRate and growthSeries stay last-good. Applies
 // the never-regress guard, degrades gracefully with no keys, and exits 0.
-import { dataPath, readJSON, writeJSON, refreshSeed, num, parseCompact, nowISO, chromiumLaunchOptions } from '../lib/store.mjs';
+import { dataPath, readJSON, writeIfChanged, refreshSeed, num, parseCompact, nowISO, chromiumLaunchOptions } from '../lib/store.mjs';
 import { fetchDoc, scrapeAvailable } from '../lib/scrape.mjs';
 
 const SOCIAL = dataPath('social.json');
@@ -103,16 +103,24 @@ for (const id of Object.keys(data.byBrand)) {
     ig = await igPlaywright(src.instagram); if (ig != null) igSrc = 'instagram';
     if (ig == null) { ig = await igScrape(src.instagram); if (ig != null) igSrc = 'instagram-scrape'; }
   }
+  // Trust the live scrape (followers legitimately jump as brands grow); reject
+  // only obvious garbage — null, 0, or an absurd value — and keep last-good then.
+  if (num(ig) != null && (num(ig) <= 0 || num(ig) > 5000000)) {
+    console.error(`[social] ${id}: IG ${ig} out of sane range; keeping last-good`);
+    ig = null; igSrc = null;
+  }
   if (num(ig) != null) { b.instagram = num(ig); anyReal = true; }
   prov.instagram = igSrc || (igAttempted ? 'last-good' : 'estimated');
 
   // recompute total from whatever we have
   b.total = (num(b.youtube) || 0) + (num(b.instagram) || 0) + (num(b.facebook) || 0);
   if ((ytAttempted && ytSrc == null) || (igAttempted && igSrc == null)) prov.stale = true;
-  data._provenance.byBrand[id] = prov;
+  // only rewrite a brand's provenance when we actually attempted it (keys present);
+  // a no-key run leaves the existing (real) provenance untouched → no-op commit
+  if (ytAttempted || igAttempted) data._provenance.byBrand[id] = prov;
 }
-data._provenance.source = anyReal ? 'YouTube + Instagram' : 'estimated';
-data._provenance.fetchedAt = now;
+if (anyReal) { data._provenance.source = 'YouTube + Instagram'; data._provenance.fetchedAt = now; }
+else if (!data._provenance.source) { data._provenance.source = 'estimated'; data._provenance.fetchedAt = now; }
 
 // ---- never regress --------------------------------------------------------
 let restored = 0;
@@ -125,7 +133,10 @@ for (const id of Object.keys(data.byBrand)) {
 }
 if (restored) console.log(`[social] restored ${restored} field(s) from last-good`);
 
-writeJSON(SOCIAL, data);
-console.log(`[social] wrote social.json (source: ${data._provenance.source})`);
-refreshSeed();
+if (writeIfChanged(SOCIAL, data, lastGood)) {
+  console.log(`[social] wrote social.json (source: ${data._provenance.source})`);
+  refreshSeed();
+} else {
+  console.log('[social] no change vs last-good; nothing to write');
+}
 process.exit(0);

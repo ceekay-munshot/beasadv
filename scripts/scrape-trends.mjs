@@ -11,7 +11,7 @@
 // Genuinely fragile: on any per-brand failure the brand's last-good/mock series
 // is kept and marked best-effort/stale. Degrades with no SCRAPEDO_API_KEY,
 // never writes null over a real series, and exits 0.
-import { dataPath, readJSON, writeJSON, refreshSeed, num, nowISO } from '../lib/store.mjs';
+import { dataPath, readJSON, writeIfChanged, refreshSeed, num, nowISO } from '../lib/store.mjs';
 
 const TRENDS = dataPath('search-trends.json');
 const SOURCES = dataPath('manual/sources.json');
@@ -74,7 +74,8 @@ let anyReal = false;
 const attempted = !!KEY;
 for (const id of Object.keys(data.byBrand)) {
   const term = (sources.byBrand[id] || {}).trendsTerm;
-  if (!attempted || !term) { data._provenance.byBrand[id] = { source: attempted ? 'last-good' : 'estimated', fetchedAt: now }; continue; }
+  if (!attempted) continue; // no SCRAPEDO key -> leave provenance as-is (no-op)
+  if (!term) { data._provenance.byBrand[id] = { source: 'last-good', fetchedAt: now }; continue; }
   try {
     data.byBrand[id] = await refreshOne(term);
     data._provenance.byBrand[id] = { source: 'google-trends', fetchedAt: now };
@@ -90,8 +91,8 @@ if (attempted) {
   try { data.category = await refreshOne('water purifier'); anyReal = true; }
   catch (e) { console.error(`[trends] category: failed (${e.message}); keeping last-good`); }
 }
-data._provenance.source = anyReal ? 'Google Trends (IN, 5y)' : 'estimated';
-data._provenance.fetchedAt = now;
+if (anyReal) { data._provenance.source = 'Google Trends (IN, 5y)'; data._provenance.fetchedAt = now; }
+else if (!data._provenance.source) { data._provenance.source = 'estimated'; data._provenance.fetchedAt = now; }
 
 // ---- never regress --------------------------------------------------------
 let restored = 0;
@@ -102,7 +103,10 @@ for (const id of Object.keys(data.byBrand)) {
 if (!Array.isArray(data.category) || data.category.length !== N || data.category.some((v) => num(v) == null)) data.category = lastGood.category;
 if (restored) console.log(`[trends] restored ${restored} series from last-good`);
 
-writeJSON(TRENDS, data);
-console.log(`[trends] wrote search-trends.json (source: ${data._provenance.source})`);
-refreshSeed();
+if (writeIfChanged(TRENDS, data, lastGood)) {
+  console.log(`[trends] wrote search-trends.json (source: ${data._provenance.source})`);
+  refreshSeed();
+} else {
+  console.log('[trends] no change vs last-good; nothing to write');
+}
 process.exit(0);

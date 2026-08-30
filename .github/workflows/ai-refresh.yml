@@ -1,0 +1,71 @@
+name: AI-answers refresh
+
+# How often AI assistants name each brand — refresh monthly (and on demand).
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 15 * *' # 06:00 UTC on the 15th each month
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ai-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Scrape AI answers (Claude + Mistral)
+        continue-on-error: true
+        env:
+          LLM_PROVIDER: ${{ secrets.LLM_PROVIDER }}
+          CLAUDE_BEDROCK_API_KEY: ${{ secrets.CLAUDE_BEDROCK_API_KEY }}
+          CLAUDE_BEDROCK_REGION: ${{ secrets.CLAUDE_BEDROCK_REGION }}
+          CLAUDE_BEDROCK_MODEL_ID: ${{ secrets.CLAUDE_BEDROCK_MODEL_ID }}
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          MISTRAL_MODEL: ${{ secrets.MISTRAL_MODEL }}
+        run: node scripts/scrape-ai.mjs
+
+      - name: Commit & push if changed
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data/ai-visibility.json public/js/seed.js
+          if git diff --cached --quiet; then
+            echo "No AI-answers changes to commit."
+            exit 0
+          fi
+          git commit -m "AI-answers refresh ($(date -u +%Y-%m-%d))"
+          for i in 1 2 3 4; do
+            if git push origin HEAD:main; then echo "pushed"; exit 0; fi
+            echo "push failed (attempt $i); rebasing onto origin/main"
+            git fetch origin main || true
+            git rebase origin/main || git rebase --abort || true
+            sleep $((2 ** i))
+          done
+          echo "push failed after retries" >&2
+          exit 1
+
+      - name: Upload ai-visibility.json
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-visibility-json
+          path: public/data/ai-visibility.json
+          if-no-files-found: warn

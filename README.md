@@ -104,17 +104,20 @@ scripts/scrape-spend.mjs    refresh spend.json from primary sources (degrades gr
 scripts/scrape-social.mjs   refresh social.json (YouTube API/scrape + Instagram best-effort)
 scripts/scrape-reviews.mjs  refresh reviews.json (Amazon + Flipkart via Firecrawl JSON)
 scripts/scrape-trends.mjs   refresh search-trends.json (Google Trends via Scrape.do)
+scripts/scrape-ai.mjs       refresh ai-visibility.json (Claude + Mistral question battery)
 public/data/manual/sources.json  per-brand handles / product URLs / trends terms
 .github/workflows/spend-refresh.yml  monthly + on-demand spend refresh
 .github/workflows/pull-refresh.yml   weekly + on-demand search/social/reviews refresh
+.github/workflows/ai-refresh.yml     monthly + on-demand AI-answers refresh
 ```
 
 ## Data pipeline (CI)
 
-Four of the six data lanes are backed by real extraction pipelines (spend +
-search / social / reviews); AI Answers is the remaining mock lane (next round).
-Two GitHub Actions jobs (both also runnable via *workflow_dispatch*) do the work,
-then run `gen-data.mjs` to refresh `seed.js`.
+All six data lanes are backed by real extraction pipelines (spend, search,
+social, reviews, AI answers). Three GitHub Actions jobs (all also runnable via
+*workflow_dispatch*) do the work, then run `gen-data.mjs` to refresh `seed.js`.
+Each scraper only writes when the meaningful content actually changed (timestamps
+are ignored), so a no-op scheduled run produces no commit.
 
 **`spend-refresh.yml`** (monthly) → `scripts/scrape-spend.mjs`:
 
@@ -134,6 +137,15 @@ then run `gen-data.mjs` to refresh `seed.js`.
   mode); appends each run's total to `velocitySeries` so the "buzz" line grows.
 - `scrape-trends.mjs` — Google Trends 5-year interest per brand, routed through
   Scrape.do, downsampled to the quarterly shape.
+
+**`ai-refresh.yml`** (monthly) → `scripts/scrape-ai.mjs`:
+
+- Asks ~15 buyer questions to the two LLMs we have (**Bedrock Claude** +
+  **Mistral**, each a "platform"); one `completeJSONWith()` call per
+  (platform, question) returns the brands the model names, with rank + sentiment.
+- Aggregates per platform and an "all" merge → visibility %, share of voice,
+  sentiment split, and sample "gap" questions. The AI tab's platform dropdown is
+  data-driven (Claude / Mistral / All).
 
 Every scraper degrades gracefully: on any failure it keeps the last-good
 committed value, marks it `stale`, and exits 0 — it never regresses a real number

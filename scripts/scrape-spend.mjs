@@ -22,10 +22,12 @@ import { dirname, join } from 'node:path';
 import { completeJSON, llmAvailable } from '../lib/llm.mjs';
 import { fetchDoc, scrapeAvailable } from '../lib/scrape.mjs';
 import { openScreenerSession } from '../lib/screener.mjs';
+import { writeIfChanged, refreshSeed } from '../lib/store.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SPEND_PATH = join(ROOT, 'public', 'data', 'spend.json');
 const PC_PATH = join(ROOT, 'public', 'data', 'manual', 'private-circle.json');
+const SOURCES_PATH = join(ROOT, 'public', 'data', 'manual', 'sources.json');
 const NOW = new Date().toISOString();
 const num = (v) => (typeof v === 'number' && isFinite(v) ? v : null);
 
@@ -43,6 +45,10 @@ data._provenance = data._provenance || {};
 let pc = { byBrand: {} };
 try { if (existsSync(PC_PATH)) pc = JSON.parse(readFileSync(PC_PATH, 'utf8')); }
 catch (e) { console.error(`[spend] private-circle.json unreadable: ${e.message}`); }
+let sources = { byBrand: {} };
+try { if (existsSync(SOURCES_PATH)) sources = JSON.parse(readFileSync(SOURCES_PATH, 'utf8')); }
+catch (e) { console.error(`[spend] sources.json unreadable: ${e.message}`); }
+const srcFor = (id) => (sources.byBrand && sources.byBrand[id]) || {};
 
 const rowsOf = (id) => data.byBrand[id] || (data.byBrand[id] = []);
 const rowFor = (id, year) => rowsOf(id).find((r) => r.year === year);
@@ -65,7 +71,8 @@ function mergeYears(id, entries, quality) {
 }
 function markStale(id) {
   for (const r of rowsOf(id)) r.stale = true;
-  setProv(id, { stale: true, fetchedAt: NOW });
+  // drop any prior sourceDoc so a failed refresh never shows a misleading source
+  setProv(id, { stale: true, fetchedAt: NOW, sourceDoc: null, note: 'Latest refresh could not confirm; showing last-good.' });
 }
 
 // ---- 1) Unlisted peers via PrivateCircle ---------------------------------
@@ -105,47 +112,62 @@ function extractPrompt(entity, markdown) {
     `Return {"years":[{"year","revenue","advertisement","sellingPromo"}]}. Use null for anything not clearly stated.\n\n` +
     `--- DOCUMENT ---\n${String(markdown).slice(0, 90000)}`;
 }
+// rating-agency / non-annual-report PDFs to never treat as an annual report
+const RATINGS_RE = /careratings|crisil|icra|rating|ratings/i;
 function findPdfLinks(html) {
   if (!html) return [];
   const out = [];
   const re = /href="([^"]+\.pdf[^"]*)"/gi; let m;
   while ((m = re.exec(html))) out.push(m[1]);
-  // prefer annual-report-looking links
-  return out.sort((a, b) => (/(annual|financial|report)/i.test(b) ? 1 : 0) - (/(annual|financial|report)/i.test(a) ? 1 : 0));
+  return out
+    .filter((u) => !RATINGS_RE.test(u))
+    .sort((a, b) => (/(annual|financial|report)/i.test(b) ? 1 : 0) - (/(annual|financial|report)/i.test(a) ? 1 : 0));
 }
 const abs = (base, href) => { try { return new URL(href, base).href; } catch { return href; } };
 
+// read one PDF and LLM-extract its P&L years, or null
+async function tryExtractPdf(entity, pdf) {
+  const doc = await fetchDoc(pdf);
+  const md = doc && (doc.markdown || doc.html);
+  if (!md) return null;
+  const { data: out } = await completeJSON({ prompt: extractPrompt(entity, md), system: EXTRACT_SYSTEM, schema: EXTRACT_SCHEMA });
+  if (out && Array.isArray(out.years) && out.years.some((y) => num(y.advertisement) != null || num(y.sellingPromo) != null || num(y.revenue) != null)) return out.years;
+  return null;
+}
+
 // ---- 2) Aquaguard (Eureka Forbes Ltd) ------------------------------------
-async function extractListed({ id, entity, query, knownCompanyPath }) {
+async function extractListed({ id, entity, query, knownCompanyPath, annualReportUrl }) {
   if (!scrapeAvailable() || !llmAvailable()) {
     console.log(`[spend] ${id}: no scrape/LLM keys — not attempted, keeping last-good`);
     return { attempted: false };
   }
   try {
-    const s = await getSession();
-    let companyUrl = knownCompanyPath ? 'https://www.screener.in' + knownCompanyPath : null;
-    const hits = await s.searchCompany(query);
-    if (hits.length) {
-      const hit = hits.find((h) => new RegExp(entity.split(' ')[0], 'i').test(h.name)) || hits[0];
-      if (hit && hit.url) companyUrl = 'https://www.screener.in' + hit.url;
-    }
-    if (!companyUrl) throw new Error('company page not found');
-    const pageHtml = await s.fetchRenderedHtml(companyUrl);
-    const pdfs = findPdfLinks(pageHtml).map((h) => abs(companyUrl, h));
-    if (!pdfs.length) throw new Error('no annual-report PDF link found');
     let extracted = null, sourceDoc = null;
-    for (const pdf of pdfs.slice(0, 3)) {
-      const doc = await fetchDoc(pdf);
-      const md = doc && (doc.markdown || doc.html);
-      if (!md) continue;
-      const { data: out } = await completeJSON({ prompt: extractPrompt(entity, md), system: EXTRACT_SYSTEM, schema: EXTRACT_SCHEMA });
-      if (out && Array.isArray(out.years) && out.years.some((y) => num(y.advertisement) != null || num(y.sellingPromo) != null || num(y.revenue) != null)) {
-        extracted = out.years; sourceDoc = pdf; break;
+    // 1) explicit annual-report URL first (needs no browser)
+    if (annualReportUrl) {
+      const years = await tryExtractPdf(entity, annualReportUrl);
+      if (years) { extracted = years; sourceDoc = annualReportUrl; }
+      else console.log(`[spend] ${id}: annualReportUrl yielded nothing; trying Screener discovery`);
+    }
+    // 2) Screener discovery (best-effort; ratings PDFs excluded)
+    if (!extracted) {
+      const s = await getSession();
+      let companyUrl = knownCompanyPath ? 'https://www.screener.in' + knownCompanyPath : null;
+      const hits = await s.searchCompany(query);
+      if (hits.length) {
+        const hit = hits.find((h) => new RegExp(entity.split(' ')[0], 'i').test(h.name)) || hits[0];
+        if (hit && hit.url) companyUrl = 'https://www.screener.in' + hit.url;
+      }
+      if (companyUrl) {
+        const pageHtml = await s.fetchRenderedHtml(companyUrl);
+        const pdfs = findPdfLinks(pageHtml).map((h) => abs(companyUrl, h));
+        for (const pdf of pdfs.slice(0, 3)) { const years = await tryExtractPdf(entity, pdf); if (years) { extracted = years; sourceDoc = pdf; break; } }
       }
     }
-    if (!extracted) throw new Error('extraction produced no usable figures');
+    if (!extracted) throw new Error('no usable figures from annual report or Screener');
     const n = mergeYears(id, extracted, 'disclosed');
-    setProv(id, { sourceDoc, note: 'Company-wide Advertisement + Selling & Sales Promotion (Other Expenses)', fetchedAt: NOW, quality: 'disclosed' });
+    for (const r of rowsOf(id)) delete r.stale; // successful refresh clears stale
+    setProv(id, { sourceDoc, note: 'Company-wide Advertisement + Selling & Sales Promotion (Other Expenses)', fetchedAt: NOW, quality: 'disclosed', stale: false });
     console.log(`[spend] ${id}: extracted ${n} year(s) from ${sourceDoc}`);
     return { attempted: true, ok: true };
   } catch (e) {
@@ -156,11 +178,11 @@ async function extractListed({ id, entity, query, knownCompanyPath }) {
 }
 
 // ---- run ------------------------------------------------------------------
-await extractListed({ id: 'aquaguard', entity: 'Eureka Forbes', query: 'Eureka Forbes', knownCompanyPath: '/company/EUREKAFORB/' });
+await extractListed({ id: 'aquaguard', entity: 'Eureka Forbes', query: 'Eureka Forbes', knownCompanyPath: '/company/EUREKAFORB/', annualReportUrl: srcFor('aquaguard').annualReportUrl });
 
 // Kent: attempt listed extraction; else fall back to PrivateCircle
 {
-  const res = await extractListed({ id: 'kent', entity: 'Kent RO Systems', query: 'Kent RO Systems' });
+  const res = await extractListed({ id: 'kent', entity: 'Kent RO Systems', query: 'Kent RO Systems', annualReportUrl: srcFor('kent').annualReportUrl });
   if (!res.ok) {
     const entries = pc.byBrand && pc.byBrand.kent;
     if (entries && entries.length) {
@@ -191,13 +213,12 @@ for (const id of Object.keys(data.byBrand)) {
 }
 if (restored) console.log(`[spend] restored ${restored} field(s) from last-good (never-regress guard)`);
 
-// ---- write + refresh seed -------------------------------------------------
-writeFileSync(SPEND_PATH, JSON.stringify(data, null, 2) + '\n');
-console.log('[spend] wrote public/data/spend.json');
-try {
-  execFileSync('node', [join(ROOT, 'scripts', 'gen-data.mjs')], { stdio: 'inherit' });
-} catch (e) {
-  console.error(`[spend] gen-data refresh failed: ${e.message}`);
+// ---- write + refresh seed (only when meaningful content changed) ----------
+if (writeIfChanged(SPEND_PATH, data, lastGood)) {
+  console.log('[spend] wrote public/data/spend.json');
+  refreshSeed();
+} else {
+  console.log('[spend] no change vs last-good; nothing to write');
 }
 console.log('[spend] done.');
 process.exit(0);
