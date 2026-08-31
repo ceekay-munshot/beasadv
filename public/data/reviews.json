@@ -1,11 +1,11 @@
 {
   "byBrand": {
     "aquaguard": {
-      "amazonCount": 9018,
+      "amazonCount": 9049,
       "flipkartCount": 3600,
-      "totalCount": 12618,
+      "totalCount": 12649,
       "avgRating": 4.2,
-      "flagship": "Aquaguard Delight NXT WS RO+UV+UF | 6 Stage Purification | Free Service Plan worth ₹2000 | India’s #1 Water Purifier | Suitable for Borewell, Tanker & Municipal Water",
+      "flagship": "Aquaguard Delight NXT WS RO+UV+UF | 6 Stage Purification lFree Service Plan worth ₹2000 | India’s #1 Water Purifier | Suitable for Borewell, Tanker & Municipal Water",
       "velocitySeries": [
         7216,
         7442,
@@ -17,14 +17,15 @@
         8800,
         12618,
         12618,
-        12618
+        12618,
+        12649
       ],
       "quality": "estimated"
     },
     "kent": {
-      "amazonCount": 15418,
+      "amazonCount": 15429,
       "flipkartCount": 2300,
-      "totalCount": 17718,
+      "totalCount": 17729,
       "avgRating": 4.1,
       "flagship": "KENT Supreme Plus Neo RO Water Purifier | 2 Yrs Comprehensive Warranty* | No Service Cost for 2 Yrs | RO+UF+UV+Alk+Cu+TDS Control+UV In-Tank | 8L | 20LP/Hr | Ideal For Borewell/Tanker/Municipal Water",
       "velocitySeries": [
@@ -38,14 +39,15 @@
         17718,
         17718,
         17718,
-        17718
+        17718,
+        17729
       ],
       "quality": "estimated"
     },
     "livpure": {
-      "amazonCount": 14865,
+      "amazonCount": 14876,
       "flipkartCount": 220,
-      "totalCount": 15085,
+      "totalCount": 15096,
       "avgRating": 4.1,
       "flagship": "Livpure GLO PRO++ RO+UV+UF | Water Purifier for Home - 7 L Storage | Free Standard Installation | Suitable for Borewell, Tanker, Municipal Water | Black",
       "velocitySeries": [
@@ -59,14 +61,15 @@
         600,
         15085,
         15085,
-        15085
+        15085,
+        15096
       ],
       "quality": "estimated"
     },
     "pureit": {
-      "amazonCount": 501,
+      "amazonCount": 502,
       "flipkartCount": 2700,
-      "totalCount": 3201,
+      "totalCount": 3202,
       "avgRating": 4.2,
       "flagship": "Pureit Revito Prime RO+MF+Mineral+UV in-Tank | 7 stage | 8L Capacity | Upto 70% Water Saving | Suitable for Borewell, Tanker & Municipal Water | DURAViva | Black",
       "velocitySeries": [
@@ -80,7 +83,8 @@
         6700,
         3201,
         3201,
-        3201
+        3201,
+        3202
       ],
       "quality": "estimated"
     },
@@ -89,7 +93,7 @@
       "flipkartCount": 800,
       "totalCount": 2923,
       "avgRating": 4.3,
-      "flagship": "AO Smith Z8 Instant Hot and Ambient Purifier|Hot Water in Stainless Steel Tank|10 L Storage|8-Stage Purification |100% RO+SCMT|Wall mount Water Purifier for Home",
+      "flagship": "AO Smith Z8 Instant Hot and Ambient Purifier",
       "velocitySeries": [
         2397,
         2472,
@@ -98,6 +102,7 @@
         2698,
         2773,
         2848,
+        2923,
         2923,
         2923,
         2923,
@@ -117,32 +122,33 @@
     "Aug'26",
     "Aug'26",
     "Aug'26",
+    "Aug'26",
     "Aug'26"
   ],
   "_provenance": {
     "byBrand": {
       "aquaguard": {
         "source": "amazon",
-        "fetchedAt": "2026-08-30T14:48:07.025Z"
+        "fetchedAt": "2026-08-31T11:21:37.565Z"
       },
       "kent": {
         "source": "amazon",
-        "fetchedAt": "2026-08-30T14:48:07.025Z"
+        "fetchedAt": "2026-08-31T11:21:37.565Z"
       },
       "livpure": {
         "source": "amazon",
-        "fetchedAt": "2026-08-30T14:48:07.025Z"
+        "fetchedAt": "2026-08-31T11:21:37.565Z"
       },
       "pureit": {
         "source": "amazon",
-        "fetchedAt": "2026-08-30T14:48:07.025Z"
+        "fetchedAt": "2026-08-31T11:21:37.565Z"
       },
       "aosmith": {
         "source": "amazon",
-        "fetchedAt": "2026-08-30T14:48:07.025Z"
+        "fetchedAt": "2026-08-31T11:21:37.565Z"
       }
     },
     "source": "Amazon + Flipkart",
-    "fetchedAt": "2026-08-30T14:48:07.025Z"
+    "fetchedAt": "2026-08-31T11:21:37.565Z"
   }
 }
