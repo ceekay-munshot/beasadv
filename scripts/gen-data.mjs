@@ -153,17 +153,17 @@ function buildSearch() {
 
 function buildSocial() {
   const anchors = {
-    aquaguard: { youtube: 93600, instagram: 122000, facebook: 573000, engagementRate: 1.9 },
-    kent: { youtube: 49600, instagram: 81000, facebook: 1200000, engagementRate: 0.8 },
-    livpure: { youtube: 15600, instagram: 69000, facebook: 150000, engagementRate: 2.4 },
-    pureit: { youtube: 22000, instagram: 11000, facebook: 141000, engagementRate: 1.1 },
-    aosmith: { youtube: 12000, instagram: 15000, facebook: 70000, engagementRate: 1.3 },
+    aquaguard: { youtube: 93600, instagram: 122000, engagementRate: 1.9 },
+    kent: { youtube: 49600, instagram: 81000, engagementRate: 0.8 },
+    livpure: { youtube: 15600, instagram: 69000, engagementRate: 2.4 },
+    pureit: { youtube: 22000, instagram: 11000, engagementRate: 1.1 },
+    aosmith: { youtube: 12000, instagram: 15000, engagementRate: 1.3 },
   };
   const GROWTH_Q = ["Q1'25", "Q2'25", "Q3'25", "Q4'25", "Q1'26", "Q2'26", "Q3'26", "Q4'26"];
   const byBrand = {};
   IDS.forEach((id) => {
     const a = anchors[id];
-    const total = a.youtube + a.instagram + a.facebook;
+    const total = a.youtube + a.instagram;
     const rnd = mulberry32(2000 + ORIG_IDX[id]);
     const growthSeries = GROWTH_Q.map((_, j) => {
       const frac = 0.86 + 0.14 * (j / (GROWTH_Q.length - 1));
