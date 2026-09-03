@@ -1,20 +1,22 @@
 {
   "platforms": [
     "claude",
+    "gemini",
     "mistral"
   ],
   "platformLabels": {
     "claude": "Claude",
+    "gemini": "Gemini",
     "mistral": "Mistral"
   },
   "byBrand": {
     "aquaguard": {
       "overall": {
-        "visibilityPct": 83,
-        "shareOfVoice": 23.1,
+        "visibilityPct": 85,
+        "shareOfVoice": 23.2,
         "sentiment": {
-          "pos": 92,
-          "neu": 8,
+          "pos": 91,
+          "neu": 9,
           "neg": 0
         }
       },
@@ -28,12 +30,21 @@
             "neg": 0
           }
         },
+        "gemini": {
+          "visibilityPct": 100,
+          "shareOfVoice": 20,
+          "sentiment": {
+            "pos": 100,
+            "neu": 0,
+            "neg": 0
+          }
+        },
         "mistral": {
           "visibilityPct": 80,
-          "shareOfVoice": 21.1,
+          "shareOfVoice": 20.5,
           "sentiment": {
-            "pos": 92,
-            "neu": 8,
+            "pos": 88,
+            "neu": 13,
             "neg": 0
           }
         }
@@ -46,8 +57,8 @@
     },
     "kent": {
       "overall": {
-        "visibilityPct": 87,
-        "shareOfVoice": 24.1,
+        "visibilityPct": 92,
+        "shareOfVoice": 25.3,
         "sentiment": {
           "pos": 96,
           "neu": 4,
@@ -64,9 +75,18 @@
             "neg": 0
           }
         },
+        "gemini": {
+          "visibilityPct": 100,
+          "shareOfVoice": 20,
+          "sentiment": {
+            "pos": 100,
+            "neu": 0,
+            "neg": 0
+          }
+        },
         "mistral": {
-          "visibilityPct": 87,
-          "shareOfVoice": 22.8,
+          "visibilityPct": 100,
+          "shareOfVoice": 25.6,
           "sentiment": {
             "pos": 100,
             "neu": 0,
@@ -81,12 +101,12 @@
     },
     "livpure": {
       "overall": {
-        "visibilityPct": 67,
-        "shareOfVoice": 18.5,
+        "visibilityPct": 65,
+        "shareOfVoice": 17.9,
         "sentiment": {
-          "pos": 40,
-          "neu": 55,
-          "neg": 5
+          "pos": 53,
+          "neu": 41,
+          "neg": 6
         }
       },
       "byPlatform": {
@@ -99,9 +119,18 @@
             "neg": 11
           }
         },
+        "gemini": {
+          "visibilityPct": 100,
+          "shareOfVoice": 20,
+          "sentiment": {
+            "pos": 100,
+            "neu": 0,
+            "neg": 0
+          }
+        },
         "mistral": {
-          "visibilityPct": 73,
-          "shareOfVoice": 19.3,
+          "visibilityPct": 70,
+          "shareOfVoice": 17.9,
           "sentiment": {
             "pos": 0,
             "neu": 100,
@@ -111,18 +140,20 @@
       },
       "sampleGaps": [
         "Aquaguard vs Kent — which should I buy?",
-        "Best water purifier for borewell water in India?"
+        "Most reliable water purifier for a family of four in India?",
+        "Best water purifier for borewell water in India?",
+        "Best premium water purifier in India?"
       ],
       "quality": "measured"
     },
     "pureit": {
       "overall": {
-        "visibilityPct": 63,
-        "shareOfVoice": 17.6,
+        "visibilityPct": 65,
+        "shareOfVoice": 17.9,
         "sentiment": {
-          "pos": 42,
-          "neu": 53,
-          "neg": 5
+          "pos": 53,
+          "neu": 41,
+          "neg": 6
         }
       },
       "byPlatform": {
@@ -135,30 +166,41 @@
             "neg": 14
           }
         },
-        "mistral": {
-          "visibilityPct": 80,
-          "shareOfVoice": 21.1,
+        "gemini": {
+          "visibilityPct": 100,
+          "shareOfVoice": 20,
           "sentiment": {
-            "pos": 17,
-            "neu": 83,
+            "pos": 100,
+            "neu": 0,
+            "neg": 0
+          }
+        },
+        "mistral": {
+          "visibilityPct": 90,
+          "shareOfVoice": 23.1,
+          "sentiment": {
+            "pos": 22,
+            "neu": 78,
             "neg": 0
           }
         }
       },
       "sampleGaps": [
         "Aquaguard vs Kent — which should I buy?",
-        "Best copper/mineral water purifier in India?"
+        "Best copper/mineral water purifier in India?",
+        "Best water purifier for municipal tap water in India?",
+        "Best premium water purifier in India?"
       ],
       "quality": "measured"
     },
     "aosmith": {
       "overall": {
-        "visibilityPct": 60,
-        "shareOfVoice": 16.7,
+        "visibilityPct": 58,
+        "shareOfVoice": 15.8,
         "sentiment": {
-          "pos": 61,
-          "neu": 33,
-          "neg": 6
+          "pos": 67,
+          "neu": 27,
+          "neg": 7
         }
       },
       "byPlatform": {
@@ -167,33 +209,44 @@
           "shareOfVoice": 17.6,
           "sentiment": {
             "pos": 89,
-            "neu": 11,
+            "neu": 0,
+            "neg": 11
+          }
+        },
+        "gemini": {
+          "visibilityPct": 100,
+          "shareOfVoice": 20,
+          "sentiment": {
+            "pos": 100,
+            "neu": 0,
             "neg": 0
           }
         },
         "mistral": {
-          "visibilityPct": 60,
-          "shareOfVoice": 15.8,
+          "visibilityPct": 50,
+          "shareOfVoice": 12.8,
           "sentiment": {
-            "pos": 33,
-            "neu": 56,
-            "neg": 11
+            "pos": 20,
+            "neu": 80,
+            "neg": 0
           }
         }
       },
       "sampleGaps": [
         "Best water purifier under ₹15,000 in India?",
         "Aquaguard vs Kent — which should I buy?",
-        "Best budget water purifier in India in 2026?"
+        "Best budget water purifier in India in 2026?",
+        "Best copper/mineral water purifier in India?"
       ],
       "quality": "measured"
     }
   },
   "_provenance": {
-    "source": "claude+mistral",
-    "fetchedAt": "2026-08-30T14:45:53.744Z",
+    "source": "claude+gemini+mistral",
+    "fetchedAt": "2026-09-03T19:42:54.185Z",
     "platforms": [
       "claude",
+      "gemini",
       "mistral"
     ]
   }
