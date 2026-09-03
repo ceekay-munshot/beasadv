@@ -6,11 +6,15 @@
 //             channel page for the subscriber count.
 //   Instagram best-effort: playwright-core login if INSTAGRAM_USERNAME/PASSWORD
 //             are set, else scrape the public profile; keep last-good on failure.
+//   Facebook  best-effort (no login): fetch the page via lib/scrape.fetchDoc and
+//             read the count from og:description or a "X likes / followers /
+//             people like this" pattern. Facebook often blocks — that's fine;
+//             keep last-good and mark the row stale when nothing real is found.
 //
 // Preserves social.json's shape (youtube / instagram / facebook / engagementRate
 // / total / growthSeries per brand). Only overwrites a number actually
-// retrieved; facebook, engagementRate and growthSeries stay last-good. Applies
-// the never-regress guard, degrades gracefully with no keys, and exits 0.
+// retrieved; engagementRate and growthSeries stay last-good. Applies the
+// never-regress guard, degrades gracefully with no keys, and exits 0.
 import { dataPath, readJSON, writeIfChanged, refreshSeed, num, parseCompact, nowISO, chromiumLaunchOptions } from '../lib/store.mjs';
 import { fetchDoc, scrapeAvailable } from '../lib/scrape.mjs';
 
@@ -81,6 +85,25 @@ async function igPlaywright(username) {
   finally { try { if (browser) await browser.close(); } catch {} }
 }
 
+// ---- Facebook (best-effort, no login) ------------------------------------
+// Fetch the page and read a follower/like count from og:description or a
+// visible "X likes / followers / people like this" line. Facebook frequently
+// serves a login wall or an og:description without a number to logged-out
+// fetchers; on any such miss we return null and the caller keeps last-good.
+async function fbScrape(url) {
+  if (!url || !scrapeAvailable()) return null;
+  const doc = await fetchDoc(url);
+  const text = doc && (doc.html || doc.markdown);
+  if (!text) return null;
+  // og:description reads like "573,000 likes · 1,234 talking about this".
+  const og = text.match(/og:description["'][^>]*content=["']([^"']+)["']/i);
+  const hay = (og && og[1]) || text;
+  const m = hay.match(/([\d.,]+\s*[KMB]?)\s*(?:people\s+like\s+this|people\s+follow\s+this|likes|followers)/i);
+  if (!m) return null;
+  const v = m[1].match(/^\d+$/) ? num(m[1]) : parseCompact(m[1]);
+  return num(v);
+}
+
 // ---- run ------------------------------------------------------------------
 const now = nowISO();
 let anyReal = false;
@@ -112,14 +135,26 @@ for (const id of Object.keys(data.byBrand)) {
   if (num(ig) != null) { b.instagram = num(ig); anyReal = true; }
   prov.instagram = igSrc || (igAttempted ? 'last-good' : 'estimated');
 
+  // Facebook (best-effort, no login)
+  const fbAttempted = !!(scrapeAvailable() && src.facebookUrl);
+  let fb = null, fbSrc = null;
+  if (src.facebookUrl) { fb = await fbScrape(src.facebookUrl); if (fb != null) fbSrc = 'facebook-scrape'; }
+  // Reject obvious garbage — null, 0, or an absurd value — and keep last-good then.
+  if (num(fb) != null && (num(fb) <= 0 || num(fb) > 50000000)) {
+    console.error(`[social] ${id}: FB ${fb} out of sane range; keeping last-good`);
+    fb = null; fbSrc = null;
+  }
+  if (num(fb) != null) { b.facebook = num(fb); anyReal = true; }
+  prov.facebook = fbSrc || (fbAttempted ? 'last-good' : 'estimated');
+
   // recompute total from whatever we have
   b.total = (num(b.youtube) || 0) + (num(b.instagram) || 0) + (num(b.facebook) || 0);
-  if ((ytAttempted && ytSrc == null) || (igAttempted && igSrc == null)) prov.stale = true;
+  if ((ytAttempted && ytSrc == null) || (igAttempted && igSrc == null) || (fbAttempted && fbSrc == null)) prov.stale = true;
   // only rewrite a brand's provenance when we actually attempted it (keys present);
   // a no-key run leaves the existing (real) provenance untouched → no-op commit
-  if (ytAttempted || igAttempted) data._provenance.byBrand[id] = prov;
+  if (ytAttempted || igAttempted || fbAttempted) data._provenance.byBrand[id] = prov;
 }
-if (anyReal) { data._provenance.source = 'YouTube + Instagram'; data._provenance.fetchedAt = now; }
+if (anyReal) { data._provenance.source = 'YouTube + Instagram + Facebook'; data._provenance.fetchedAt = now; }
 else if (!data._provenance.source) { data._provenance.source = 'estimated'; data._provenance.fetchedAt = now; }
 
 // ---- never regress --------------------------------------------------------

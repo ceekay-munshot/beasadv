@@ -39,6 +39,7 @@ const SCHEMA = {
 
 async function readProduct(url) {
   if (!url || !scrapeAvailable()) return null;
+  const isFlipkart = /flipkart\.com/i.test(url);
   let j = await extractStructured(url, SCHEMA);
   if (j && (num(j.reviewCount) != null || num(j.rating) != null)) {
     return { count: num(j.reviewCount), rating: num(j.rating), title: j.title || null };
@@ -47,9 +48,20 @@ async function readProduct(url) {
   const doc = await fetchDoc(url);
   const t = doc && (doc.html || doc.markdown);
   if (!t) return null;
-  const cm = t.match(/([\d,]+)\s*(?:ratings|reviews|global ratings)/i);
+  let count = null;
+  if (isFlipkart) {
+    // Flipkart shows "3,456 Ratings & 234 Reviews" (HTML may encode the "&" as
+    // &amp;). Prefer the Ratings figure so flipkartCount stays comparable with
+    // Amazon's rating-count amazonCount; fall back to a bare "N Ratings" match.
+    const fm = t.match(/([\d,]+)\s*Ratings?\s*(?:&amp;|&|and)\s*([\d,]+)\s*Reviews?/i)
+      || t.match(/([\d,]+)\s*Ratings?\b/i);
+    if (fm) count = parseCompact(fm[1]);
+  }
+  if (count == null) {
+    const cm = t.match(/([\d,]+)\s*(?:ratings|reviews|global ratings)/i);
+    count = cm ? parseCompact(cm[1]) : null;
+  }
   const rm = t.match(/([\d.]+)\s*out of\s*5/i);
-  const count = cm ? parseCompact(cm[1]) : null;
   const rating = rm ? num(rm[1]) : null;
   if (count == null && rating == null) return null;
   return { count, rating, title: null };
