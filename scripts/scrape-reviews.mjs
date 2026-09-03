@@ -4,8 +4,11 @@
 //
 // For each brand with an amazonUrl / flipkartUrl in sources.json, read the
 // product page with Firecrawl JSON mode (rating / reviewCount / title), falling
-// back to a markdown+regex read. Preserves reviews.json's shape (amazonCount /
-// flipkartCount / totalCount / avgRating / flagship / velocitySeries per brand).
+// back to a markdown+regex read. When a brand has no flipkartUrl — or its pinned
+// page yields very few ratings (a low-volume SKU) — a Flipkart search for
+// "<brand> water purifier" picks the most-reviewed listing (mirrors the Amazon
+// search fallback). Preserves reviews.json's shape (amazonCount / flipkartCount /
+// totalCount / avgRating / flagship / velocitySeries per brand).
 //
 // When a fresh total is retrieved for any brand, one point is appended to every
 // brand's velocitySeries (fresh total where available, else carry-forward) plus
@@ -18,6 +21,9 @@ import { fetchDoc, extractStructured, scrapeAvailable } from '../lib/scrape.mjs'
 const REVIEWS = dataPath('reviews.json');
 const SOURCES = dataPath('manual/sources.json');
 const CAP = 24;
+// Below this many Flipkart ratings, treat a pinned SKU as low-volume and let the
+// search fallback look for the brand's most-reviewed listing instead.
+const MIN_FLIP = 50;
 const META = readJSON(dataPath('meta.json'), { brands: [] });
 const nameOf = (id) => (META.brands.find((b) => b.id === id) || {}).name || id;
 
@@ -83,6 +89,29 @@ async function searchTopProduct(brandName) {
   return best;
 }
 
+// Flipkart search fallback: mirror the Amazon one. Search Flipkart for
+// "<brand> water purifier", read the candidate listings, and return the one with
+// the most ratings. Flipkart product links look like /<slug>/p/itm<id>.
+async function searchTopFlipkart(brandName) {
+  if (!scrapeAvailable()) return null;
+  const doc = await fetchDoc(`https://www.flipkart.com/search?q=${encodeURIComponent(brandName + ' water purifier')}`);
+  const html = doc && (doc.html || doc.markdown);
+  if (!html) return null;
+  const seen = new Set(), paths = [];
+  for (const m of html.matchAll(/(?:https?:\/\/www\.flipkart\.com)?(\/[^\s"')]+?\/p\/itm[0-9A-Za-z]+)/gi)) {
+    const path = m[1].split('?')[0];
+    if (!seen.has(path)) { seen.add(path); paths.push(path); }
+    if (paths.length >= 5) break;
+  }
+  let best = null;
+  for (const path of paths) {
+    const url = `https://www.flipkart.com${path}`;
+    const p = await readProduct(url);
+    if (p && num(p.count) != null && (!best || p.count > best.count)) best = { ...p, url };
+  }
+  return best;
+}
+
 // ---- run: gather fresh totals per brand ----------------------------------
 const now = nowISO();
 const freshTotal = {};
@@ -92,7 +121,18 @@ for (const id of Object.keys(data.byBrand)) {
   const attempted = scrapeAvailable(); // URL read or search fallback
   let amazon = null, flip = null, title = null;
   if (src.amazonUrl) amazon = await readProduct(src.amazonUrl);
+  // Flipkart: a pinned flipkartUrl is the first choice. When there is no pin, or
+  // the pin yields very few ratings (a low-volume SKU), search Flipkart and take
+  // the most-reviewed listing instead.
   if (src.flipkartUrl) flip = await readProduct(src.flipkartUrl);
+  const flipCount = flip && num(flip.count) != null ? num(flip.count) : null;
+  if (flipCount == null || flipCount < MIN_FLIP) {
+    const found = await searchTopFlipkart(nameOf(id));
+    if (found && num(found.count) != null && (flipCount == null || found.count > flipCount)) {
+      console.log(`[reviews] ${id}: flipkart search fallback found ${found.url} (${found.count} ratings)`);
+      flip = found;
+    }
+  }
   // no configured product URL -> search Amazon for the flagship
   if (amazon == null && flip == null && !src.amazonUrl && !src.flipkartUrl) {
     amazon = await searchTopProduct(nameOf(id));
