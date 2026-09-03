@@ -54,7 +54,8 @@
   function buildSignals(data) {
     const brands = data.meta.brands;
     const latestTrend = (id) => { const s = data.search.byBrand[id] || []; return s.length ? s[s.length - 1] : 0; };
-    const socialTotals = brands.map((b) => (data.social.byBrand[b.id]?.total) || 0);
+    const socialReach = (s) => ((s && s.youtube) || 0) + ((s && s.instagram) || 0); // youtube + instagram only (Facebook dropped)
+    const socialTotals = brands.map((b) => socialReach(data.social.byBrand[b.id]));
     const spendTotals = brands.map((b) => {
       const rows = data.spend.byBrand[b.id]; return rows ? aspTotal(rows[rows.length - 1]) : 0;
     });
@@ -78,14 +79,14 @@
         score: {
           spend: logNorm(spendLatest, spendTotals),
           search: shareOfMax(searchLatest, maxSearch),
-          social: shareOfMax(social.total || 0, maxSocial),
+          social: shareOfMax(socialReach(social), maxSocial),
           reviews: clamp(reviewsScore, 0, 100),
           ai: shareOfMax(ai.visibilityPct || 0, maxAi),
         },
         raw: {
           spend: spendLatest,               // ₹ cr
           search: searchLatest,             // latest trends index 0..100
-          social: social.total || 0,        // followers
+          social: socialReach(social),      // followers (youtube + instagram)
           reviews: reviews.totalCount || 0, // review count
           ai: ai.visibilityPct || 0,        // %
         },

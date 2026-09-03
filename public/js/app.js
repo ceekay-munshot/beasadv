@@ -257,7 +257,6 @@
     if (has('search')) items.push({ icon: 'search', label: 'Most searched', b: leadBy((x) => U.latestFyAvg(D.search.data.byBrand[x.id] || [0])) });
     if (has('social')) {
       items.push({ icon: 'youtube', label: 'YouTube', b: leadBy((x) => (D.social.data.byBrand[x.id] || {}).youtube || 0) });
-      items.push({ icon: 'thumbs-up', label: 'Facebook', b: leadBy((x) => (D.social.data.byBrand[x.id] || {}).facebook || 0) });
     }
     if (has('reviews')) items.push({ icon: 'star', label: 'Most reviewed', b: leadBy((x) => (D.reviews.data.byBrand[x.id] || {}).totalCount || 0) });
     if (has('ai')) items.push({ icon: 'sparkles', label: 'AI answers', b: leadBy((x) => ((D.ai.data.byBrand[x.id] || {}).overall || {}).visibilityPct || 0) });
@@ -397,10 +396,9 @@
         isSize ? 'Audience size on each platform (each chart has its own scale)' : 'Average engagement rate — how many followers actually react',
         seg('social', [{ val: 'size', label: 'Audience size' }, { val: 'engagement', label: 'Engagement rate' }], S.social))}
       ${isSize
-        ? `<div class="grid gap-3 md:grid-cols-3">
+        ? `<div class="grid gap-3 md:grid-cols-2">
             <div><div class="card-label mb-1 flex items-center gap-1.5"><i data-lucide="youtube" class="w-3.5 h-3.5 text-rose-500"></i>YouTube subscribers</div><div id="so-yt" class="h-[230px]"></div></div>
             <div><div class="card-label mb-1 flex items-center gap-1.5"><i data-lucide="instagram" class="w-3.5 h-3.5 text-pink-500"></i>Instagram followers</div><div id="so-ig" class="h-[230px]"></div></div>
-            <div><div class="card-label mb-1 flex items-center gap-1.5"><i data-lucide="facebook" class="w-3.5 h-3.5 text-blue-600"></i>Facebook likes</div><div id="so-fb" class="h-[230px]"></div></div>
           </div>`
         : `<div id="so-eng" class="h-[300px]"></div>`}
       </div>
@@ -414,7 +412,7 @@
         yFormatter: (v) => U.fmtCompact(v),
         override: { xaxis: { labels: { rotate: -22, rotateAlways: true, hideOverlappingLabels: false, trim: false, style: { fontSize: '10px' } } } },
       });
-      mk('so-yt', 'youtube'); mk('so-ig', 'instagram'); mk('so-fb', 'facebook');
+      mk('so-yt', 'youtube'); mk('so-ig', 'instagram');
     } else {
       Charts.bar('so-eng', {
         categories: shortsOf(vis), data: vis.map((b) => (soc.byBrand[b.id] || {}).engagementRate || 0),
