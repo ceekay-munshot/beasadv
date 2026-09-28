@@ -1,10 +1,10 @@
 {
   "byBrand": {
     "aquaguard": {
-      "youtube": 93700,
+      "youtube": 93800,
       "instagram": 172000,
       "engagementRate": 1.9,
-      "total": 265700,
+      "total": 265800,
       "growthSeries": [
         684.8,
         690,
@@ -17,10 +17,10 @@
       ]
     },
     "kent": {
-      "youtube": 49700,
+      "youtube": 49900,
       "instagram": 153000,
       "engagementRate": 0.8,
-      "total": 202700,
+      "total": 202900,
       "growthSeries": [
         1139.3,
         1181.7,
@@ -94,32 +94,37 @@
   "_provenance": {
     "byBrand": {
       "aquaguard": {
-        "fetchedAt": "2026-09-21T10:24:21.442Z",
+        "fetchedAt": "2026-09-28T11:26:51.857Z",
         "youtube": "youtube-api",
-        "instagram": "instagram-scrape"
+        "instagram": "last-good",
+        "stale": true
       },
       "kent": {
-        "fetchedAt": "2026-09-21T10:24:21.442Z",
+        "fetchedAt": "2026-09-28T11:26:51.857Z",
         "youtube": "youtube-api",
-        "instagram": "instagram-scrape"
+        "instagram": "last-good",
+        "stale": true
       },
       "livpure": {
-        "fetchedAt": "2026-09-21T10:24:21.442Z",
+        "fetchedAt": "2026-09-28T11:26:51.857Z",
         "youtube": "youtube-api",
-        "instagram": "instagram-scrape"
+        "instagram": "last-good",
+        "stale": true
       },
       "pureit": {
-        "fetchedAt": "2026-09-21T10:24:21.442Z",
+        "fetchedAt": "2026-09-28T11:26:51.857Z",
         "youtube": "youtube-api",
-        "instagram": "instagram-scrape"
+        "instagram": "last-good",
+        "stale": true
       },
       "aosmith": {
-        "fetchedAt": "2026-09-21T10:24:21.442Z",
+        "fetchedAt": "2026-09-28T11:26:51.857Z",
         "youtube": "youtube-api",
-        "instagram": "instagram-scrape"
+        "instagram": "last-good",
+        "stale": true
       }
     },
     "source": "YouTube + Instagram",
-    "fetchedAt": "2026-09-21T10:24:21.442Z"
+    "fetchedAt": "2026-09-28T11:26:51.857Z"
   }
 }

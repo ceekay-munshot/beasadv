@@ -159,24 +159,29 @@
   "_provenance": {
     "byBrand": {
       "aquaguard": {
-        "source": "google-trends",
-        "fetchedAt": "2026-09-21T10:36:41.039Z"
+        "source": "last-good",
+        "fetchedAt": "2026-09-28T11:26:58.854Z",
+        "stale": true
       },
       "kent": {
-        "source": "google-trends",
-        "fetchedAt": "2026-09-21T10:36:41.039Z"
+        "source": "last-good",
+        "fetchedAt": "2026-09-28T11:26:58.854Z",
+        "stale": true
       },
       "livpure": {
-        "source": "google-trends",
-        "fetchedAt": "2026-09-21T10:36:41.039Z"
+        "source": "last-good",
+        "fetchedAt": "2026-09-28T11:26:58.854Z",
+        "stale": true
       },
       "pureit": {
-        "source": "google-trends",
-        "fetchedAt": "2026-09-21T10:36:41.039Z"
+        "source": "last-good",
+        "fetchedAt": "2026-09-28T11:26:58.854Z",
+        "stale": true
       },
       "aosmith": {
-        "source": "google-trends",
-        "fetchedAt": "2026-09-21T10:36:41.039Z"
+        "source": "last-good",
+        "fetchedAt": "2026-09-28T11:26:58.854Z",
+        "stale": true
       }
     },
     "source": "Google Trends (IN, 5y)",

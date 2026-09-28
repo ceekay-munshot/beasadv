@@ -153,23 +153,28 @@
     "byBrand": {
       "aquaguard": {
         "source": "amazon",
-        "fetchedAt": "2026-09-21T10:24:29.485Z"
+        "fetchedAt": "2026-09-28T11:26:54.030Z",
+        "stale": true
       },
       "kent": {
         "source": "amazon",
-        "fetchedAt": "2026-09-21T10:24:29.485Z"
+        "fetchedAt": "2026-09-28T11:26:54.030Z",
+        "stale": true
       },
       "livpure": {
         "source": "amazon",
-        "fetchedAt": "2026-09-21T10:24:29.485Z"
+        "fetchedAt": "2026-09-28T11:26:54.030Z",
+        "stale": true
       },
       "pureit": {
         "source": "amazon",
-        "fetchedAt": "2026-09-21T10:24:29.485Z"
+        "fetchedAt": "2026-09-28T11:26:54.030Z",
+        "stale": true
       },
       "aosmith": {
         "source": "amazon",
-        "fetchedAt": "2026-09-21T10:24:29.485Z"
+        "fetchedAt": "2026-09-28T11:26:54.030Z",
+        "stale": true
       }
     },
     "source": "Amazon + Flipkart",
