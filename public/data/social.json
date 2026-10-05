@@ -17,10 +17,10 @@
       ]
     },
     "kent": {
-      "youtube": 49900,
+      "youtube": 50000,
       "instagram": 153000,
       "engagementRate": 0.8,
-      "total": 202900,
+      "total": 203000,
       "growthSeries": [
         1139.3,
         1181.7,
@@ -94,37 +94,37 @@
   "_provenance": {
     "byBrand": {
       "aquaguard": {
-        "fetchedAt": "2026-09-28T11:26:51.857Z",
+        "fetchedAt": "2026-10-05T12:02:35.562Z",
         "youtube": "youtube-api",
         "instagram": "last-good",
         "stale": true
       },
       "kent": {
-        "fetchedAt": "2026-09-28T11:26:51.857Z",
+        "fetchedAt": "2026-10-05T12:02:35.562Z",
         "youtube": "youtube-api",
         "instagram": "last-good",
         "stale": true
       },
       "livpure": {
-        "fetchedAt": "2026-09-28T11:26:51.857Z",
+        "fetchedAt": "2026-10-05T12:02:35.562Z",
         "youtube": "youtube-api",
         "instagram": "last-good",
         "stale": true
       },
       "pureit": {
-        "fetchedAt": "2026-09-28T11:26:51.857Z",
+        "fetchedAt": "2026-10-05T12:02:35.562Z",
         "youtube": "youtube-api",
         "instagram": "last-good",
         "stale": true
       },
       "aosmith": {
-        "fetchedAt": "2026-09-28T11:26:51.857Z",
+        "fetchedAt": "2026-10-05T12:02:35.562Z",
         "youtube": "youtube-api",
         "instagram": "last-good",
         "stale": true
       }
     },
     "source": "YouTube + Instagram",
-    "fetchedAt": "2026-09-28T11:26:51.857Z"
+    "fetchedAt": "2026-10-05T12:02:35.562Z"
   }
 }
