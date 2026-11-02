@@ -1,11 +1,11 @@
 {
   "byBrand": {
     "aquaguard": {
-      "amazonCount": 10402,
-      "flipkartCount": 9053,
-      "totalCount": 19455,
+      "amazonCount": 10533,
+      "flipkartCount": 9404,
+      "totalCount": 19937,
       "avgRating": 4.2,
-      "flagship": "Aquaguard Delight NXT WS RO+UV+UF | 6 Stage Purification lFree Service Plan worth ₹2000 | India’s #1 Water Purifier | Suitable for Borewell, Tanker & Municipal Water",
+      "flagship": "Aquaguard Delight NXT WS RO+UV+UF | 6 Stage Purification | Free Service Plan worth ₹2000 | India’s #1 Water Purifier | Suitable for Borewell, Tanker & Municipal Water",
       "velocitySeries": [
         7216,
         7442,
@@ -26,16 +26,17 @@
         17450,
         17667,
         18755,
-        19455
+        19455,
+        19937
       ],
       "quality": "estimated"
     },
     "kent": {
-      "amazonCount": 15855,
-      "flipkartCount": 85256,
-      "totalCount": 101111,
+      "amazonCount": 15935,
+      "flipkartCount": 85526,
+      "totalCount": 101461,
       "avgRating": 4.1,
-      "flagship": "KENT Supreme Plus Neo RO Water Purifier | 2 Yrs Comprehensive Warranty* | No Service Cost for 2 Yrs | RO+UF+UV+Alk+Cu+TDS Control+UV In-Tank | 8L | 20LP/Hr | Ideal For Borewell/Tanker/Municipal Water",
+      "flagship": "KENT Supreme Plus Neo RO Water Purifier | 2 Yrs Comprehensive Warranty | No Service Cost for 2 Yrs | RO+UF+UV+Alk+Cu+TDS Control+UV In-Tank | 8L | 20LP/Hr | Ideal For Borewell/Tanker/Municipal Water",
       "velocitySeries": [
         14529,
         14985,
@@ -56,14 +57,15 @@
         100039,
         100102,
         100694,
-        101111
+        101111,
+        101461
       ],
       "quality": "estimated"
     },
     "livpure": {
-      "amazonCount": 15167,
-      "flipkartCount": 106348,
-      "totalCount": 121515,
+      "amazonCount": 15211,
+      "flipkartCount": 106731,
+      "totalCount": 121942,
       "avgRating": 4.1,
       "flagship": "Livpure GLO PRO++ RO+UV+UF | Water Purifier for Home - 7 L Storage | Free Standard Installation | Suitable for Borewell, Tanker, Municipal Water | Black",
       "velocitySeries": [
@@ -86,14 +88,15 @@
         120093,
         120236,
         120993,
-        121515
+        121515,
+        121942
       ],
       "quality": "estimated"
     },
     "pureit": {
       "amazonCount": 506,
-      "flipkartCount": 1391,
-      "totalCount": 1897,
+      "flipkartCount": 1398,
+      "totalCount": 1904,
       "avgRating": 4.2,
       "flagship": "Pureit Revito Prime RO+MF+Mineral+UV in-Tank | 7 stage | 8L Capacity | Upto 70% Water Saving | Suitable for Borewell, Tanker & Municipal Water | DURAViva | Black",
       "velocitySeries": [
@@ -116,7 +119,8 @@
         1885,
         1887,
         1892,
-        1897
+        1897,
+        1904
       ],
       "quality": "estimated"
     },
@@ -125,7 +129,7 @@
       "flipkartCount": 2282,
       "totalCount": 4407,
       "avgRating": 4.3,
-      "flagship": "AO Smith Z8 Instant Hot and Ambient Purifier|Hot Water in Stainless Steel Tank|10 L Storage|8-Stage Purification|100% RO+SCMT|Wall mount Water Purifier for Home",
+      "flagship": "AO Smith Z8 Instant Hot and Ambient Purifier | Hot Water in Stainless Steel Tank | 10 L Storage | 8-Stage Purification | 100% RO+SCMT | Wall mount Water Purifier for Home",
       "velocitySeries": [
         2397,
         2472,
@@ -145,6 +149,7 @@
         2634,
         2334,
         4406,
+        4407,
         4407,
         4407
       ],
@@ -171,32 +176,33 @@
     "Oct'26",
     "Oct'26",
     "Oct'26",
-    "Oct'26"
+    "Oct'26",
+    "Nov'26"
   ],
   "_provenance": {
     "byBrand": {
       "aquaguard": {
         "source": "amazon+flipkart",
-        "fetchedAt": "2026-10-26T10:46:05.168Z"
+        "fetchedAt": "2026-11-02T13:05:18.212Z"
       },
       "kent": {
         "source": "amazon+flipkart",
-        "fetchedAt": "2026-10-26T10:46:05.168Z"
+        "fetchedAt": "2026-11-02T13:05:18.212Z"
       },
       "livpure": {
         "source": "amazon+flipkart",
-        "fetchedAt": "2026-10-26T10:46:05.168Z"
+        "fetchedAt": "2026-11-02T13:05:18.212Z"
       },
       "pureit": {
         "source": "amazon+flipkart",
-        "fetchedAt": "2026-10-26T10:46:05.168Z"
+        "fetchedAt": "2026-11-02T13:05:18.212Z"
       },
       "aosmith": {
         "source": "amazon+flipkart",
-        "fetchedAt": "2026-10-26T10:46:05.168Z"
+        "fetchedAt": "2026-11-02T13:05:18.212Z"
       }
     },
     "source": "Amazon + Flipkart",
-    "fetchedAt": "2026-10-26T10:46:05.168Z"
+    "fetchedAt": "2026-11-02T13:05:18.212Z"
   }
 }
