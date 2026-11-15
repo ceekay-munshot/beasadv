@@ -1,20 +1,18 @@
 {
   "platforms": [
-    "claude",
-    "gemini"
+    "claude"
   ],
   "platformLabels": {
-    "claude": "Claude",
-    "gemini": "Gemini"
+    "claude": "Claude"
   },
   "byBrand": {
     "aquaguard": {
       "overall": {
-        "visibilityPct": 89,
-        "shareOfVoice": 24.2,
+        "visibilityPct": 87,
+        "shareOfVoice": 25.5,
         "sentiment": {
-          "pos": 94,
-          "neu": 6,
+          "pos": 92,
+          "neu": 8,
           "neg": 0
         }
       },
@@ -25,15 +23,6 @@
           "sentiment": {
             "pos": 92,
             "neu": 8,
-            "neg": 0
-          }
-        },
-        "gemini": {
-          "visibilityPct": 100,
-          "shareOfVoice": 20,
-          "sentiment": {
-            "pos": 100,
-            "neu": 0,
             "neg": 0
           }
         }
@@ -46,11 +35,11 @@
     },
     "kent": {
       "overall": {
-        "visibilityPct": 89,
-        "shareOfVoice": 24.2,
+        "visibilityPct": 87,
+        "shareOfVoice": 25.5,
         "sentiment": {
-          "pos": 88,
-          "neu": 13,
+          "pos": 92,
+          "neu": 8,
           "neg": 0
         }
       },
@@ -63,15 +52,6 @@
             "neu": 8,
             "neg": 0
           }
-        },
-        "gemini": {
-          "visibilityPct": 100,
-          "shareOfVoice": 20,
-          "sentiment": {
-            "pos": 67,
-            "neu": 33,
-            "neg": 0
-          }
         }
       },
       "sampleGaps": [
@@ -82,12 +62,12 @@
     },
     "livpure": {
       "overall": {
-        "visibilityPct": 67,
-        "shareOfVoice": 18.2,
+        "visibilityPct": 60,
+        "shareOfVoice": 17.6,
         "sentiment": {
-          "pos": 83,
-          "neu": 8,
-          "neg": 8
+          "pos": 89,
+          "neu": 0,
+          "neg": 11
         }
       },
       "byPlatform": {
@@ -99,33 +79,24 @@
             "neu": 0,
             "neg": 11
           }
-        },
-        "gemini": {
-          "visibilityPct": 100,
-          "shareOfVoice": 20,
-          "sentiment": {
-            "pos": 67,
-            "neu": 33,
-            "neg": 0
-          }
         }
       },
       "sampleGaps": [
+        "Which water purifier brand has the best after-sales service in India?",
         "Aquaguard vs Kent — which should I buy?",
         "Most reliable water purifier for a family of four in India?",
-        "Best water purifier for borewell water in India?",
-        "Which water purifier brand is most trusted in India?"
+        "Best water purifier for borewell water in India?"
       ],
       "quality": "measured"
     },
     "pureit": {
       "overall": {
-        "visibilityPct": 56,
-        "shareOfVoice": 15.2,
+        "visibilityPct": 47,
+        "shareOfVoice": 13.7,
         "sentiment": {
-          "pos": 80,
-          "neu": 10,
-          "neg": 10
+          "pos": 86,
+          "neu": 0,
+          "neg": 14
         }
       },
       "byPlatform": {
@@ -137,33 +108,24 @@
             "neu": 0,
             "neg": 14
           }
-        },
-        "gemini": {
-          "visibilityPct": 100,
-          "shareOfVoice": 20,
-          "sentiment": {
-            "pos": 67,
-            "neu": 33,
-            "neg": 0
-          }
         }
       },
       "sampleGaps": [
         "Which RO water purifier is best for hard/high-TDS water in India?",
+        "Which water purifier brand has the best after-sales service in India?",
         "Aquaguard vs Kent — which should I buy?",
-        "Most reliable water purifier for a family of four in India?",
-        "Best water purifier for borewell water in India?"
+        "Most reliable water purifier for a family of four in India?"
       ],
       "quality": "measured"
     },
     "aosmith": {
       "overall": {
-        "visibilityPct": 67,
-        "shareOfVoice": 18.2,
+        "visibilityPct": 60,
+        "shareOfVoice": 17.6,
         "sentiment": {
-          "pos": 92,
+          "pos": 89,
           "neu": 0,
-          "neg": 8
+          "neg": 11
         }
       },
       "byPlatform": {
@@ -175,32 +137,22 @@
             "neu": 0,
             "neg": 11
           }
-        },
-        "gemini": {
-          "visibilityPct": 100,
-          "shareOfVoice": 20,
-          "sentiment": {
-            "pos": 100,
-            "neu": 0,
-            "neg": 0
-          }
         }
       },
       "sampleGaps": [
+        "Best water purifier under ₹15,000 in India?",
         "Aquaguard vs Kent — which should I buy?",
         "Which water purifier brand is most trusted in India?",
-        "Best budget water purifier in India in 2026?",
-        "Best copper/mineral water purifier in India?"
+        "Best budget water purifier in India in 2026?"
       ],
       "quality": "measured"
     }
   },
   "_provenance": {
-    "source": "claude+gemini",
-    "fetchedAt": "2026-10-15T10:26:38.965Z",
+    "source": "claude",
+    "fetchedAt": "2026-11-15T13:01:46.278Z",
     "platforms": [
-      "claude",
-      "gemini"
+      "claude"
     ]
   }
 }
