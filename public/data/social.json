@@ -2,9 +2,9 @@
   "byBrand": {
     "aquaguard": {
       "youtube": 94200,
-      "instagram": 189000,
+      "instagram": 192248,
       "engagementRate": 1.9,
-      "total": 283200,
+      "total": 286448,
       "growthSeries": [
         684.8,
         690,
@@ -17,10 +17,10 @@
       ]
     },
     "kent": {
-      "youtube": 50700,
-      "instagram": 163000,
+      "youtube": 50900,
+      "instagram": 163809,
       "engagementRate": 0.8,
-      "total": 213700,
+      "total": 214709,
       "growthSeries": [
         1139.3,
         1181.7,
@@ -34,9 +34,9 @@
     },
     "livpure": {
       "youtube": 15700,
-      "instagram": 23000,
+      "instagram": 22938,
       "engagementRate": 2.4,
-      "total": 38700,
+      "total": 38638,
       "growthSeries": [
         201.3,
         208.4,
@@ -50,9 +50,9 @@
     },
     "pureit": {
       "youtube": 26100,
-      "instagram": 17000,
+      "instagram": 16772,
       "engagementRate": 1.1,
-      "total": 43100,
+      "total": 42872,
       "growthSeries": [
         149.2,
         153.8,
@@ -66,9 +66,9 @@
     },
     "aosmith": {
       "youtube": 10300,
-      "instagram": 26000,
+      "instagram": 25704,
       "engagementRate": 1.3,
-      "total": 36300,
+      "total": 36004,
       "growthSeries": [
         83.5,
         84.9,
@@ -94,32 +94,32 @@
   "_provenance": {
     "byBrand": {
       "aquaguard": {
-        "fetchedAt": "2026-11-09T13:37:10.368Z",
+        "fetchedAt": "2026-11-16T13:21:49.762Z",
         "youtube": "youtube-api",
         "instagram": "instagram-scrape"
       },
       "kent": {
-        "fetchedAt": "2026-11-09T13:37:10.368Z",
+        "fetchedAt": "2026-11-16T13:21:49.762Z",
         "youtube": "youtube-api",
         "instagram": "instagram-scrape"
       },
       "livpure": {
-        "fetchedAt": "2026-11-09T13:37:10.368Z",
+        "fetchedAt": "2026-11-16T13:21:49.762Z",
         "youtube": "youtube-api",
         "instagram": "instagram-scrape"
       },
       "pureit": {
-        "fetchedAt": "2026-11-09T13:37:10.368Z",
+        "fetchedAt": "2026-11-16T13:21:49.762Z",
         "youtube": "youtube-api",
         "instagram": "instagram-scrape"
       },
       "aosmith": {
-        "fetchedAt": "2026-11-09T13:37:10.368Z",
+        "fetchedAt": "2026-11-16T13:21:49.762Z",
         "youtube": "youtube-api",
         "instagram": "instagram-scrape"
       }
     },
     "source": "YouTube + Instagram",
-    "fetchedAt": "2026-11-09T13:37:10.368Z"
+    "fetchedAt": "2026-11-16T13:21:49.762Z"
   }
 }
