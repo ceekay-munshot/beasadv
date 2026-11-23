@@ -1,10 +1,10 @@
 {
   "byBrand": {
     "aquaguard": {
-      "amazonCount": 10714,
+      "amazonCount": 10800,
       "flipkartCount": 9808,
-      "totalCount": 20522,
-      "avgRating": 4.1,
+      "totalCount": 20608,
+      "avgRating": 4,
       "flagship": "Aquaguard Delight Aquasaver RO+UV+UF",
       "velocitySeries": [
         7216,
@@ -29,15 +29,16 @@
         19455,
         19937,
         20246,
-        20522
+        20522,
+        20608
       ],
       "quality": "estimated"
     },
     "kent": {
-      "amazonCount": 16024,
+      "amazonCount": 16048,
       "flipkartCount": 85804,
-      "totalCount": 101828,
-      "avgRating": 4.1,
+      "totalCount": 101852,
+      "avgRating": 3.5,
       "flagship": "KENT Supreme Plus Neo RO Water Purifier | 2 Yrs Comprehensive Warranty* | No Service Cost for 2 Yrs | RO+UF+UV+Alk+Cu+TDS Control+UV In-Tank | 8L | 20LP/Hr | Ideal For Borewell/Tanker/Municipal Water",
       "velocitySeries": [
         14529,
@@ -62,15 +63,16 @@
         101111,
         101461,
         101665,
-        101828
+        101828,
+        101852
       ],
       "quality": "estimated"
     },
     "livpure": {
-      "amazonCount": 15296,
+      "amazonCount": 15346,
       "flipkartCount": 107254,
-      "totalCount": 122550,
-      "avgRating": 4.1,
+      "totalCount": 122600,
+      "avgRating": 4.5,
       "flagship": "Livpure GLO PRO++ RO+UV+UF | Water Purifier for Home - 7 L Storage | Free Standard Installation | Suitable for Borewell, Tanker, Municipal Water | Black",
       "velocitySeries": [
         492,
@@ -95,15 +97,16 @@
         121515,
         121942,
         122270,
-        122550
+        122550,
+        122600
       ],
       "quality": "estimated"
     },
     "pureit": {
-      "amazonCount": 511,
+      "amazonCount": 513,
       "flipkartCount": 1403,
-      "totalCount": 1914,
-      "avgRating": 4.1,
+      "totalCount": 1916,
+      "avgRating": 4.4,
       "flagship": "Pureit Revito Prime RO+MF+Mineral+UV in-Tank | 7 stage | 8L Capacity | Upto 70% Water Saving | Suitable for Borewell, Tanker & Municipal Water | DURAViva | Black",
       "velocitySeries": [
         5494,
@@ -128,15 +131,16 @@
         1897,
         1904,
         1909,
-        1914
+        1914,
+        1916
       ],
       "quality": "estimated"
     },
     "aosmith": {
-      "amazonCount": 2125,
+      "amazonCount": 513,
       "flipkartCount": 2282,
-      "totalCount": 4407,
-      "avgRating": 4.3,
+      "totalCount": 2795,
+      "avgRating": 4.1,
       "flagship": "AO Smith Z8 Instant Hot and Ambient Purifier",
       "velocitySeries": [
         2397,
@@ -161,7 +165,8 @@
         4407,
         4407,
         4407,
-        4407
+        4407,
+        2795
       ],
       "quality": "estimated"
     }
@@ -189,32 +194,33 @@
     "Oct'26",
     "Nov'26",
     "Nov'26",
+    "Nov'26",
     "Nov'26"
   ],
   "_provenance": {
     "byBrand": {
       "aquaguard": {
-        "source": "amazon+flipkart",
-        "fetchedAt": "2026-11-16T13:22:11.613Z"
+        "source": "amazon",
+        "fetchedAt": "2026-11-23T15:41:09.040Z"
       },
       "kent": {
-        "source": "amazon+flipkart",
-        "fetchedAt": "2026-11-16T13:22:11.613Z"
+        "source": "amazon",
+        "fetchedAt": "2026-11-23T15:41:09.040Z"
       },
       "livpure": {
-        "source": "amazon+flipkart",
-        "fetchedAt": "2026-11-16T13:22:11.613Z"
+        "source": "amazon",
+        "fetchedAt": "2026-11-23T15:41:09.040Z"
       },
       "pureit": {
-        "source": "amazon+flipkart",
-        "fetchedAt": "2026-11-16T13:22:11.613Z"
+        "source": "amazon",
+        "fetchedAt": "2026-11-23T15:41:09.040Z"
       },
       "aosmith": {
-        "source": "amazon+flipkart",
-        "fetchedAt": "2026-11-16T13:22:11.613Z"
+        "source": "amazon",
+        "fetchedAt": "2026-11-23T15:41:09.040Z"
       }
     },
     "source": "Amazon + Flipkart",
-    "fetchedAt": "2026-11-16T13:22:11.613Z"
+    "fetchedAt": "2026-11-23T15:41:09.040Z"
   }
 }
